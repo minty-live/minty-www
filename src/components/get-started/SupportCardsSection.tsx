@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import Container from '@/components/ui/Container';
-import { getStartedContent } from '@/config/get-started';
-import FadeContent from '@/animations/landing/fadeanim';
+import Link from "next/link";
+import Container from "@/components/ui/Container";
+import { getStartedContent } from "@/config/get-started";
+import FadeContent from "@/animations/landing/fadeanim";
 
 export default function SupportCardsSection() {
   const { faqSection } = getStartedContent;
@@ -21,15 +21,13 @@ export default function SupportCardsSection() {
                 <div>
                   <div
                     className={`w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg font-bold mb-5 shadow-2xs ${
-                      card.type === 'support' ? 'bg-[#2BBCA6]' : 'bg-[#00CBB0]'
+                      card.type === "support" ? "bg-[#2BBCA6]" : "bg-[#00CBB0]"
                     }`}
                   >
                     {card.icon}
                   </div>
 
-                  <h3 className="text-ink-deep text-[17px] font-extrabold mb-2">
-                    {card.title}
-                  </h3>
+                  <h3 className="text-ink-deep text-[17px] font-extrabold mb-2">{card.title}</h3>
                   <p className="text-gray-600 text-[13px] leading-relaxed mb-6">
                     {card.description}
                   </p>
@@ -40,7 +38,9 @@ export default function SupportCardsSection() {
                   className="text-teal-deep font-bold text-[14px] hover:text-ink-deep inline-flex min-h-11 items-center gap-1 transition-colors group"
                 >
                   {card.linkText}
-                  <span className="transform transition-transform group-hover:translate-x-0.5">→</span>
+                  <span className="transform transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
                 </Link>
               </div>
             ))}

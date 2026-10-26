@@ -1,8 +1,8 @@
-import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
-import { siteConfig } from '@/config/site';
-import { CURRENCY, PLANS } from '@/config/pricing';
-import './globals.css';
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { siteConfig } from "@/config/site";
+import { CURRENCY, PLANS } from "@/config/pricing";
+import "./globals.css";
 
 // Plus Jakarta Sans, self-hosted through next/font as the three app frontends host Inter
 // (2026-10-12). This replaced a Google Fonts <link>: next/font also generates a metric-matched
@@ -16,9 +16,9 @@ import './globals.css';
 // 400/500/600/700/800, and one variable file beats five static ones.
 // The stacks that consume --font-jakarta live in globals.css's @theme; change the two together.
 const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-jakarta',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -33,51 +33,57 @@ export const metadata: Metadata = {
   creator: siteConfig.author.name,
   publisher: siteConfig.author.name,
   robots: {
-    index: true, follow: true,
+    index: true,
+    follow: true,
     googleBot: {
-      index: true, follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   openGraph: {
-    type: 'website', locale: 'en_US',
-    url: siteConfig.url, siteName: siteConfig.name,
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: siteConfig.social.twitter,
   },
-  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
+  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
   // No default canonical: each page names its own through lib/metadata.ts's pageMetadata. A
   // site-wide canonical here told search engines every page was a copy of the homepage.
-  category: 'business',
+  category: "business",
 };
 
 export const viewport: Viewport = {
   // The browser chrome tint on phones: Minty's brand colour (never a button fill, but this is not one).
-  width: 'device-width', initialScale: 1, themeColor: '#54D3DA',
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#54D3DA",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const orgJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    applicationCategory: 'BusinessApplication',
-    operatingSystem: 'Web',
-    offers: { '@type': 'Offer', price: String(PLANS.pettyCash.monthly), priceCurrency: CURRENCY },
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    offers: { "@type": "Offer", price: String(PLANS.pettyCash.monthly), priceCurrency: CURRENCY },
     publisher: {
-      '@type': 'Organization',
+      "@type": "Organization",
       name: siteConfig.author.name,
       url: siteConfig.author.url,
     },

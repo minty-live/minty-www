@@ -1,17 +1,17 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import FAQHero from '@/components/support/FaqHero';
-import FAQCategories from '@/components/support/FaqCategories';
-import FAQSupportSection from '@/components/support/FaqSupportSection';
-import { pageMetadata } from '@/lib/metadata';
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FAQHero from "@/components/support/FaqHero";
+import FAQCategories from "@/components/support/FaqCategories";
+import FAQSupportSection from "@/components/support/FaqSupportSection";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: 'FAQ',
+  title: "FAQ",
   description:
-    'Answers to common Daily Minty questions, from your first daily closing to running several shops and working with your accountant.',
-  path: '/resources/faq',
+    "Answers to common Daily Minty questions, from your first daily closing to running several shops and working with your accountant.",
+  path: "/resources/faq",
 });
 
 export default function FAQPage() {

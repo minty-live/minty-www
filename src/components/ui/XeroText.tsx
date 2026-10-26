@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
 /** The Xero brand blue used wherever the word appears in copy. */
-export const XERO_BLUE = '#2baae0';
+export const XERO_BLUE = "#2baae0";
 
 /**
  * Renders `text` with every occurrence of "Xero" in the Xero blue, leaving the
@@ -13,12 +13,12 @@ export const XERO_BLUE = '#2baae0';
  */
 export function highlightXero(text: string) {
   return text.split(/(Xero)/g).map((part, i) =>
-    part === 'Xero' ? (
+    part === "Xero" ? (
       <span key={i} style={{ color: XERO_BLUE }}>
         {part}
       </span>
     ) : (
       <Fragment key={i}>{part}</Fragment>
-    )
+    ),
   );
 }

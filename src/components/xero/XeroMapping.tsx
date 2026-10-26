@@ -1,12 +1,12 @@
-import { cn } from '@/lib/utils';
-import type { MappingRow, MappingTone } from '@/config/xero-integration';
+import { cn } from "@/lib/utils";
+import type { MappingRow, MappingTone } from "@/config/xero-integration";
 
-const MINTY_TEAL = '#3FCFC0';
+const MINTY_TEAL = "#3FCFC0";
 
 const TONE: Record<MappingTone, { pill: string; hex: string }> = {
-  blue:  { pill: 'bg-[#2BA9E0]', hex: '#2BA9E0' },
-  red:   { pill: 'bg-[#F0857C]', hex: '#F0857C' },
-  green: { pill: 'bg-[#8DC63F]', hex: '#8DC63F' },
+  blue: { pill: "bg-[#2BA9E0]", hex: "#2BA9E0" },
+  red: { pill: "bg-[#F0857C]", hex: "#F0857C" },
+  green: { pill: "bg-[#8DC63F]", hex: "#8DC63F" },
 };
 
 function Arrow({
@@ -14,7 +14,7 @@ function Arrow({
   tone,
   gradientId,
 }: {
-  direction: MappingRow['direction'];
+  direction: MappingRow["direction"];
   tone: MappingTone;
   gradientId: string;
 }) {
@@ -34,9 +34,14 @@ function Arrow({
             <stop offset="100%" stopColor={TONE[tone].hex} />
           </linearGradient>
         </defs>
-        <g stroke={`url(#${gradientId})`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <g
+          stroke={`url(#${gradientId})`}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <line x1="2" y1="6" x2="78" y2="6" />
-          {direction === 'right' ? (
+          {direction === "right" ? (
             <polyline points="72,2 78,6 72,10" />
           ) : (
             <polyline points="8,2 2,6 8,10" />
@@ -79,22 +84,18 @@ export default function XeroMapping({
             <div
               key={`${row.left}-${row.right}`}
               className={cn(
-                'grid grid-cols-[1fr_auto_1fr] md:grid-cols-[1fr_120px_1fr] gap-2 md:gap-4 items-center',
-                startsNewGroup && 'mt-4'
+                "grid grid-cols-[1fr_auto_1fr] md:grid-cols-[1fr_120px_1fr] gap-2 md:gap-4 items-center",
+                startsNewGroup && "mt-4",
               )}
             >
               <span className="rounded-md bg-[#3FCFC0] text-white text-[12px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center">
                 {row.left}
               </span>
-              <Arrow
-                direction={row.direction}
-                tone={row.tone}
-                gradientId={`xero-arrow-${idx}`}
-              />
+              <Arrow direction={row.direction} tone={row.tone} gradientId={`xero-arrow-${idx}`} />
               <span
                 className={cn(
-                  'rounded-md text-white text-[12px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center',
-                  TONE[row.tone].pill
+                  "rounded-md text-white text-[12px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center",
+                  TONE[row.tone].pill,
                 )}
               >
                 {row.right}

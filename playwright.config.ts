@@ -10,25 +10,25 @@
 // public/ or deleting a component can be proven harmless. Nothing here ever
 // sends a real contact email - see e2e/contact.spec.ts.
 
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3002;
 export const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
-  testDir: './e2e',
+  testDir: "./e2e",
   workers: 1,
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  reporter: [['list']],
+  reporter: [["list"]],
   timeout: 60_000,
   expect: { timeout: 10_000 },
   use: {
     baseURL: BASE_URL,
-    trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
-    video: 'off',
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    video: "off",
   },
   webServer: {
     command: `npx next dev -p ${PORT}`,
@@ -36,5 +36,5 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
 });

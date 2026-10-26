@@ -14,15 +14,15 @@ npm run dev                    # http://localhost:3000
 
 ## Pages
 
-| URL                           | What                                                  | Copy lives in                 |
-| ----------------------------- | ----------------------------------------------------- | ----------------------------- |
-| `/`                           | landing                                               | `src/config/landing.ts`       |
-| `/pricing`                    | plans and module tiles (names and prices: `src/config/pricing.ts`, which mirrors the subscription catalogue) | `src/components/pricing/PricingGrid.tsx` |
-| `/resources/learning`         | getting-started guides (YouTube embeds)               | `src/config/get-started.ts`   |
-| `/resources/faq`              | FAQ                                                   | `src/config/faq.ts`           |
-| `/resources/xero-integration` | how the Xero sync works (in the sitemap, not the nav) | `src/config/xero-integration.ts` |
-| `/resources/contact`          | the contact form                                      | `src/components/contact/ContactFormSection.tsx` |
-| `/api/contact`                | POST only; validates, rate-limits, sends via Graph    | `src/app/api/contact/route.ts`, `src/lib/graph-mailer.ts` |
+| URL                           | What                                                                                                         | Copy lives in                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `/`                           | landing                                                                                                      | `src/config/landing.ts`                                   |
+| `/pricing`                    | plans and module tiles (names and prices: `src/config/pricing.ts`, which mirrors the subscription catalogue) | `src/components/pricing/PricingGrid.tsx`                  |
+| `/resources/learning`         | getting-started guides (YouTube embeds)                                                                      | `src/config/get-started.ts`                               |
+| `/resources/faq`              | FAQ                                                                                                          | `src/config/faq.ts`                                       |
+| `/resources/xero-integration` | how the Xero sync works (in the sitemap, not the nav)                                                        | `src/config/xero-integration.ts`                          |
+| `/resources/contact`          | the contact form                                                                                             | `src/components/contact/ContactFormSection.tsx`           |
+| `/api/contact`                | POST only; validates, rate-limits, sends via Graph                                                           | `src/app/api/contact/route.ts`, `src/lib/graph-mailer.ts` |
 
 The navbar and footer are data: `src/config/nav.ts` and `footer.ts`. `sitemap.ts` and
 `robots.ts` are generated from `src/config/site.ts`, which also holds the brand name, tagline,
@@ -32,30 +32,30 @@ animations are Tailwind tokens in the `@theme` block of `src/app/globals.css` (t
 
 ## Where things are
 
-|                     |                                                                    |
-| ------------------- | ------------------------------------------------------------------ |
-| `src/app/`          | routes (one folder per URL), `layout.tsx` with the site metadata   |
-| `src/components/`   | by page: `landing/`, `pricing/`, `get-started/`, `support/`, `contact/`, `xero/`; shared `layout/` and `ui/` |
-| `src/config/`       | page copy and link tables — edit these, not the components         |
-| `src/animations/`   | GSAP entrance animations                                           |
-| `src/lib/`          | `graph-mailer.ts`, `rate-limit.ts`, `contactRules.ts` (the form's rules, shared with the API), `money.ts` (`HKD 280`), `metadata.ts` (each page's title, canonical and social card), `utils.ts` |
-| `scripts/`          | `icons.mjs` - regenerates `src/components/ui/iconPaths.ts` (Material Symbols Rounded) |
-| `public/`           | by page: `brand/`, `landing/`, `pricing/`, `guides/`, `support/`, `shared/` |
-| `e2e/`              | Playwright tests, see below                                        |
-| `docs/`             | `features/` (start here: `site.md`), `contact-form-implementation.md` (how the form works and what is still open), `feedback/`, `archive/` |
+|                   |                                                                                                                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/`        | routes (one folder per URL), `layout.tsx` with the site metadata                                                                                                                                |
+| `src/components/` | by page: `landing/`, `pricing/`, `get-started/`, `support/`, `contact/`, `xero/`; shared `layout/` and `ui/`                                                                                    |
+| `src/config/`     | page copy and link tables — edit these, not the components                                                                                                                                      |
+| `src/animations/` | GSAP entrance animations                                                                                                                                                                        |
+| `src/lib/`        | `graph-mailer.ts`, `rate-limit.ts`, `contactRules.ts` (the form's rules, shared with the API), `money.ts` (`HKD 280`), `metadata.ts` (each page's title, canonical and social card), `utils.ts` |
+| `scripts/`        | `icons.mjs` - regenerates `src/components/ui/iconPaths.ts` (Material Symbols Rounded)                                                                                                           |
+| `public/`         | by page: `brand/`, `landing/`, `pricing/`, `guides/`, `support/`, `shared/`                                                                                                                     |
+| `e2e/`            | Playwright tests, see below                                                                                                                                                                     |
+| `docs/`           | `features/` (start here: `site.md`), `contact-form-implementation.md` (how the form works and what is still open), `feedback/`, `archive/`                                                      |
 
 ## Scripts
 
-|                     |                                                        |
-| ------------------- | ------------------------------------------------------ |
-| `npm run dev`       | dev server on 3000                                     |
-| `npm run build`     | production build                                       |
-| `npm run start`     | serve the production build                             |
-| `npm run lint`      | ESLint 9 flat config (`eslint.config.mjs`: Next's core-web-vitals + TypeScript rules) |
-| `npm run type-check`| `tsc --noEmit`                                         |
-| `npm run test:e2e`  | Playwright — starts its own dev server on 3002         |
-| `npm run format`    | Prettier (the app frontends' settings, in `package.json`); CI runs `format:check` |
-| `npm run icons`     | regenerate the inlined Material Symbols after adding a name to `scripts/icons.mjs` |
+|                      |                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------- |
+| `npm run dev`        | dev server on 3000                                                                    |
+| `npm run build`      | production build                                                                      |
+| `npm run start`      | serve the production build                                                            |
+| `npm run lint`       | ESLint 9 flat config (`eslint.config.mjs`: Next's core-web-vitals + TypeScript rules) |
+| `npm run type-check` | `tsc --noEmit`                                                                        |
+| `npm run test:e2e`   | Playwright — starts its own dev server on 3002                                        |
+| `npm run format`     | Prettier (the app frontends' settings, in `package.json`); CI runs `format:check`     |
+| `npm run icons`      | regenerate the inlined Material Symbols after adding a name to `scripts/icons.mjs`    |
 
 CI (`.github/workflows/ci.yml`) calls the shared `next-web.yml@v1` in
 `minty-oliveandvine/.github`: `type-check`, `lint`, a production `build` on Node 24 and

@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react';
-import { ICON_PATHS, type IconName } from './iconPaths';
+import type { SVGProps } from "react";
+import { ICON_PATHS, type IconName } from "./iconPaths";
 
 /**
  * A Material Symbols Rounded glyph (weight 400), drawn inline in `currentColor`, so it takes the
@@ -11,7 +11,7 @@ export default function Icon({
   name,
   title,
   ...props
-}: { name: IconName; title?: string } & Omit<SVGProps<SVGSVGElement>, 'children'>) {
+}: { name: IconName; title?: string } & Omit<SVGProps<SVGSVGElement>, "children">) {
   return (
     <svg
       viewBox="0 -960 960 960"
@@ -20,7 +20,7 @@ export default function Icon({
       fill="currentColor"
       focusable="false"
       aria-hidden={title ? undefined : true}
-      role={title ? 'img' : undefined}
+      role={title ? "img" : undefined}
       {...props}
     >
       {title && <title>{title}</title>}

@@ -2,15 +2,15 @@
 // (billing_plan: PETTY_CASH 28000, BILL "Payment Request" 28000, BILL+PETTY_CASH "Super Minty"
 // 40000, all HKD monthly; billing_policy.trial_days 30). A price, name or trial change goes in
 // the database, that file AND here.
-import { formatPrice } from '@/lib/money';
+import { formatPrice } from "@/lib/money";
 
-export const CURRENCY = 'HKD';
+export const CURRENCY = "HKD";
 export const TRIAL_DAYS = 30;
 
 export const PLANS = {
-  pettyCash: { name: 'Petty Cash', monthly: 280 },
-  paymentRequest: { name: 'Payment Request', monthly: 280 },
-  superMinty: { name: 'Super Minty', monthly: 400 },
+  pettyCash: { name: "Petty Cash", monthly: 280 },
+  paymentRequest: { name: "Payment Request", monthly: 280 },
+  superMinty: { name: "Super Minty", monthly: 400 },
 } as const;
 
 /** "HKD 280" */

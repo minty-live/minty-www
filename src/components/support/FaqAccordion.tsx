@@ -1,19 +1,40 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import type { FaqItem, FaqBlock, PermissionRow } from '@/config/faq';
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import type { FaqItem, FaqBlock, PermissionRow } from "@/config/faq";
 
 function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
-  const roles = ['CASHIER', 'SHOP MANAGER', 'ACCOUNTANT', 'ADMIN'];
+  const roles = ["CASHIER", "SHOP MANAGER", "ACCOUNTANT", "ADMIN"];
   const defaultPermissions: PermissionRow[] = [
-    { name: 'Prepare daily report', roles: { CASHIER: true, 'SHOP MANAGER': true, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'View daily report you created', roles: { CASHIER: true, 'SHOP MANAGER': true, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'View daily report of the whole shop', roles: { CASHIER: false, 'SHOP MANAGER': true, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'Sales method setting', roles: { CASHIER: false, 'SHOP MANAGER': false, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'Expense code setting', roles: { CASHIER: false, 'SHOP MANAGER': false, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'Publish to Xero', roles: { CASHIER: false, 'SHOP MANAGER': false, ACCOUNTANT: true, ADMIN: true } },
-    { name: 'Connect & disconnect to Xero', roles: { CASHIER: false, 'SHOP MANAGER': false, ACCOUNTANT: false, ADMIN: true } },
+    {
+      name: "Prepare daily report",
+      roles: { CASHIER: true, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "View daily report you created",
+      roles: { CASHIER: true, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "View daily report of the whole shop",
+      roles: { CASHIER: false, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "Sales method setting",
+      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "Expense code setting",
+      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "Publish to Xero",
+      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
+    },
+    {
+      name: "Connect & disconnect to Xero",
+      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: false, ADMIN: true },
+    },
   ];
   const tablePermissions = permissions || defaultPermissions;
 
@@ -31,8 +52,8 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
               <th
                 key={role}
                 className={cn(
-                  'bg-[#E4F6F1] px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-teal-deep',
-                  i === roles.length - 1 && 'rounded-tr-xl'
+                  "bg-[#E4F6F1] px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-teal-deep",
+                  i === roles.length - 1 && "rounded-tr-xl",
                 )}
               >
                 {role}
@@ -47,17 +68,16 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
               <tr key={idx}>
                 <td
                   className={cn(
-                    'px-5 py-3.5 font-medium text-ink border-b border-white',
-                    idx % 2 === 0 ? 'bg-[#FDF4EF]' : 'bg-[#FFFAF6]',
-                    isLast && 'rounded-bl-xl border-b-0'
+                    "px-5 py-3.5 font-medium text-ink border-b border-white",
+                    idx % 2 === 0 ? "bg-[#FDF4EF]" : "bg-[#FFFAF6]",
+                    isLast && "rounded-bl-xl border-b-0",
                   )}
                 >
-                  {perm.name.includes('Xero') ? (
+                  {perm.name.includes("Xero") ? (
                     <>
-                      {perm.name.substring(0, perm.name.indexOf('Xero')).trim()}
-                      {' '}
+                      {perm.name.substring(0, perm.name.indexOf("Xero")).trim()}{" "}
                       <span className="font-bold text-[#2baae0]">Xero</span>
-                      {perm.name.substring(perm.name.indexOf('Xero') + 4).trimStart()}
+                      {perm.name.substring(perm.name.indexOf("Xero") + 4).trimStart()}
                     </>
                   ) : (
                     perm.name
@@ -67,10 +87,10 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
                   <td
                     key={role}
                     className={cn(
-                      'px-4 py-3.5 text-center border-b border-white',
-                      idx % 2 === 0 ? 'bg-[#F4FBF8]' : 'bg-white',
-                      isLast && 'border-b-0',
-                      isLast && i === roles.length - 1 && 'rounded-br-xl'
+                      "px-4 py-3.5 text-center border-b border-white",
+                      idx % 2 === 0 ? "bg-[#F4FBF8]" : "bg-white",
+                      isLast && "border-b-0",
+                      isLast && i === roles.length - 1 && "rounded-br-xl",
                     )}
                   >
                     {perm.roles[role as keyof typeof perm.roles] ? (
@@ -99,7 +119,13 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
   );
 }
 
-export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[]; defaultOpenId?: string | null }) {
+export default function FaqAccordion({
+  items,
+  defaultOpenId,
+}: {
+  items: FaqItem[];
+  defaultOpenId?: string | null;
+}) {
   const [openId, setOpenId] = useState<string | null>(defaultOpenId ?? null);
 
   // A new target or a new list (the parent switched tabs) re-opens the target, adjusted during
@@ -115,7 +141,7 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
       setTimeout(() => {
         const element = document.getElementById(`faq-${openId}`);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       }, 300);
     }
@@ -130,10 +156,11 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
             key={item.id}
             id={`faq-${item.id}`}
             className={cn(
-              'bg-white border rounded-[14px] overflow-hidden transition-all duration-200 h-fit',
-              'border-line hover:border-ink/18 hover:-translate-y-0.5 hover:shadow-minty-md',
-              isOpen && 'border-teal shadow-[0_1px_0_rgba(47,184,166,.06),0_8px_24px_rgba(15,45,58,.06)]',
-              item.wide && 'md:col-span-2'
+              "bg-white border rounded-[14px] overflow-hidden transition-all duration-200 h-fit",
+              "border-line hover:border-ink/18 hover:-translate-y-0.5 hover:shadow-minty-md",
+              isOpen &&
+                "border-teal shadow-[0_1px_0_rgba(47,184,166,.06),0_8px_24px_rgba(15,45,58,.06)]",
+              item.wide && "md:col-span-2",
             )}
           >
             <button
@@ -144,12 +171,12 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
               <span className="flex-1 text-base font-semibold text-teal-deep leading-[1.4]">
-                Q. {item.question.includes('Xero') ? (
+                Q.{" "}
+                {item.question.includes("Xero") ? (
                   <>
-                    {item.question.substring(0, item.question.indexOf('Xero')).trim()}
-                    {' '}
+                    {item.question.substring(0, item.question.indexOf("Xero")).trim()}{" "}
                     <span className="font-bold text-[#2baae0]">Xero</span>
-                    {item.question.substring(item.question.indexOf('Xero') + 4).trimStart()}
+                    {item.question.substring(item.question.indexOf("Xero") + 4).trimStart()}
                   </>
                 ) : (
                   item.question
@@ -158,10 +185,10 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
               <span
                 aria-hidden="true"
                 className={cn(
-                  'relative flex-none w-10 h-10 rounded-xl bg-teal-gradient shadow-[0_6px_16px_rgba(0,203,198,.30)] transition-transform duration-300',
+                  "relative flex-none w-10 h-10 rounded-xl bg-teal-gradient shadow-[0_6px_16px_rgba(0,203,198,.30)] transition-transform duration-300",
                   'before:content-[""] before:absolute before:top-1/2 before:left-[11px] before:right-[11px] before:h-[2.5px] before:bg-white before:rounded-xs before:-translate-y-1/2 before:transition-transform before:duration-300',
                   'after:content-[""] after:absolute after:left-1/2 after:top-[11px] after:bottom-[11px] after:w-[2.5px] after:bg-white after:rounded-xs after:-translate-x-1/2 after:transition-transform after:duration-300',
-                  isOpen && 'before:rotate-135 after:rotate-135'
+                  isOpen && "before:rotate-135 after:rotate-135",
                 )}
               />
             </button>
@@ -184,29 +211,51 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
 function renderBlocks(blocks: FaqBlock[]) {
   return blocks.map((block, idx) => {
     switch (block.type) {
-      case 'p':
-        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify">{block.text}</p>;
-      case 'p-strong':
-        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify"><strong>{block.text}</strong></p>;
-      case 'ul':
+      case "p":
         return (
-          <ul key={idx} className="mt-2.5 pl-5 text-ink-soft text-[14.5px] leading-[1.65] marker:text-teal">
+          <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify">
+            {block.text}
+          </p>
+        );
+      case "p-strong":
+        return (
+          <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify">
+            <strong>{block.text}</strong>
+          </p>
+        );
+      case "ul":
+        return (
+          <ul
+            key={idx}
+            className="mt-2.5 pl-5 text-ink-soft text-[14.5px] leading-[1.65] marker:text-teal"
+          >
             {block.items.map((it, i) =>
-              typeof it === 'string' ? (
-                <li key={i} className="mb-1">{it}</li>
+              typeof it === "string" ? (
+                <li key={i} className="mb-1">
+                  {it}
+                </li>
               ) : (
-                <li key={i} className="mb-1"><strong>{it.strong}</strong> {it.text}</li>
-              )
+                <li key={i} className="mb-1">
+                  <strong>{it.strong}</strong> {it.text}
+                </li>
+              ),
             )}
           </ul>
         );
-      case 'ol':
+      case "ol":
         return (
-          <ol key={idx} className="mt-2.5 pl-[22px] text-ink-soft text-[14.5px] leading-[1.65] marker:text-teal-deep marker:font-bold">
-            {block.items.map((it, i) => <li key={i} className="mb-2">{it}</li>)}
+          <ol
+            key={idx}
+            className="mt-2.5 pl-[22px] text-ink-soft text-[14.5px] leading-[1.65] marker:text-teal-deep marker:font-bold"
+          >
+            {block.items.map((it, i) => (
+              <li key={i} className="mb-2">
+                {it}
+              </li>
+            ))}
           </ol>
         );
-      case 'permissions-table':
+      case "permissions-table":
         return <PermissionsTable key={idx} permissions={block.permissions} />;
     }
   });

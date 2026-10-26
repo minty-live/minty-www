@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // COPY of minty-web/lib/emailInput.ts's hook (2026-10-01); the rules it uses live in
 // ./email.ts here. Change every copy (minty-web, billing-frontend, onboarding,
@@ -12,25 +12,20 @@
  * mid-composition makes the Korean IME duplicate characters.
  */
 
-import {
-  useState,
-  type ChangeEvent,
-  type CompositionEvent,
-  type InputHTMLAttributes,
-} from 'react';
+import { useState, type ChangeEvent, type CompositionEvent, type InputHTMLAttributes } from "react";
 
-import { hasNonAsciiEmailChar, sanitizeEmailInput } from './email';
+import { hasNonAsciiEmailChar, sanitizeEmailInput } from "./email";
 
 type EmailInputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
-  | 'type'
-  | 'inputMode'
-  | 'autoComplete'
-  | 'autoCapitalize'
-  | 'autoCorrect'
-  | 'spellCheck'
-  | 'onChange'
-  | 'onCompositionEnd'
+  | "type"
+  | "inputMode"
+  | "autoComplete"
+  | "autoCapitalize"
+  | "autoCorrect"
+  | "spellCheck"
+  | "onChange"
+  | "onCompositionEnd"
 >;
 
 /**
@@ -59,11 +54,11 @@ export function useEmailInput(onValue?: (value: string) => void): {
   return {
     rejected,
     props: {
-      type: 'text',
-      inputMode: 'email',
-      autoComplete: 'email',
-      autoCapitalize: 'none',
-      autoCorrect: 'off',
+      type: "text",
+      inputMode: "email",
+      autoComplete: "email",
+      autoCapitalize: "none",
+      autoCorrect: "off",
       spellCheck: false,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
         if ((e.nativeEvent as InputEvent).isComposing) onValue?.(e.currentTarget.value);

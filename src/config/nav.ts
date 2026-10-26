@@ -1,4 +1,4 @@
-import { siteConfig } from './site';
+import { siteConfig } from "./site";
 
 export interface NavChild {
   label: string;
@@ -10,39 +10,39 @@ export interface NavLink {
   label: string;
   href: string;
   enabled: boolean;
-  variant?: 'text' | 'primary' | 'dark';
+  variant?: "text" | "primary" | "dark";
   external?: boolean;
   children?: NavChild[];
 }
 
 export const navLinks: NavLink[] = [
-  { key: 'home',     label: 'Home',    href: '/',        variant: 'text', enabled: true },
-  { key: 'pricing',  label: 'Pricing', href: '/pricing', variant: 'text', enabled: true },
+  { key: "home", label: "Home", href: "/", variant: "text", enabled: true },
+  { key: "pricing", label: "Pricing", href: "/pricing", variant: "text", enabled: true },
   {
-    key: 'resources',
-    label: 'Resources',
-    href: '#',
-    variant: 'text',
+    key: "resources",
+    label: "Resources",
+    href: "#",
+    variant: "text",
     enabled: true,
     children: [
-      { label: 'Learning', href: '/resources/learning', enabled: true },
-      { label: 'FAQ',      href: '/resources/faq',      enabled: true },
-      { label: 'Contact',  href: '/resources/contact',  enabled: true },
+      { label: "Learning", href: "/resources/learning", enabled: true },
+      { label: "FAQ", href: "/resources/faq", enabled: true },
+      { label: "Contact", href: "/resources/contact", enabled: true },
     ],
   },
   {
-    key: 'get-started',
-    label: 'Join Waitlist',
+    key: "get-started",
+    label: "Join Waitlist",
     href: siteConfig.waitlistUrl,
-    variant: 'primary',
+    variant: "primary",
     external: true,
     enabled: true,
   },
   {
-    key: 'login',
-    label: 'Log In',
+    key: "login",
+    label: "Log In",
     href: siteConfig.loginUrl,
-    variant: 'dark',
+    variant: "dark",
     external: true,
     enabled: true,
   },

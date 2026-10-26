@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Container from '@/components/ui/Container';
-import { getStartedContent, parseGuideCode } from '@/config/get-started';
-import type { GuideGroup, GuideItem } from '@/config/get-started';
-import { cn } from '@/lib/utils';
-import Icon from '@/components/ui/Icon';
-import VideoPlayer from '@/components/get-started/VideoPlayer';
-import FadeContent from '@/animations/landing/fadeanim';
-import { highlightXero } from '@/components/ui/XeroText';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Container from "@/components/ui/Container";
+import { getStartedContent, parseGuideCode } from "@/config/get-started";
+import type { GuideGroup, GuideItem } from "@/config/get-started";
+import { cn } from "@/lib/utils";
+import Icon from "@/components/ui/Icon";
+import VideoPlayer from "@/components/get-started/VideoPlayer";
+import FadeContent from "@/animations/landing/fadeanim";
+import { highlightXero } from "@/components/ui/XeroText";
 
 /** The curriculum modules — every group that actually carries guides. */
 const isModule = (group: GuideGroup) => group.items.length > 0;
@@ -33,17 +33,17 @@ export default function GuidesSection() {
     const row = document.getElementById(`guide-${openCode}`);
     if (!row) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    row.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    row.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
+      if (event.key !== "Escape") return;
       setOpenCode(null);
       // Focus would otherwise fall to <body> when the panel unmounts.
-      row.querySelector('button')?.focus();
+      row.querySelector("button")?.focus();
     };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [openCode]);
 
   return (
@@ -126,7 +126,7 @@ function Module({
       <h2 className="mb-1.5 text-[22px] font-extrabold tracking-tight sm:text-[26px] md:text-[30px]">
         {group.eyebrow ? (
           <>
-            <span className="text-ink-deep">{group.eyebrow}</span>{' '}
+            <span className="text-ink-deep">{group.eyebrow}</span>{" "}
             <span className="text-teal-deep">{highlightXero(group.title)}</span>
           </>
         ) : (
@@ -195,7 +195,7 @@ function GuideRow({
           onClick={() => onToggle(isOpen ? null : item.code)}
           className="group flex min-h-[64px] w-full items-center gap-3 border-0 bg-transparent px-2 py-3 text-left font-sans transition-colors hover:bg-mint-soft/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal md:min-h-[72px] md:gap-4 md:px-3"
         >
-          <StepBadge step={step} variant={isOpen ? 'open' : 'default'} />
+          <StepBadge step={step} variant={isOpen ? "open" : "default"} />
           <span className="min-w-0 flex-1">
             <span className="block text-[15px] font-extrabold leading-snug text-ink-deep md:text-[17px]">
               {highlightXero(item.title)}
@@ -215,13 +215,13 @@ function GuideRow({
           <span
             aria-hidden="true"
             className={cn(
-              'grid h-10 w-10 flex-none place-items-center rounded-full border text-[13px] transition-colors',
+              "grid h-10 w-10 flex-none place-items-center rounded-full border text-[13px] transition-colors",
               isOpen
-                ? 'border-ink-deep bg-ink-deep text-white'
-                : 'border-line text-ink-deep group-hover:border-teal-deep group-hover:text-teal-deep',
+                ? "border-ink-deep bg-ink-deep text-white"
+                : "border-line text-ink-deep group-hover:border-teal-deep group-hover:text-teal-deep",
             )}
           >
-            {isOpen ? '✕' : '▶'}
+            {isOpen ? "✕" : "▶"}
           </span>
         </button>
       </h3>
@@ -254,16 +254,16 @@ function GuideRow({
   );
 }
 
-function StepBadge({ step, variant }: { step: number; variant: 'default' | 'open' | 'pending' }) {
+function StepBadge({ step, variant }: { step: number; variant: "default" | "open" | "pending" }) {
   return (
     <span
       aria-hidden="true"
       className={cn(
-        'grid h-9 w-9 flex-none place-items-center rounded-full text-[13px] font-extrabold tabular-nums transition-colors',
-        variant === 'open' && 'bg-teal text-white',
-        variant === 'default' &&
-          'bg-mint-soft text-teal-deep group-hover:bg-teal-deep group-hover:text-white',
-        variant === 'pending' && 'border border-dashed border-line text-ink-muted',
+        "grid h-9 w-9 flex-none place-items-center rounded-full text-[13px] font-extrabold tabular-nums transition-colors",
+        variant === "open" && "bg-teal text-white",
+        variant === "default" &&
+          "bg-mint-soft text-teal-deep group-hover:bg-teal-deep group-hover:text-white",
+        variant === "pending" && "border border-dashed border-line text-ink-muted",
       )}
     >
       {step}
@@ -274,21 +274,19 @@ function StepBadge({ step, variant }: { step: number; variant: 'default' | 'open
 /** A group with no guides: the same gutters and left edge as the list, without the rows. */
 function Banner({ group }: { group: GuideGroup }) {
   return (
-    <section className={cn('py-10 md:py-12', group.background)}>
+    <section className={cn("py-10 md:py-12", group.background)}>
       <Container className="max-w-[1440px] px-4 md:px-6">
         <h2 className="mb-2 text-[22px] font-extrabold tracking-tight sm:text-[26px] md:text-[32px]">
           {group.eyebrow ? (
             <>
-              <span className="text-ink-deep">{group.eyebrow}</span>{' '}
+              <span className="text-ink-deep">{group.eyebrow}</span>{" "}
               <span className="text-teal-deep">{highlightXero(group.title)}</span>
             </>
           ) : (
             <span className="text-ink-deep">{highlightXero(group.title)}</span>
           )}
         </h2>
-        {group.subtitle && (
-          <p className="text-sm text-ink-muted md:text-base">{group.subtitle}</p>
-        )}
+        {group.subtitle && <p className="text-sm text-ink-muted md:text-base">{group.subtitle}</p>}
       </Container>
     </section>
   );
@@ -300,7 +298,7 @@ function Callout({
   callout,
   inline = false,
 }: {
-  callout: NonNullable<GuideGroup['callout']>;
+  callout: NonNullable<GuideGroup["callout"]>;
   inline?: boolean;
 }) {
   const body = (

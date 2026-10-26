@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import Icon from '@/components/ui/Icon';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import Icon from "@/components/ui/Icon";
 
 /** Pull the video id out of any YouTube URL form. */
 function youtubeId(videoUrl: string): string {
-  if (videoUrl.includes('/embed/')) return videoUrl.split('/embed/')[1].split(/[?&#]/)[0];
-  if (videoUrl.includes('youtu.be/')) return videoUrl.split('youtu.be/')[1].split(/[?&#]/)[0];
-  if (videoUrl.includes('watch?v=')) return videoUrl.split('watch?v=')[1].split('&')[0];
-  return '';
+  if (videoUrl.includes("/embed/")) return videoUrl.split("/embed/")[1].split(/[?&#]/)[0];
+  if (videoUrl.includes("youtu.be/")) return videoUrl.split("youtu.be/")[1].split(/[?&#]/)[0];
+  if (videoUrl.includes("watch?v=")) return videoUrl.split("watch?v=")[1].split("&")[0];
+  return "";
 }
 
 function buildEmbedUrl(videoUrl: string): string {
   const params = new URLSearchParams({
-    autoplay: '1',
+    autoplay: "1",
     // Start with sound — playback is always kicked off by a click on the
     // poster, so the browser's user-activation requirement is already met.
     // Where a browser still refuses (iOS Safari, a fresh profile), it starts
     // muted instead and the "Tap for sound" button below comes back.
-    mute: '0',
+    mute: "0",
     // Native chrome: draggable timeline, elapsed/total time, volume,
     // fullscreen. Set to '0' to hide it again.
-    controls: '1',
+    controls: "1",
     // Suppresses on-video annotation cards.
-    iv_load_policy: '3',
+    iv_load_policy: "3",
     // Keeps end-screen suggestions within this channel.
-    rel: '0',
+    rel: "0",
     // Stops iOS from forcing the video into its native fullscreen player.
-    playsinline: '1',
-    enablejsapi: '1',
+    playsinline: "1",
+    enablejsapi: "1",
   });
   return `https://www.youtube.com/embed/${youtubeId(videoUrl)}?${params}`;
 }
@@ -70,8 +70,8 @@ export default function VideoPlayer({
   thumbnail,
   isPlaying: controlledPlaying,
   onPlayingChange,
-  collapsedWidth = 'max-w-[460px]',
-  posterAspect = 'aspect-video',
+  collapsedWidth = "max-w-[460px]",
+  posterAspect = "aspect-video",
   duration,
   showClose = true,
   scrollOnPlay = true,
@@ -95,7 +95,7 @@ export default function VideoPlayer({
   // hqdefault, not maxresdefault — the latter 404s on videos that were never
   // uploaded at high enough resolution, which leaves a blank poster.
   const poster = thumbnail || `https://img.youtube.com/vi/${youtubeId(videoUrl)}/hqdefault.jpg`;
-  const isLocalThumb = Boolean(thumbnail) && thumbnail!.startsWith('/');
+  const isLocalThumb = Boolean(thumbnail) && thumbnail!.startsWith("/");
 
   // Each newly opened video assumes sound again until the player says otherwise (adjusted during
   // render when isPlaying changes, rather than in an effect).
@@ -111,17 +111,17 @@ export default function VideoPlayer({
   useEffect(() => {
     if (!isPlaying) return;
     const onMessage = (event: MessageEvent) => {
-      if (!event.origin.includes('youtube.com')) return;
+      if (!event.origin.includes("youtube.com")) return;
       try {
-        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+        const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
         const muted = data?.info?.muted;
-        if (typeof muted === 'boolean') setIsMuted(muted);
+        if (typeof muted === "boolean") setIsMuted(muted);
       } catch {
         // Non-JSON chatter from the embed — nothing to read.
       }
     };
-    window.addEventListener('message', onMessage);
-    return () => window.removeEventListener('message', onMessage);
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, [isPlaying]);
 
   // Subscribe for state updates, then push unMute + play. Both are no-ops when
@@ -131,19 +131,19 @@ export default function VideoPlayer({
     const frame = iframeRef.current?.contentWindow;
     if (!frame) return;
     for (const message of [
-      { event: 'listening' },
-      { event: 'command', func: 'unMute', args: [] },
-      { event: 'command', func: 'playVideo', args: [] },
+      { event: "listening" },
+      { event: "command", func: "unMute", args: [] },
+      { event: "command", func: "playVideo", args: [] },
     ]) {
-      frame.postMessage(JSON.stringify(message), '*');
+      frame.postMessage(JSON.stringify(message), "*");
     }
   };
 
   // Fallback for browsers that force the embed to start muted anyway.
   const unmute = () => {
     iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
-      '*'
+      JSON.stringify({ event: "command", func: "unMute", args: [] }),
+      "*",
     );
     setIsMuted(false);
   };
@@ -153,21 +153,26 @@ export default function VideoPlayer({
   if (!isPlaying) {
     return (
       // The outer wrapper owns the width so playing can widen past the poster.
-      <div className={cn('mx-auto w-full transition-[max-width] duration-300 ease-out', collapsedWidth)}>
+      <div
+        className={cn(
+          "mx-auto w-full transition-[max-width] duration-300 ease-out",
+          collapsedWidth,
+        )}
+      >
         <button
           type="button"
           onClick={() => {
             setPlaying(true);
             if (scrollOnPlay) {
               setTimeout(() => {
-                playerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
               }, 100);
             }
           }}
           aria-label={`Play: ${title}`}
           className={cn(
-            'relative w-full rounded-2xl overflow-hidden cursor-pointer group shadow-xs block border-0 p-0',
-            posterAspect
+            "relative w-full rounded-2xl overflow-hidden cursor-pointer group shadow-xs block border-0 p-0",
+            posterAspect,
           )}
         >
           {isLocalThumb ? (
@@ -190,7 +195,9 @@ export default function VideoPlayer({
 
           <div className="absolute inset-0 bg-black/5 flex items-center justify-center transition-colors group-hover:bg-black/10">
             <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-md backdrop-blur-xs transform transition-transform group-hover:scale-110">
-              <span className="text-ink-deep text-xl ml-1" aria-hidden="true">▶</span>
+              <span className="text-ink-deep text-xl ml-1" aria-hidden="true">
+                ▶
+              </span>
             </div>
           </div>
 
@@ -209,9 +216,9 @@ export default function VideoPlayer({
     <div
       ref={playerRef}
       className={cn(
-        'relative overflow-hidden bg-[#EDF3F1]',
-        'aspect-video mx-auto w-full rounded-2xl border border-emerald-50/50 shadow-inner transition-[max-width] duration-300 ease-out',
-        className
+        "relative overflow-hidden bg-[#EDF3F1]",
+        "aspect-video mx-auto w-full rounded-2xl border border-emerald-50/50 shadow-inner transition-[max-width] duration-300 ease-out",
+        className,
       )}
     >
       <iframe

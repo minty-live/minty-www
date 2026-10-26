@@ -31,11 +31,11 @@ ContactFormSection.tsx      POST /api/contact         graph-mailer.ts
 
 Three layers, each with a single responsibility:
 
-| Layer | File | Responsibility |
-|---|---|---|
-| UI | `src/components/contact/ContactFormSection.tsx` | Collect input, manage submit state, surface errors |
-| API | `src/app/api/contact/route.ts` | Validate, reject spam, translate failures into safe messages |
-| Transport | `src/lib/graph-mailer.ts` | Acquire Graph token, compose and send the mail |
+| Layer     | File                                            | Responsibility                                               |
+| --------- | ----------------------------------------------- | ------------------------------------------------------------ |
+| UI        | `src/components/contact/ContactFormSection.tsx` | Collect input, manage submit state, surface errors           |
+| API       | `src/app/api/contact/route.ts`                  | Validate, reject spam, translate failures into safe messages |
+| Transport | `src/lib/graph-mailer.ts`                       | Acquire Graph token, compose and send the mail               |
 
 Credentials live only in the transport layer, which is server-only. The browser never
 receives them.
@@ -62,7 +62,7 @@ Notable choices:
 - **`import 'server-only'`.** The only dependency added (`server-only@0.0.1`, ~1 KB). It
   makes the **build fail loudly** if this module is ever imported into client code — a
   guardrail against leaking `MS_CLIENT_SECRET` into a browser bundle.
-- **`replyTo` set to the submitter.** Mail arrives *from* the shared mailbox, but hitting
+- **`replyTo` set to the submitter.** Mail arrives _from_ the shared mailbox, but hitting
   Reply in Outlook addresses the person who filled the form.
 - **HTML escaping.** All user-supplied values pass through `escapeHtml()` before being
   interpolated into the HTML mail body, preventing markup injection into the email.
@@ -77,7 +77,7 @@ Notable choices:
   caps (`message` 5000, `name` 100, ...), the topic list and every message. The form checks them
   as you type; the route is the gate.
 - **Refusals use the house envelope:** `422 {"error": "<sentence>", "fields": {"<field>":
-  "<sentence>"}}`, never `detail`. Every sentence follows Part 11 (what is wrong, then what to
+"<sentence>"}}`, never `detail`. Every sentence follows Part 11 (what is wrong, then what to
   do), e.g. "The message is still empty. Tell us how we can help." A topic outside the list is
   refused too. The other replies are sentences as well: 403/400 "We couldn't read that
   message...", 413, 429 (with `Retry-After`), 500 "Your message didn't send...".
@@ -87,7 +87,7 @@ Notable choices:
   and it drops non-ASCII once an IME composition ends and shows the same sentence. The
   browser's `type="email"` had let Korean through after the "@".
 - **Honeypot:** a hidden `company` field. Real users leave it empty; bots fill it. When
-  populated the route returns `{ ok: true }` *without sending* — the bot sees success and
+  populated the route returns `{ ok: true }` _without sending_ — the bot sees success and
   does not retry.
 - **Fill time:** the form sends `renderedAt` (when it became fillable). Under three seconds -
   or no usable `renderedAt` at all - is dropped the same silent way. Until 2026-10-26 a body
@@ -134,12 +134,12 @@ Converted to a client component (`'use client'`) with a four-state machine:
 
 Four server-side variables:
 
-| Variable | Purpose |
-|---|---|
-| `MS_TENANT_ID` | Azure AD tenant (directory) ID |
-| `MS_CLIENT_ID` | App registration client ID |
-| `MS_CLIENT_SECRET` | App registration client secret |
-| `CONTACT_MAILBOX` | Mailbox to send **from** and deliver **to** |
+| Variable           | Purpose                                     |
+| ------------------ | ------------------------------------------- |
+| `MS_TENANT_ID`     | Azure AD tenant (directory) ID              |
+| `MS_CLIENT_ID`     | App registration client ID                  |
+| `MS_CLIENT_SECRET` | App registration client secret              |
+| `CONTACT_MAILBOX`  | Mailbox to send **from** and deliver **to** |
 
 None are prefixed `NEXT_PUBLIC_`, so Next.js will not expose them to the client bundle.
 
@@ -155,10 +155,10 @@ production.
 The app registration requires the **`Mail.Send` _Application_ permission** (not Delegated),
 with **admin consent granted**. Without it Graph returns `403 ErrorAccessDenied`.
 
-> Azure Portal → App registrations → *app* → API permissions → Add → Microsoft Graph →
+> Azure Portal → App registrations → _app_ → API permissions → Add → Microsoft Graph →
 > Application permissions → `Mail.Send` → Add → **Grant admin consent**
 
-Note that `Mail.Send` at application scope grants the ability to send as *any* mailbox in
+Note that `Mail.Send` at application scope grants the ability to send as _any_ mailbox in
 the tenant. Scoping it down with an ApplicationAccessPolicy limited to `CONTACT_MAILBOX` is
 recommended but not currently configured.
 
@@ -166,14 +166,14 @@ recommended but not currently configured.
 
 ## 5. Security notes
 
-| Concern | Handling |
-|---|---|
-| Secret in client bundle | Prevented by `server-only` + no `NEXT_PUBLIC_` prefix |
-| Secret in git | `.env.local` gitignored; verified via `git check-ignore` |
-| HTML injection into email | All values escaped via `escapeHtml()` |
-| Bot spam | Honeypot field, a minimum fill time (a missing one counts as a bot), per-IP rate limits |
-| Oversized payloads | Length caps enforced server-side, not just in the DOM |
-| Internal detail leakage | Graph errors logged server-side only; client gets a generic message |
+| Concern                   | Handling                                                                                |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| Secret in client bundle   | Prevented by `server-only` + no `NEXT_PUBLIC_` prefix                                   |
+| Secret in git             | `.env.local` gitignored; verified via `git check-ignore`                                |
+| HTML injection into email | All values escaped via `escapeHtml()`                                                   |
+| Bot spam                  | Honeypot field, a minimum fill time (a missing one counts as a bot), per-IP rate limits |
+| Oversized payloads        | Length caps enforced server-side, not just in the DOM                                   |
+| Internal detail leakage   | Graph errors logged server-side only; client gets a generic message                     |
 
 **Credential hygiene:** the client secret was transmitted in plaintext during development
 setup and is present in shell/editor history. Rotating it in Azure and updating both
@@ -195,27 +195,27 @@ real submission is tested.
 
 ## 7. Outstanding work
 
-| Item | Notes |
-|---|---|
-| **Grant `Mail.Send` admin consent** | Blocking — nothing sends until this is done |
-| **Test a live submission** | Confirms token flow, permission, and delivery together |
-| **Add env vars to the deploy host** | Production will fail without them |
-| ~~`.env.example` does not document the Graph vars~~ | Done 2026-09-17 — all four are listed with placeholders. |
-| ~~Rate limiting~~ | Done — `src/lib/rate-limit.ts`, three windows (2/min, 5/10 min, 10/hour) applied in the route before the body is read. |
-| ~~Privacy policy link~~ | Done 2026-10-26 — minty-web's `https://my.dailyminty.com/privacy` |
-| Rate-limit key trusts `X-Forwarded-For` | `src/lib/rate-limit.ts` takes its left-most entry. Correct behind Vercel, which sets the header itself; on any other host a client could pick its own bucket. |
-| Confirmation email to submitter | Not implemented — submitters get no receipt |
-| Automated tests | `e2e/contact.spec.ts` covers the form rendering, the live messages (unfinished email on leave, non-English characters while typing), the error summary and its links, single-problem focus, the 422 envelope, and the route's origin, honeypot, fill-time and missing-fill-time drops — everything short of a real send. Nothing exercises a valid submission, by design: every API test body keeps at least one invalid field. |
-| ~~`src/components/contact/ContactForm.tsx`~~ | Deleted 2026-09-17. |
+| Item                                                | Notes                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Grant `Mail.Send` admin consent**                 | Blocking — nothing sends until this is done                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Test a live submission**                          | Confirms token flow, permission, and delivery together                                                                                                                                                                                                                                                                                                                                                                          |
+| **Add env vars to the deploy host**                 | Production will fail without them                                                                                                                                                                                                                                                                                                                                                                                               |
+| ~~`.env.example` does not document the Graph vars~~ | Done 2026-09-17 — all four are listed with placeholders.                                                                                                                                                                                                                                                                                                                                                                        |
+| ~~Rate limiting~~                                   | Done — `src/lib/rate-limit.ts`, three windows (2/min, 5/10 min, 10/hour) applied in the route before the body is read.                                                                                                                                                                                                                                                                                                          |
+| ~~Privacy policy link~~                             | Done 2026-10-26 — minty-web's `https://my.dailyminty.com/privacy`                                                                                                                                                                                                                                                                                                                                                               |
+| Rate-limit key trusts `X-Forwarded-For`             | `src/lib/rate-limit.ts` takes its left-most entry. Correct behind Vercel, which sets the header itself; on any other host a client could pick its own bucket.                                                                                                                                                                                                                                                                   |
+| Confirmation email to submitter                     | Not implemented — submitters get no receipt                                                                                                                                                                                                                                                                                                                                                                                     |
+| Automated tests                                     | `e2e/contact.spec.ts` covers the form rendering, the live messages (unfinished email on leave, non-English characters while typing), the error summary and its links, single-problem focus, the 422 envelope, and the route's origin, honeypot, fill-time and missing-fill-time drops — everything short of a real send. Nothing exercises a valid submission, by design: every API test body keeps at least one invalid field. |
+| ~~`src/components/contact/ContactForm.tsx`~~        | Deleted 2026-09-17.                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ---
 
 ## 8. Files changed
 
-| File | Change |
-|---|---|
-| `src/lib/graph-mailer.ts` | **New** — Graph token acquisition and send |
-| `src/app/api/contact/route.ts` | **New** — validation and submission endpoint |
+| File                                            | Change                                                            |
+| ----------------------------------------------- | ----------------------------------------------------------------- |
+| `src/lib/graph-mailer.ts`                       | **New** — Graph token acquisition and send                        |
+| `src/app/api/contact/route.ts`                  | **New** — validation and submission endpoint                      |
 | `src/components/contact/ContactFormSection.tsx` | Wired to the API; added state, topics, honeypot, field attributes |
-| `.env.local` | **New**, gitignored — real credentials |
-| `package.json` / `package-lock.json` | Added `server-only@0.0.1` |
+| `.env.local`                                    | **New**, gitignored — real credentials                            |
+| `package.json` / `package-lock.json`            | Added `server-only@0.0.1`                                         |

@@ -1,17 +1,19 @@
-import Image from 'next/image';
-import Icon from '@/components/ui/Icon';
-import Container from '@/components/ui/Container';
-import { landingContent } from '@/config/landing';
-import FadeContent from '@/animations/landing/fadeanim';
+import Image from "next/image";
+import Icon from "@/components/ui/Icon";
+import Container from "@/components/ui/Container";
+import { landingContent } from "@/config/landing";
+import FadeContent from "@/animations/landing/fadeanim";
 
 function renderHeadline(headline: string, highlights: readonly string[]) {
-  const pattern = new RegExp(`(${highlights.join('|')})`, 'gi');
+  const pattern = new RegExp(`(${highlights.join("|")})`, "gi");
   return headline.split(pattern).map((part, i) =>
     highlights.some((h) => h.toLowerCase() === part.toLowerCase()) ? (
-      <span key={i} className="text-peach-accent">{part}</span>
+      <span key={i} className="text-peach-accent">
+        {part}
+      </span>
     ) : (
       <span key={i}>{part}</span>
-    )
+    ),
   );
 }
 
@@ -39,7 +41,10 @@ export default function ProblemSection() {
                 {problem.tag}
               </span>
             </div>
-            <h2 id="problem-title" className="text-3xl sm:text-4xl font-bold mb-8 whitespace-pre-line">
+            <h2
+              id="problem-title"
+              className="text-3xl sm:text-4xl font-bold mb-8 whitespace-pre-line"
+            >
               {renderHeadline(problem.headline, problem.highlights)}
             </h2>
             <ul className="list-none p-0 m-0 flex flex-col gap-4">
@@ -57,6 +62,5 @@ export default function ProblemSection() {
         </Container>
       </FadeContent>
     </section>
-
   );
 }

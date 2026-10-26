@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Container from '@/components/ui/Container';
-import { landingContent } from '@/config/landing';
-import FadeContent from '@/animations/landing/fadeanim';
+import Image from "next/image";
+import Container from "@/components/ui/Container";
+import { landingContent } from "@/config/landing";
+import FadeContent from "@/animations/landing/fadeanim";
 
 export default function HowItWorksSection() {
   const { how } = landingContent;
@@ -22,7 +22,6 @@ export default function HowItWorksSection() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 auto-rows-[minmax(230px,auto)] items-stretch">
-            
             {/* CARD 1: Left Vertical Card */}
             {how.steps[0] && (
               <article className="md:row-span-2 md:col-start-1 md:row-start-1 bg-white border border-line/80 rounded-[24px] p-7 md:p-8 text-center shadow-minty-sm flex flex-col items-center justify-between">
@@ -39,7 +38,9 @@ export default function HowItWorksSection() {
                   <span className="w-8 h-8 rounded-full bg-mint/30 text-teal-deep inline-flex items-center justify-center font-bold text-sm shrink-0">
                     1
                   </span>
-                  <h3 className="text-[20px] font-bold text-ink leading-snug">{how.steps[0].title}</h3>
+                  <h3 className="text-[20px] font-bold text-ink leading-snug">
+                    {how.steps[0].title}
+                  </h3>
                   <p className="text-[14.5px] text-ink/75 leading-relaxed max-w-[280px]">
                     {how.steps[0].body}
                   </p>
@@ -64,7 +65,9 @@ export default function HowItWorksSection() {
                   <span className="w-7 h-7 rounded-full bg-mint/30 text-teal-deep inline-flex items-center justify-center font-bold text-xs shrink-0">
                     2
                   </span>
-                  <h3 className="text-[18px] font-bold text-ink leading-snug">{how.steps[1].title}</h3>
+                  <h3 className="text-[18px] font-bold text-ink leading-snug">
+                    {how.steps[1].title}
+                  </h3>
                   <p className="text-[14px] text-ink/75 leading-relaxed max-w-[340px]">
                     {how.steps[1].body}
                   </p>
@@ -88,7 +91,9 @@ export default function HowItWorksSection() {
                   <span className="w-8 h-8 rounded-full bg-mint/30 text-teal-deep inline-flex items-center justify-center font-bold text-sm shrink-0">
                     4
                   </span>
-                  <h3 className="text-[20px] font-bold text-ink leading-snug">{how.steps[3].title}</h3>
+                  <h3 className="text-[20px] font-bold text-ink leading-snug">
+                    {how.steps[3].title}
+                  </h3>
                   <p className="text-[14.5px] text-ink/75 leading-relaxed max-w-[280px]">
                     {how.steps[3].body}
                   </p>
@@ -113,14 +118,15 @@ export default function HowItWorksSection() {
                   <span className="w-7 h-7 rounded-full bg-mint/30 text-teal-deep inline-flex items-center justify-center font-bold text-xs shrink-0">
                     3
                   </span>
-                  <h3 className="text-[18px] font-bold text-ink leading-snug">{how.steps[2].title}</h3>
+                  <h3 className="text-[18px] font-bold text-ink leading-snug">
+                    {how.steps[2].title}
+                  </h3>
                   <p className="text-[14px] text-ink/75 leading-relaxed max-w-[340px]">
                     {how.steps[2].body}
                   </p>
                 </div>
               </article>
             )}
-
           </div>
         </Container>
       </section>

@@ -7,6 +7,7 @@ since 2026-10-26, when the owner lifted the 2026-10-12 hold on Next 14 / Tailwin
 move was checked by diffing every element's computed style on all six pages, before and after.
 Two v4 behaviour changes needed compat rules, both in `src/app/globals.css`'s base layer and
 `md:leading-*` classes:
+
 - buttons get the pointer cursor back;
 - an explicit `leading-*` now beats the line-height that comes with a `md:text-*` size, so four
   blocks carry `md:leading-*`.
@@ -34,17 +35,18 @@ The social card is `public/og-image.png`, a true 1200×630 PNG cropped from the 
 
 All in `src/config/site.ts`:
 
-| What | Where it goes |
-|---|---|
-| Join Waitlist (every primary CTA) | the ClickUp form, `NEXT_PUBLIC_WAITLIST_FORM_URL` |
-| Log In (navbar, phone menu, learning hero) | `WAITLIST_URL` - **held on the old app address until November** (below) |
-| Terms, Privacy (footer, contact form) | minty-web's public pages, `https://my.dailyminty.com/terms` and `/privacy` |
-| Contact | `mailto:hello@dailyminty.com`, WhatsApp, the contact page |
+| What                                       | Where it goes                                                              |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| Join Waitlist (every primary CTA)          | the ClickUp form, `NEXT_PUBLIC_WAITLIST_FORM_URL`                          |
+| Log In (navbar, phone menu, learning hero) | `WAITLIST_URL` - **held on the old app address until November** (below)    |
+| Terms, Privacy (footer, contact form)      | minty-web's public pages, `https://my.dailyminty.com/terms` and `/privacy` |
+| Contact                                    | `mailto:hello@dailyminty.com`, WhatsApp, the contact page                  |
 
 ### Held until November (owner, 2026-10-26)
 
 Log In keeps pointing at `https://www.minty.oliveandvinehk.com/`, and the CTAs stay "Join
 Waitlist", until the full November launch. At the cutover (`minty-infra/CUTOVER.md` §7, step 4):
+
 - point Log In at `https://my.dailyminty.com/login`;
 - rename `WAITLIST_URL` (which is the Log In address, despite its name) to `HUB_URL` in
   `site.ts`, `next.config.mjs`'s `env` and `.env.example`;
@@ -53,6 +55,7 @@ Waitlist", until the full November launch. At the cutover (`minty-infra/CUTOVER.
 ## Pricing and money
 
 `src/config/pricing.ts` mirrors the subscription catalogue (`Minty/docs/schema/seed_catalogue.sql`):
+
 - Petty Cash and Payment Request at HKD 280 a month each;
 - Super Minty (both) at HKD 400;
 - a 30-day trial.
@@ -85,6 +88,7 @@ format, and refuses `$`/`HK$`.
 ## Tests
 
 `npm run test:e2e` (Playwright, 3002) covers:
+
 - `pages`: every page renders.
 - `links`: every internal link resolves.
 - `assets`: every image is served.

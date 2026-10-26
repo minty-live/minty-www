@@ -8,7 +8,7 @@ const nextConfig = {
   env: {
     WAITLIST_URL: process.env.WAITLIST_URL,
   },
-  images: { formats: ['image/avif', 'image/webp'] },
+  images: { formats: ["image/avif", "image/webp"] },
   compress: true,
   poweredByHeader: false,
 };

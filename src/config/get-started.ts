@@ -47,7 +47,8 @@ export function parseGuideCode(code: string): { module: number; step: number } {
 export const getStartedContent = {
   hero: {
     title: "Get started using",
-    description: "Support guides and tutorials for first-time users — everything you need to be up and running today.",
+    description:
+      "Support guides and tutorials for first-time users — everything you need to be up and running today.",
     primaryBtn: "Try Minty for free",
     primaryBtnHref: "/pricing",
     secondaryBtn: "Log In",
@@ -327,7 +328,7 @@ export const getStartedContent = {
       },
     ],
   },
-faqSection: {
+  faqSection: {
     title: "Xero Integration FAQ",
     subtitle: "Cannot connect to Xero? I'm here to help.",
     faqBox: {
@@ -337,49 +338,56 @@ faqSection: {
         {
           id: 1,
           question: "How do I disconnect from Xero?",
-          answer: "No hard feelings, disconnecting is quick and you can do it from either side. If you'd like to unlink from within Minty, just click the Disconnect button and I'll close the Xero connection at the same time. If you'd rather do it from Xero, head to Manage Connected Apps and click Disconnect there, which unlinks Minty right along with it. Either way, both sides disconnect together, so you only ever need to do it once."
+          answer:
+            "No hard feelings, disconnecting is quick and you can do it from either side. If you'd like to unlink from within Minty, just click the Disconnect button and I'll close the Xero connection at the same time. If you'd rather do it from Xero, head to Manage Connected Apps and click Disconnect there, which unlinks Minty right along with it. Either way, both sides disconnect together, so you only ever need to do it once.",
         },
         {
           id: 2,
           question: "What does the integration not cover?",
-          answer: "Great question, and I like being upfront about where I stop. I keep connections strictly one-to-one, so a single Xero organization only ever links to one Minty entity. I also won't connect if you're signed in to Xero as a different person than the one who clicked, since the two have to match. Invitations stay personal too, so only the exact address an invite was sent to can accept it. When it comes to your data, I never delete your Xero contacts. I only add and update, so nothing goes missing by accident. In certain pickers, like expense and owner accounts, I quietly leave out the accounts Xero manages on its own. There aren't any sync settings to fiddle with either, since I handle the timing myself. If there's something specific you're wondering whether I handle, just ask and I'll always tell you straight."
+          answer:
+            "Great question, and I like being upfront about where I stop. I keep connections strictly one-to-one, so a single Xero organization only ever links to one Minty entity. I also won't connect if you're signed in to Xero as a different person than the one who clicked, since the two have to match. Invitations stay personal too, so only the exact address an invite was sent to can accept it. When it comes to your data, I never delete your Xero contacts. I only add and update, so nothing goes missing by accident. In certain pickers, like expense and owner accounts, I quietly leave out the accounts Xero manages on its own. There aren't any sync settings to fiddle with either, since I handle the timing myself. If there's something specific you're wondering whether I handle, just ask and I'll always tell you straight.",
         },
         {
           id: 3,
           question: "Where do payment processing fees show up in Xero?",
-          answer: "Whenever you publish from Minty, I tuck each transaction into the right spot in Xero for you. Publish from the petty cash module and I'll record it under Spend & Receive Money, where you can check it anytime under Cash In & Out on your Xero Home page. Every petty cash transaction shows up there, sorted by its type. Publish from the payment module and I'll post it to Bills instead, so just open the Bills page in Xero and your recorded transaction will be waiting there."
+          answer:
+            "Whenever you publish from Minty, I tuck each transaction into the right spot in Xero for you. Publish from the petty cash module and I'll record it under Spend & Receive Money, where you can check it anytime under Cash In & Out on your Xero Home page. Every petty cash transaction shows up there, sorted by its type. Publish from the payment module and I'll post it to Bills instead, so just open the Bills page in Xero and your recorded transaction will be waiting there.",
         },
         {
           id: 4,
           question: "How do I reconcile my sales data in Xero?",
-          answer: "Reconciling happens over in Xero, and the path depends on which module you're using. For the payment module, I keep it hands-off. I pull your bank feed and drop it straight onto your Xero bank statement, so you can head there and reconcile right away. The petty cash module takes one extra step to reach the bank statement. Once you publish from Minty, your entries land on Xero's Account Transactions page. From there, export them as a CSV, then import that CSV into your bank statement page, and now you can reconcile them in Xero just like everything else."
+          answer:
+            "Reconciling happens over in Xero, and the path depends on which module you're using. For the payment module, I keep it hands-off. I pull your bank feed and drop it straight onto your Xero bank statement, so you can head there and reconcile right away. The petty cash module takes one extra step to reach the bank statement. Once you publish from Minty, your entries land on Xero's Account Transactions page. From there, export them as a CSV, then import that CSV into your bank statement page, and now you can reconcile them in Xero just like everything else.",
         },
         {
           id: 5,
           question: "When does my data sync, and is there anything I can adjust?",
-          answer: "Here's the honest rundown. I don't run a constant real-time stream. Instead, I move data at two natural moments. Coming in from Xero, I keep a local copy of your chart of accounts and contacts so pages load fast. I download everything when you first connect, then quietly refresh it as you visit the relevant pages, updating only what's actually changed. I never delete a contact, so I only ever add and update. Going out to Xero, your transactions are sent when you Publish a report, which I handle in the background so you're never left waiting. Behind the scenes I keep the connection alive on my own, and your access renews automatically whenever it's needed. Apart from connecting and logging in, there are no sync settings for you to manage. I take care of the timing."
-        }
-      ]
+          answer:
+            "Here's the honest rundown. I don't run a constant real-time stream. Instead, I move data at two natural moments. Coming in from Xero, I keep a local copy of your chart of accounts and contacts so pages load fast. I download everything when you first connect, then quietly refresh it as you visit the relevant pages, updating only what's actually changed. I never delete a contact, so I only ever add and update. Going out to Xero, your transactions are sent when you Publish a report, which I handle in the background so you're never left waiting. Behind the scenes I keep the connection alive on my own, and your access renews automatically whenever it's needed. Apart from connecting and logging in, there are no sync settings for you to manage. I take care of the timing.",
+        },
+      ],
     },
     supportCards: [
       {
         type: "support",
-        icon: "✉", 
+        icon: "✉",
         title: "Contact support",
-        description: "Contact Olive and Vine Consulting for more information, personalised help, or to book an hour with a specialist.",
+        description:
+          "Contact Olive and Vine Consulting for more information, personalised help, or to book an hour with a specialist.",
         linkText: "Send a message",
-        href: "/resources/contact"
+        href: "/resources/contact",
       },
       {
         type: "videos",
         icon: "▶",
         title: "Watch video guides",
-        description: "Follow along with a curated walkthrough covering every part of Minty — perfect for visual learners.",
+        description:
+          "Follow along with a curated walkthrough covering every part of Minty — perfect for visual learners.",
         linkText: "Browse videos",
-        href: "#guide"
-      }
-    ]
-  }
+        href: "#guide",
+      },
+    ],
+  },
 };
 
 // Fail loudly on a malformed curriculum, but only in development: this module is imported by a

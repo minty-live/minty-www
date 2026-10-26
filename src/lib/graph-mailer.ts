@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 
 type GraphEnv = {
   tenantId: string;
@@ -15,7 +15,7 @@ function readEnv(): GraphEnv {
     .map(([key]) => key);
 
   if (missing.length) {
-    throw new Error(`Missing environment variables: ${missing.join(', ')}`);
+    throw new Error(`Missing environment variables: ${missing.join(", ")}`);
   }
 
   return {
@@ -35,20 +35,22 @@ async function getAccessToken(env: GraphEnv): Promise<string> {
   }
 
   const res = await fetch(`https://login.microsoftonline.com/${env.tenantId}/oauth2/v2.0/token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
       client_id: env.clientId,
       client_secret: env.clientSecret,
-      scope: 'https://graph.microsoft.com/.default',
-      grant_type: 'client_credentials',
+      scope: "https://graph.microsoft.com/.default",
+      grant_type: "client_credentials",
     }),
-    cache: 'no-store',
+    cache: "no-store",
   });
 
   const data = await res.json();
   if (!res.ok) {
-    throw new Error(`Token request failed (${res.status}): ${data.error_description ?? data.error}`);
+    throw new Error(
+      `Token request failed (${res.status}): ${data.error_description ?? data.error}`,
+    );
   }
 
   // Refresh 60s early to avoid racing the expiry.
@@ -66,18 +68,18 @@ export type ContactSubmission = {
 
 function escapeHtml(value: string): string {
   return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function buildHtml(submission: ContactSubmission): string {
   const rows: Array<[string, string]> = [
-    ['Name', submission.name],
-    ['Email', submission.email],
-    ['Business', submission.businessName || '—'],
-    ['Topic', submission.topic],
+    ["Name", submission.name],
+    ["Email", submission.email],
+    ["Business", submission.businessName || "—"],
+    ["Topic", submission.topic],
   ];
 
   return `
@@ -89,13 +91,13 @@ function buildHtml(submission: ContactSubmission): string {
             ([label, value]) => `<tr>
               <td style="padding:4px 16px 4px 0;font-weight:bold;">${label}</td>
               <td style="padding:4px 0;">${escapeHtml(value)}</td>
-            </tr>`
+            </tr>`,
           )
-          .join('')}
+          .join("")}
       </table>
       <div style="font-weight:bold;margin-bottom:4px;">Message</div>
       <div style="white-space:pre-wrap;background:#F9FBFC;border:1px solid #E7DDD0;border-radius:8px;padding:12px;">${escapeHtml(
-        submission.message
+        submission.message,
       )}</div>
     </div>
   `;
@@ -105,24 +107,27 @@ export async function sendContactEmail(submission: ContactSubmission): Promise<v
   const env = readEnv();
   const token = await getAccessToken(env);
 
-  const res = await fetch(`https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.mailbox)}/sendMail`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: {
-        subject: `[Contact] ${submission.topic} — ${submission.name}`,
-        body: { contentType: 'HTML', content: buildHtml(submission) },
-        toRecipients: [{ emailAddress: { address: env.mailbox } }],
-        // Lets you hit "Reply" in Outlook and answer the submitter directly.
-        replyTo: [{ emailAddress: { address: submission.email, name: submission.name } }],
+  const res = await fetch(
+    `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.mailbox)}/sendMail`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      saveToSentItems: true,
-    }),
-    cache: 'no-store',
-  });
+      body: JSON.stringify({
+        message: {
+          subject: `[Contact] ${submission.topic} — ${submission.name}`,
+          body: { contentType: "HTML", content: buildHtml(submission) },
+          toRecipients: [{ emailAddress: { address: env.mailbox } }],
+          // Lets you hit "Reply" in Outlook and answer the submitter directly.
+          replyTo: [{ emailAddress: { address: submission.email, name: submission.name } }],
+        },
+        saveToSentItems: true,
+      }),
+      cache: "no-store",
+    },
+  );
 
   if (!res.ok) {
     const detail = await res.text();

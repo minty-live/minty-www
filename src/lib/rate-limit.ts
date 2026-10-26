@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 
 /**
  * In-memory sliding-window rate limiter.
@@ -76,11 +76,11 @@ export function check(key: string, rules: Rule[]): RateLimitResult {
 
 /** Best-effort client IP from proxy headers. */
 export function clientIp(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
+  const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
     // Left-most entry is the original client; the rest are proxies.
-    const first = forwarded.split(',')[0]?.trim();
+    const first = forwarded.split(",")[0]?.trim();
     if (first) return first;
   }
-  return request.headers.get('x-real-ip')?.trim() || 'unknown';
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
