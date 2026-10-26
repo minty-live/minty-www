@@ -45,7 +45,8 @@ export default function OutcomeSection() {
                   id="outcome-title"
                   className="text-[20px] md:text-[24px] font-extrabold text-[#1a202c] leading-tight"
                 >
-                  {outcome.title} <span className="text-[#00cbb2]">{outcome.titleAccent}</span>{" "}
+                  {outcome.title}{" "}
+                  <span className="text-accent-heading">{outcome.titleAccent}</span>{" "}
                 </h2>
               </div>
             </div>

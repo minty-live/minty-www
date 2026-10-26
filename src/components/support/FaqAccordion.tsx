@@ -2,41 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { highlightXero } from "@/components/ui/XeroText";
 import type { FaqItem, FaqBlock, PermissionRow } from "@/config/faq";
 
-function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
+function PermissionsTable({ permissions }: { permissions: PermissionRow[] }) {
   const roles = ["CASHIER", "SHOP MANAGER", "ACCOUNTANT", "ADMIN"];
-  const defaultPermissions: PermissionRow[] = [
-    {
-      name: "Prepare daily report",
-      roles: { CASHIER: true, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "View daily report you created",
-      roles: { CASHIER: true, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "View daily report of the whole shop",
-      roles: { CASHIER: false, "SHOP MANAGER": true, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "Sales method setting",
-      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "Expense code setting",
-      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "Publish to Xero",
-      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: true, ADMIN: true },
-    },
-    {
-      name: "Connect & disconnect to Xero",
-      roles: { CASHIER: false, "SHOP MANAGER": false, ACCOUNTANT: false, ADMIN: true },
-    },
-  ];
-  const tablePermissions = permissions || defaultPermissions;
+  const tablePermissions = permissions;
 
   return (
     <div className="mt-4 overflow-x-auto rounded-xl">
@@ -73,15 +44,7 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
                     isLast && "rounded-bl-xl border-b-0",
                   )}
                 >
-                  {perm.name.includes("Xero") ? (
-                    <>
-                      {perm.name.substring(0, perm.name.indexOf("Xero")).trim()}{" "}
-                      <span className="font-bold text-[#2baae0]">Xero</span>
-                      {perm.name.substring(perm.name.indexOf("Xero") + 4).trimStart()}
-                    </>
-                  ) : (
-                    perm.name
-                  )}
+                  {highlightXero(perm.name, "font-bold text-xero")}
                 </td>
                 {roles.map((role, i) => (
                   <td
@@ -171,16 +134,9 @@ export default function FaqAccordion({
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
               <span className="flex-1 text-base font-semibold text-teal-deep leading-[1.4]">
-                Q.{" "}
-                {item.question.includes("Xero") ? (
-                  <>
-                    {item.question.substring(0, item.question.indexOf("Xero")).trim()}{" "}
-                    <span className="font-bold text-[#2baae0]">Xero</span>
-                    {item.question.substring(item.question.indexOf("Xero") + 4).trimStart()}
-                  </>
-                ) : (
-                  item.question
-                )}
+                {/* highlightXero keeps the spaces around the word; trimming them here once
+                    turned "Xero or" into "Xeroor". */}
+                Q. {highlightXero(item.question, "font-bold text-xero")}
               </span>
               <span
                 aria-hidden="true"

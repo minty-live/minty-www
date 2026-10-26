@@ -4,7 +4,7 @@ import type { MappingRow, MappingTone } from "@/config/xero-integration";
 const MINTY_TEAL = "#3FCFC0";
 
 const TONE: Record<MappingTone, { pill: string; hex: string }> = {
-  blue: { pill: "bg-[#2BA9E0]", hex: "#2BA9E0" },
+  blue: { pill: "bg-xero", hex: "#0078c8" },
   red: { pill: "bg-[#F0857C]", hex: "#F0857C" },
   green: { pill: "bg-[#8DC63F]", hex: "#8DC63F" },
 };
@@ -71,7 +71,7 @@ export default function XeroMapping({
         </div>
         <div />
         <div className="flex justify-center">
-          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#2BA9E0] text-white text-[12px] font-bold">
+          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-xero text-white text-[12px] font-bold">
             {rightLabel}
           </span>
         </div>

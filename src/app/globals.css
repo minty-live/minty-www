@@ -39,6 +39,15 @@
   /* Primary CTA - Minty Action (Part 13): white label at least 14px SemiBold. Brand #54D3DA is
      never a button fill. White on #3CBCC3 is 2.29:1, an exception the owner accepted for
      Primary CTA labels only. */
+  /* Headline accents ("Minty.", "clear again."): LARGE text only (24px+ bold), where AA asks
+     3:1 - this is 3.17:1 on mint, 3.42 on cream, 3.68 on white. Small teal text is teal-deep.
+     (owner, 2026-10-26; the bright #00CBB0 was about 2:1.) */
+  --color-accent-heading: #0f9682;
+
+  /* The word "Xero" in copy and Xero's side of the mapping: a darker Xero blue, 4.65:1 on white
+     (owner, 2026-10-26; #2BAAE0 was 2.65:1). */
+  --color-xero: #0078c8;
+
   --color-cta: #3cbcc3;
   --color-cta-hover: #35b2b9;
   --color-cta-pressed: #2fa4ab;

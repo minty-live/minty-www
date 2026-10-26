@@ -77,7 +77,13 @@ format, and refuses `$`/`HK$`.
   small eyebrow chips stay round.
 - **Text** is at least 12px. **Tap targets** are at least 44×44 at phone width.
 - **Contrast:** `teal-deep` (`#0b7a6e`) and `ink-muted` (`#5a6d75`) were darkened 2026-10-26 to
-  pass WCAG AA for small text. Greys are `gray-600`/`500`, never `400`, for text.
+  pass WCAG AA for small text. Greys are `gray-600`/`500`, never `400`, for text. The owner's
+  three brand-colour calls (2026-10-26):
+  - headline accents ("Minty.", "clear again.") use `accent-heading` (`#0f9682`), on large
+    text only, at 3.17:1 or better on every background they sit on;
+  - the word "Xero" and Xero's side of the mapping use `xero` (`#0078c8`, 4.65:1), through
+    `ui/XeroText.tsx`'s `highlightXero`, which keeps the spaces around the word;
+  - the selected Super Minty card keeps its bright `#01d0c1` fill with dark ink text (6.2:1).
 - **Keyboard focus** is visible everywhere (a base `:focus-visible` outline); the form fields
   draw their own teal ring.
 - **Icons** are Material Symbols Rounded, weight 400, inlined as path data by `ui/Icon.tsx`
@@ -105,11 +111,11 @@ settings), a production build and the e2e specs through the shared `next-web.yml
 
 ## Open items
 
-- **FAQ copy** (`src/config/faq.ts`) reads like placeholder text in places ("inactive
-  sequence", "historical ledger lock error"); it needs the owner's rewrite.
-- **Brand accents in headlines:** "Minty." and "clear again." are `#00CBB0`/`#00cbb2`, under
-  3:1 on white even for large text. Darkening them is a brand decision.
-- **The white-on-teal Super Minty card** (`#01d0c1`) and the Xero blue `#2baae0` word are under
-  AA. The first is a design choice, the second the partner's brand colour.
+- **The FAQ follows the product** (rewritten 2026-10-26 against minty-petty-cash-api, -web and
+  Minty's docs). It describes the code where the docs disagree: Xero is connected by Accountant
+  and Admin, and publishing an edited day again can add new entries in Xero. Change an answer
+  when the product changes; `src/config/faq.ts` holds the one roles table.
+- **The mapping's other chips** on /resources/xero-integration (Minty teal `#3FCFC0`, red
+  `#F0857C`, green `#8DC63F`) still carry white 12px text under AA.
 - **The hero art's app screenshot** shows amounts as `HK$ 1,500.00`, the old symbol format. It
   is part of the image, so it needs a new export.

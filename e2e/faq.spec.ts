@@ -6,8 +6,8 @@ import { test, expect } from "@playwright/test";
 
 const PATH = "/resources/faq";
 const BEGINNER = "not-finished";
-const INTERMEDIATE = "split-shifts";
-const INTERMEDIATE_QUESTION = "How do I balance split-shifts or mid-day drawer handoffs?";
+const INTERMEDIATE = "one-closing-a-day";
+const INTERMEDIATE_QUESTION = "Can I do more than one closing a day?";
 
 const toggle = (page: import("@playwright/test").Page, id: string) =>
   page.locator(`#faq-${id} button[aria-expanded]`);
@@ -51,4 +51,12 @@ test("a question toggles, and switching tabs swaps the list", async ({ page }) =
 test("a malformed deep link does not break the page", async ({ page }) => {
   await page.goto(`${PATH}?faqId=100%`);
   await expect(toggle(page, BEGINNER)).toHaveAttribute("aria-expanded", "false");
+});
+
+test("a question keeps its spaces around the highlighted Xero", async ({ page }) => {
+  await page.goto(PATH);
+  await page.getByRole("button", { name: /accountant/i }).click();
+  await expect(toggle(page, "export-ledger")).toContainText(
+    "Q. Can I export to Xero or another accounting system?",
+  );
 });

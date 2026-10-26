@@ -16,7 +16,7 @@ function linkXero(text: string) {
       <Link
         key={i}
         href="/resources/xero-integration"
-        className="text-[#2baae0] no-underline hover:underline"
+        className="text-xero no-underline hover:underline"
       >
         {part}
       </Link>
@@ -63,8 +63,8 @@ export default function GetStartedFaqSection() {
                         className={cn(
                           "w-6 h-6 text-[12px] font-bold rounded-full flex items-center justify-center shrink-0 transition-colors duration-150",
                           isOpen
-                            ? "bg-[#00CBB0] text-white"
-                            : "bg-[#E6FAF7] text-[#00CBB0] group-hover:bg-[#00CBB0] group-hover:text-white",
+                            ? "bg-teal-deep text-white"
+                            : "bg-[#E6FAF7] text-teal-deep group-hover:bg-teal-deep group-hover:text-white",
                         )}
                       >
                         Q

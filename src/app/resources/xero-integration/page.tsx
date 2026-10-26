@@ -46,7 +46,7 @@ export default function XeroIntegrationPage() {
                 {hero.eyebrow}
               </span>
               <h1 className="text-[32px] md:text-[44px] font-extrabold tracking-tight mb-3">
-                <span className="text-[#2BA9E0]">{hero.titleAccent}</span>{" "}
+                <span className="text-xero">{hero.titleAccent}</span>{" "}
                 <span className="text-ink-deep">{hero.titleRest}</span>
               </h1>
               <p className="text-gray-500 text-sm md:text-base">{hero.subtitle}</p>

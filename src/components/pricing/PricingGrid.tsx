@@ -106,7 +106,7 @@ export default function PricingGrid() {
                 onFocus={() => setSelectedPlan(plan.id)}
                 className={`border rounded-[24px] p-8 flex flex-col justify-between transition-all duration-200 cursor-pointer relative ${
                   isSuperMintyGreen
-                    ? "bg-[#01d0c1] border-[#01d0c1] shadow-[0_12px_36px_rgba(1,208,193,0.2)] scale-[1.01] text-white"
+                    ? "bg-[#01d0c1] border-[#01d0c1] shadow-[0_12px_36px_rgba(1,208,193,0.2)] scale-[1.01] text-ink-deep"
                     : isSelected && (plan.id === "petty-cash" || plan.id === "payment-request")
                       ? "bg-white border-gray-300 shadow-md scale-[1.01]"
                       : "bg-[#f4f6fc] border-gray-200/70 shadow-xs hover:border-gray-300"
@@ -127,14 +127,10 @@ export default function PricingGrid() {
                   </div>
 
                   <div className="flex gap-2 items-center mb-3">
-                    <h2
-                      className={`text-2xl font-extrabold ${isSuperMintyGreen ? "text-white" : "text-ink-deep"}`}
-                    >
-                      {plan.title}
-                    </h2>
+                    <h2 className="text-2xl font-extrabold text-ink-deep">{plan.title}</h2>
                     {plan.badgeText && (
                       <span
-                        className={`text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide ${isSuperMintyGreen ? "bg-white/20 text-white" : "bg-[#E5ECF0] text-[#4A7280]"}`}
+                        className={`text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide ${isSuperMintyGreen ? "bg-white/50 text-ink-deep" : "bg-[#E5ECF0] text-[#4A7280]"}`}
                       >
                         {plan.badgeText}
                       </span>
@@ -142,14 +138,14 @@ export default function PricingGrid() {
                   </div>
 
                   <p
-                    className={`text-xs leading-relaxed mb-8 min-h-[39px] ${isSuperMintyGreen ? "text-white/80" : "text-gray-600"}`}
+                    className={`text-xs leading-relaxed mb-8 min-h-[39px] ${isSuperMintyGreen ? "text-ink-deep/80" : "text-gray-600"}`}
                   >
                     {plan.description}
                   </p>
 
                   <div className="flex items-center gap-3 mb-1.5">
                     <span
-                      className={`font-bold text-2xl relative ${isSuperMintyGreen ? "text-white/70" : "text-gray-500"}`}
+                      className={`font-bold text-2xl relative ${isSuperMintyGreen ? "text-ink-deep/80" : "text-gray-500"}`}
                     >
                       <span className="sr-only">Usually </span>
                       {plan.crossedText}
@@ -158,7 +154,7 @@ export default function PricingGrid() {
                     <span
                       className={
                         isSuperMintyGreen
-                          ? "text-white font-extrabold text-3xl"
+                          ? "text-ink-deep font-extrabold text-3xl"
                           : "text-teal-deep font-extrabold text-3xl"
                       }
                     >
@@ -168,13 +164,13 @@ export default function PricingGrid() {
                   </div>
 
                   <p
-                    className={`text-xs leading-[1.6] whitespace-pre-line mb-3 min-h-[38px] ${isSuperMintyGreen ? "text-white/80" : "text-gray-600"}`}
+                    className={`text-xs leading-[1.6] whitespace-pre-line mb-3 min-h-[38px] ${isSuperMintyGreen ? "text-ink-deep/80" : "text-gray-600"}`}
                   >
                     {plan.subText}
                   </p>
 
                   <p
-                    className={`text-xs font-medium p-3 rounded-xl mb-6 ${isSuperMintyGreen ? "bg-white/15 text-white" : "text-ink-deep bg-[#F5F8F9]"}`}
+                    className={`text-xs font-medium p-3 rounded-xl mb-6 ${isSuperMintyGreen ? "bg-white/40 text-ink-deep" : "text-ink-deep bg-[#F5F8F9]"}`}
                   >
                     {plan.trialText}
                   </p>
@@ -188,22 +184,18 @@ export default function PricingGrid() {
                   </Button>
 
                   <div
-                    className={`border-t pt-6 ${isSuperMintyGreen ? "border-white/20" : "border-gray-100"}`}
+                    className={`border-t pt-6 ${isSuperMintyGreen ? "border-ink-deep/15" : "border-gray-100"}`}
                   >
-                    <p
-                      className={`text-xs font-bold mb-3 ${isSuperMintyGreen ? "text-white" : "text-ink-deep"}`}
-                    >
-                      {plan.featuresHeading}
-                    </p>
+                    <p className="text-xs font-bold mb-3 text-ink-deep">{plan.featuresHeading}</p>
                     <ul className={`flex flex-col gap-3.5`}>
                       {plan.features.map((feature, idx) => (
                         <li
                           key={idx}
-                          className={`flex items-start gap-1.5 text-xs ${isSuperMintyGreen ? "text-white" : "text-gray-600"}`}
+                          className={`flex items-start gap-1.5 text-xs ${isSuperMintyGreen ? "text-ink-deep" : "text-gray-600"}`}
                         >
                           <span
                             className={
-                              isSuperMintyGreen ? "text-white font-bold" : "text-black font-bold"
+                              isSuperMintyGreen ? "text-ink-deep font-bold" : "text-black font-bold"
                             }
                           >
                             ✓
@@ -212,9 +204,9 @@ export default function PricingGrid() {
                             <>
                               {feature.substring(0, feature.indexOf("Xero")).trim()}{" "}
                               {/* The blue washes out on the teal Super Minty card, so it
-                            falls back to black there. */}
+                            takes the card's dark ink there. */}
                               <span
-                                className={`font-bold ${isSuperMintyGreen ? "text-black" : "text-[#2baae0]"}`}
+                                className={`font-bold ${isSuperMintyGreen ? "text-ink-deep" : "text-xero"}`}
                               >
                                 Xero
                               </span>

@@ -39,14 +39,17 @@ export default function HeroSection() {
                 <div className="lg:col-span-7 max-w-[550px]">
                   <h1 className="text-white text-[28px] sm:text-[32px] md:text-[48px] font-extrabold tracking-tight leading-tight mb-4 flex items-center flex-wrap gap-x-3">
                     {hero.title}
+                    {/* The cat-M mark, as in the navbar and footer, drawn white (brightness-0
+                        invert): its "m" is transparent in the file, so the hero's teal shows
+                        through it. Teal on the teal hero would disappear. Tracks the heading
+                        size - at 40px next to 28px text it overpowered the words on small
+                        screens. */}
                     <Image
-                      src="/brand/minty-logo.webp"
+                      src="/brand/minty-logo-v2.webp"
                       alt="Minty"
-                      width={60}
+                      width={82}
                       height={60}
-                      // Logo tracks the heading size — at 40px next to 28px text it
-                      // overpowered the words on small screens.
-                      className="h-[30px] sm:h-[40px] md:h-[60px] w-auto inline-block brightness-0 invert"
+                      className="h-[22px] sm:h-[26px] md:h-[40px] w-auto inline-block brightness-0 invert"
                     />
                   </h1>
 
