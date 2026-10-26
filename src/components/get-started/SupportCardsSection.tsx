@@ -20,14 +20,14 @@ export default function SupportCardsSection() {
               >
                 <div>
                   <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg font-bold mb-5 shadow-xs ${
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg font-bold mb-5 shadow-2xs ${
                       card.type === 'support' ? 'bg-[#2BBCA6]' : 'bg-[#00CBB0]'
                     }`}
                   >
                     {card.icon}
                   </div>
 
-                  <h4 className="text-[#113B4A] text-[17px] font-extrabold mb-2">
+                  <h4 className="text-ink-deep text-[17px] font-extrabold mb-2">
                     {card.title}
                   </h4>
                   <p className="text-gray-500 text-[13px] leading-relaxed mb-6">

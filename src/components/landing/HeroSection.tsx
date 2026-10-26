@@ -48,7 +48,7 @@ export default function HeroSection() {
             </Button>
           </div>
           <span className="flex items-center gap-2 text-[13px] text-ink-muted flex-wrap">
-            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-teal text-white flex-shrink-0">
+            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-teal text-white shrink-0">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />

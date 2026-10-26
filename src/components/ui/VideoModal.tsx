@@ -41,7 +41,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
       aria-labelledby="video-modal-title"
     >
       <div
-        className="bg-white rounded-[24px] w-full max-w-4xl aspect-[16/9] relative shadow-lg"
+        className="bg-white rounded-[24px] w-full max-w-4xl aspect-video relative shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}

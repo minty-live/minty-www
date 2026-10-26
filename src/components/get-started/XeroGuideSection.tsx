@@ -20,7 +20,7 @@ export default function XeroGuideSection() {
     <FadeContent blur={false} duration={1000} ease="ease-out" initialOpacity={0}>
       <section className="bg-[#F7F9FB] py-10 md:py-16 font-sans">
         <Container className="max-w-[1440px] px-4 md:px-6">
-          <h2 className="text-[#113B4A] text-[22px] sm:text-[26px] md:text-[28px] font-extrabold tracking-tight mb-8 md:mb-10">
+          <h2 className="text-ink-deep text-[22px] sm:text-[26px] md:text-[28px] font-extrabold tracking-tight mb-8 md:mb-10">
             {highlightXero(xeroGuide.title)}
           </h2>
 
@@ -38,11 +38,11 @@ export default function XeroGuideSection() {
                   collapsedWidth="max-w-none"
                   // 16/9 matches the video frame exactly, so the poster occupies
                   // the same box the player will and nothing shifts on play.
-                  posterAspect="aspect-[16/9]"
+                  posterAspect="aspect-video"
                 />
               ) : (
                 /* No recording yet — placeholder frame from the design. */
-                <div className="relative aspect-[16/9] mx-auto w-full rounded-xl bg-[#D9D9D9] flex items-center justify-center">
+                <div className="relative aspect-video mx-auto w-full rounded-xl bg-[#D9D9D9] flex items-center justify-center">
                   <span className="text-white text-4xl" aria-hidden="true">▶</span>
                   {xeroGuide.videoNote && (
                     <span className="absolute bottom-3 right-4 text-[#E5484D] text-xs font-semibold">
@@ -61,7 +61,7 @@ export default function XeroGuideSection() {
                     key={item.id}
                     className={cn(
                       'bg-white border rounded-[14px] overflow-hidden transition-all duration-200',
-                      'border-line hover:border-ink/[0.18]',
+                      'border-line hover:border-ink/18',
                       isOpen &&
                         'border-teal shadow-[0_1px_0_rgba(47,184,166,.06),0_8px_24px_rgba(15,45,58,.06)]'
                     )}
@@ -75,16 +75,16 @@ export default function XeroGuideSection() {
                       aria-controls={`xero-guide-body-${item.id}`}
                       onClick={() => setOpenId(isOpen ? null : item.id)}
                     >
-                      <span className="flex-1 text-[14px] md:text-base font-semibold text-teal-deep leading-[1.4]">
+                      <span className="flex-1 text-[14px] md:text-base font-semibold text-teal-deep leading-[1.4] md:leading-6">
                         Q. {item.question}
                       </span>
                       <span
                         aria-hidden="true"
                         className={cn(
                           'relative flex-none w-9 h-9 md:w-10 md:h-10 rounded-xl bg-teal-gradient shadow-[0_6px_16px_rgba(0,203,198,.30)]',
-                          'before:content-[""] before:absolute before:top-1/2 before:left-[11px] before:right-[11px] before:h-[2.5px] before:bg-white before:rounded-sm before:-translate-y-1/2 before:transition-transform before:duration-300',
-                          'after:content-[""] after:absolute after:left-1/2 after:top-[11px] after:bottom-[11px] after:w-[2.5px] after:bg-white after:rounded-sm after:-translate-x-1/2 after:transition-transform after:duration-300',
-                          isOpen && 'before:rotate-[135deg] after:rotate-[135deg]'
+                          'before:content-[""] before:absolute before:top-1/2 before:left-[11px] before:right-[11px] before:h-[2.5px] before:bg-white before:rounded-xs before:-translate-y-1/2 before:transition-transform before:duration-300',
+                          'after:content-[""] after:absolute after:left-1/2 after:top-[11px] after:bottom-[11px] after:w-[2.5px] after:bg-white after:rounded-xs after:-translate-x-1/2 after:transition-transform after:duration-300',
+                          isOpen && 'before:rotate-135 after:rotate-135'
                         )}
                       />
                     </button>
@@ -101,7 +101,7 @@ export default function XeroGuideSection() {
                             // Set on the <p> itself rather than inherited, and as an
                             // arbitrary property so nothing can collapse it with the
                             // other text-* utilities on the wrapper.
-                            className="text-ink-muted [&+p]:mt-5 [text-align:justify]"
+                            className="text-ink-muted [&+p]:mt-5 text-justify"
                           >
                             {paragraph}
                           </p>

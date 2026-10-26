@@ -16,12 +16,12 @@ export default function ContactHero() {
       delay={0}
     >
     <section className="relative pt-6 md:pt-10 pb-10 md:pb-16 text-center px-4 overflow-hidden bg-[#FAF6F0]">
-        <div className="inline-flex items-center gap-2 bg-[#d6efe8] text-[#00CBB0] px-3 md:px-4 py-1 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest mb-4 md:mb-6 border border-[#00CBB0]/10 shadow-sm">
+        <div className="inline-flex items-center gap-2 bg-mint text-[#00CBB0] px-3 md:px-4 py-1 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest mb-4 md:mb-6 border border-[#00CBB0]/10 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00CBB0]" />
             {"We're here to help"}
         </div>
 
-        <h1 className="text-[32px] md:text-[56px] font-extrabold text-[#113B4A] tracking-tight mb-3 md:mb-4">
+        <h1 className="text-[32px] md:text-[56px] font-extrabold text-ink-deep tracking-tight mb-3 md:mb-4">
             Talk to <span className="text-[#00CBB0]">Minty.</span>
         </h1>
 

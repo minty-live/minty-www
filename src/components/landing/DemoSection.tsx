@@ -46,7 +46,7 @@ export default function DemoSection() {
         </div>
 
         {/* Section Heading */}
-        <h2 id="demo-title" className="text-[28px] md:text-[34px] font-extrabold text-[#113B4A] mb-3 tracking-tight">
+        <h2 id="demo-title" className="text-[28px] md:text-[34px] font-extrabold text-ink-deep mb-3 tracking-tight">
           {demo.title}
         </h2>
         
@@ -56,7 +56,7 @@ export default function DemoSection() {
         </p>
 
         {/* Video Player Floating Card */}
-        <div ref={videoCardRef} className="w-full max-w-4xl aspect-[16/10] rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(17,59,74,0.08)] bg-white relative">
+        <div ref={videoCardRef} className="w-full max-w-4xl aspect-16/10 rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(17,59,74,0.08)] bg-white relative">
           {isPlaying ? (
             <iframe
               width="100%"
@@ -97,12 +97,12 @@ export default function DemoSection() {
               </div>
 
               {/* Bottom Left Badge overlay */}
-              <div className="absolute bottom-6 left-6 bg-white text-[#113B4A] text-xs font-bold px-4 py-2 rounded-full shadow-sm">
+              <div className="absolute bottom-6 left-6 bg-white text-ink-deep text-xs font-bold px-4 py-2 rounded-full shadow-xs">
                 DailyMinty
               </div>
               
               {/* Bottom Right Duration overlay */}
-              <div className="absolute bottom-6 right-6 bg-[#2B4750] text-white text-xs font-bold px-3 py-2 rounded-xl shadow-sm">
+              <div className="absolute bottom-6 right-6 bg-[#2B4750] text-white text-xs font-bold px-3 py-2 rounded-xl shadow-xs">
                 0:40
               </div>
             </button>

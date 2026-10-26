@@ -57,8 +57,11 @@ export default function ContactFormSection() {
   // When the form became fillable — the server rejects implausibly fast submits.
   const renderedAt = useRef<number>(0);
 
-  // Hydrate from storage after mount so server and client markup match.
+  // Hydrate from storage after mount so server and client markup match. Reading browser storage
+  // once mounted is the external-system sync the rule allows: a lazy initial state would read it
+  // during the server render too, and the markup would mismatch.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- see above
     setSubmissions(readRecentSubmissions());
     renderedAt.current = Date.now();
   }, []);
@@ -164,7 +167,7 @@ export default function ContactFormSection() {
     <section className="max-w-[1000px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 pb-12 md:pb-20 mt-12 md:mt-20">
       {/* Left: Contact Form Card with Subtle Shadow */}
       <div className="lg:col-span-7 bg-white p-6 md:p-10 rounded-[20px] md:rounded-[32px] shadow-[0_4px_32px_rgba(0,0,0,0.03)] border border-gray-100">
-        <h2 className="text-[20px] md:text-2xl font-extrabold text-[#113B4A] mb-2">Send us a message</h2>
+        <h2 className="text-[20px] md:text-2xl font-extrabold text-ink-deep mb-2">Send us a message</h2>
         <p className="text-[12px] md:text-sm text-[#4A7280] mb-6 md:mb-8">We typically reply within a few hours during business days.</p>
 
         {status === 'sent' ? (
@@ -172,7 +175,7 @@ export default function ContactFormSection() {
             <div className="w-12 h-12 rounded-full bg-[#D4EFE9] flex items-center justify-center">
               <CheckCircle2 className="w-6 h-6 text-[#00CBB0]" />
             </div>
-            <h3 className="text-lg font-extrabold text-[#113B4A]">Message sent!</h3>
+            <h3 className="text-lg font-extrabold text-ink-deep">Message sent!</h3>
             <p className="text-sm text-[#4A7280]">
               Thanks for reaching out — we&apos;ve got your message and will reply to your inbox shortly.
             </p>
@@ -195,12 +198,12 @@ export default function ContactFormSection() {
         <form className="space-y-4 md:space-y-5" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             <div>
-              <label htmlFor="name" className="block text-xs font-bold text-[#113B4A] mb-1.5">Your name<span className="text-red-500" aria-hidden> *</span></label>
-              <input id="name" name="name" required maxLength={100} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-[#e7ddd0] [&:user-invalid]:border-red-500 [&:user-invalid]:focus:ring-red-200/40 focus:ring-2 focus:ring-[#e7ddd0]/20 outline-none transition-all text-[13px]" placeholder="minty" />
+              <label htmlFor="name" className="block text-xs font-bold text-ink-deep mb-1.5">Your name<span className="text-red-500" aria-hidden> *</span></label>
+              <input id="name" name="name" required maxLength={100} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-line user-invalid:border-red-500 user-invalid:focus:ring-red-200/40 focus:ring-2 focus:ring-line/20 outline-hidden transition-all text-[13px]" placeholder="minty" />
             </div>
             <div>
-              <label htmlFor="email" className="block text-xs font-bold text-[#113B4A] mb-1.5">Email<span className="text-red-500" aria-hidden> *</span></label>
-              <input id="email" name="email" {...emailInput.props} required maxLength={200} aria-describedby={emailInput.rejected ? 'email-hint' : undefined} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-[#e7ddd0] [&:user-invalid]:border-red-500 [&:user-invalid]:focus:ring-red-200/40 focus:ring-2 focus:ring-[#e7ddd0]/20 outline-none transition-all text-[13px]" placeholder="you@business.com" />
+              <label htmlFor="email" className="block text-xs font-bold text-ink-deep mb-1.5">Email<span className="text-red-500" aria-hidden> *</span></label>
+              <input id="email" name="email" {...emailInput.props} required maxLength={200} aria-describedby={emailInput.rejected ? 'email-hint' : undefined} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-line user-invalid:border-red-500 user-invalid:focus:ring-red-200/40 focus:ring-2 focus:ring-line/20 outline-hidden transition-all text-[13px]" placeholder="you@business.com" />
               {emailInput.rejected && (
                 <p id="email-hint" role="status" className="mt-1.5 text-[12px] text-red-600">{EMAIL_ASCII_HINT}</p>
               )}
@@ -209,13 +212,13 @@ export default function ContactFormSection() {
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5'>
               <div>
-                <label htmlFor="businessName" className="block text-xs font-bold text-[#113B4A] mb-1.5">Business name</label>
-                <input id="businessName" name="businessName" maxLength={150} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-[#e7ddd0] focus:ring-2 focus:ring-[#e7ddd0]/20 outline-none transition-all text-[13px]" placeholder="Optional" />
+                <label htmlFor="businessName" className="block text-xs font-bold text-ink-deep mb-1.5">Business name</label>
+                <input id="businessName" name="businessName" maxLength={150} className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-line focus:ring-2 focus:ring-line/20 outline-hidden transition-all text-[13px]" placeholder="Optional" />
               </div>
 
               <div>
-                <label htmlFor="topic" className="block text-xs font-bold text-[#113B4A] mb-1.5">Topic<span className="text-red-500" aria-hidden> *</span></label>
-                <select id="topic" name="topic" required defaultValue="" className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-[#e7ddd0] [&:user-invalid]:border-red-500 [&:user-invalid]:focus:ring-red-200/40 text-[#4A7280] focus:ring-2 focus:ring-[#e7ddd0]/20 outline-none transition-all appearance-none text-[13px]">
+                <label htmlFor="topic" className="block text-xs font-bold text-ink-deep mb-1.5">Topic<span className="text-red-500" aria-hidden> *</span></label>
+                <select id="topic" name="topic" required defaultValue="" className="w-full bg-[#fbf8f2] p-2.5 md:p-3 rounded-lg md:rounded-xl border border-line user-invalid:border-red-500 user-invalid:focus:ring-red-200/40 text-[#4A7280] focus:ring-2 focus:ring-line/20 outline-hidden transition-all appearance-none text-[13px]">
                   <option value="" disabled>Pick one..</option>
                   {TOPICS.map((topic) => (
                     <option key={topic} value={topic}>{topic}</option>
@@ -225,8 +228,8 @@ export default function ContactFormSection() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-xs font-bold text-[#113B4A] mb-1.5">How can we help?<span className="text-red-500" aria-hidden> *</span></label>
-            <textarea id="message" name="message" required maxLength={5000} className="w-full bg-[#fbf8f2] p-2.5 md:p-4 rounded-lg md:rounded-xl border border-[#e7ddd0] [&:user-invalid]:border-red-500 [&:user-invalid]:focus:ring-red-200/40 focus:ring-2 focus:ring-[#e7ddd0]/20 outline-none transition-all resize-none text-[13px]" rows={4} placeholder="Tell us a bit about..." />
+            <label htmlFor="message" className="block text-xs font-bold text-ink-deep mb-1.5">How can we help?<span className="text-red-500" aria-hidden> *</span></label>
+            <textarea id="message" name="message" required maxLength={5000} className="w-full bg-[#fbf8f2] p-2.5 md:p-4 rounded-lg md:rounded-xl border border-line user-invalid:border-red-500 user-invalid:focus:ring-red-200/40 focus:ring-2 focus:ring-line/20 outline-hidden transition-all resize-none text-[13px]" rows={4} placeholder="Tell us a bit about..." />
           </div>
 
           {/* Honeypot — hidden from users, catches bots that fill every field */}
@@ -236,7 +239,7 @@ export default function ContactFormSection() {
             tabIndex={-1}
             autoComplete="off"
             aria-hidden="true"
-            className="absolute -left-[9999px] w-px h-px opacity-0"
+            className="absolute left-[-9999px] w-px h-px opacity-0"
           />
 
           {status === 'error' && (
@@ -267,12 +270,12 @@ export default function ContactFormSection() {
       <div className="lg:col-span-5 space-y-3 md:space-y-4">
         <div className="bg-[#FAF6F0] p-4 md:p-6 rounded-[16px] md:rounded-[24px] border border-[#F2EFE8] hover:border-[#E8E1D5] transition-colors">
           <div className="flex items-start gap-3 md:gap-4">
-            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center flex-shrink-0">
+            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center shrink-0">
               <Mail className="w-4 md:w-5 h-4 md:h-5 text-[#00CBB0]" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-[#113B4A] mb-1 text-[13px] md:text-sm">Email us directly</h3>
-              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed mb-2">Best for non-urgent questions and detailed asks. Replies usually within 4 hours.</p>
+              <h3 className="font-bold text-ink-deep mb-1 text-[13px] md:text-sm">Email us directly</h3>
+              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed md:leading-4 mb-2">Best for non-urgent questions and detailed asks. Replies usually within 4 hours.</p>
               <a href="mailto:hello@dailyminty.com" className="text-[11px] md:text-xs font-bold text-[#00CBB0] hover:underline">hello@dailyminty.com →</a>
             </div>
           </div>
@@ -280,12 +283,12 @@ export default function ContactFormSection() {
 
         <div className="bg-[#FAF6F0] p-4 md:p-6 rounded-[16px] md:rounded-[24px] border border-[#F2EFE8] hover:border-[#E8E1D5] transition-colors">
           <div className="flex items-start gap-3 md:gap-4">
-            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center flex-shrink-0">
+            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center shrink-0">
               <MessageSquare className="w-4 md:w-5 h-4 md:h-5 text-[#00CBB0]" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-[#113B4A] mb-1 text-[13px] md:text-sm">WhatsApp us</h3>
-              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed mb-2">Get instant replies during business hours. Chat directly with our team on WhatsApp.</p>
+              <h3 className="font-bold text-ink-deep mb-1 text-[13px] md:text-sm">WhatsApp us</h3>
+              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed md:leading-4 mb-2">Get instant replies during business hours. Chat directly with our team on WhatsApp.</p>
                <a href="https://wa.me/85260423884" target="_blank" rel="noopener noreferrer" className="text-[11px] md:text-xs font-bold text-[#00CBB0] hover:underline">Start chat →</a>
             </div>
           </div>
@@ -293,12 +296,12 @@ export default function ContactFormSection() {
 
         <div className="bg-[#FAF6F0] p-4 md:p-6 rounded-[16px] md:rounded-[24px] border border-[#F2EFE8] hover:border-[#E8E1D5] transition-colors">
           <div className="flex items-start gap-3 md:gap-4">
-            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center flex-shrink-0">
+            <div className="w-9 md:w-10 h-9 md:h-10 rounded-full bg-[#D4EFE9] flex items-center justify-center shrink-0">
               <HelpCircle className="w-4 md:w-5 h-4 md:h-5 text-[#00CBB0]" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-[#113B4A] mb-1 text-[13px] md:text-sm">Help centre</h3>
-              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed mb-2">Step-by-step guides, video walkthroughs, and answers to the most common questions.</p>
+              <h3 className="font-bold text-ink-deep mb-1 text-[13px] md:text-sm">Help centre</h3>
+              <p className="text-[11px] md:text-xs text-[#4A7280] leading-relaxed md:leading-4 mb-2">Step-by-step guides, video walkthroughs, and answers to the most common questions.</p>
               <a href="/resources/learning" className="text-[11px] md:text-xs font-bold text-[#00CBB0] hover:underline">Browse articles →</a>
             </div>
           </div>
@@ -306,9 +309,9 @@ export default function ContactFormSection() {
 
         {/* Status Bar */}
         <div className="bg-[#D4EFE9] p-3 md:p-4 rounded-[16px] md:rounded-[24px] flex items-start gap-2.5 md:gap-3">
-          <CheckCircle2 className="w-4 md:w-5 h-4 md:h-5 text-[#00CBB0] flex-shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-4 md:w-5 h-4 md:h-5 text-[#00CBB0] shrink-0 mt-0.5" />
           <div className="min-w-0">
-            <p className="text-[12px] md:text-sm font-bold text-[#113B4A] mb-0.5 md:mb-1">All systems normal</p>
+            <p className="text-[12px] md:text-sm font-bold text-ink-deep mb-0.5 md:mb-1">All systems normal</p>
             <p className="text-[11px] md:text-xs text-[#4A7280]">No incidents reported in the last 24 hours.</p>
           </div>
         </div>

@@ -52,7 +52,7 @@ function FooterMenuItem({ link }: { link: FooterLink }) {
         {link.label}
         <span
           aria-hidden="true"
-          className="inline-block w-[6px] h-[6px] border-r-2 border-b-2 border-current rotate-45 translate-y-[-1px] transition-transform group-hover:rotate-[225deg] group-focus-within:rotate-[225deg]"
+          className="inline-block w-[6px] h-[6px] border-r-2 border-b-2 border-current rotate-45 -translate-y-px transition-transform group-hover:rotate-225 group-focus-within:rotate-225"
         />
       </button>
       <ul
@@ -61,7 +61,7 @@ function FooterMenuItem({ link }: { link: FooterLink }) {
         className={cn(
           'absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-1.5 mb-1.5',
           'min-w-[180px] list-none p-2',
-          'bg-white border border-ink/10 rounded-2xl shadow-minty-lg z-[60]',
+          'bg-white border border-ink/10 rounded-2xl shadow-minty-lg z-60',
           'opacity-0 invisible pointer-events-none transition-all duration-150',
           'group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:-translate-y-2.5',
           'group-focus-within:opacity-100 group-focus-within:visible group-focus-within:pointer-events-auto group-focus-within:-translate-y-2.5',
@@ -89,7 +89,7 @@ export default function Footer() {
   const visibleLinks = getVisibleFooterLinks();
 
   return (
-    <footer className="bg-cream py-6 md:py-9 border-t border-ink/[0.06]" aria-labelledby="footer-heading">
+    <footer className="bg-cream py-6 md:py-9 border-t border-ink/6" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
       <Container className="flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-6">
         <div className="flex flex-col md:flex-row gap-[18px] items-center text-ink-muted text-[12px] md:text-[13px]">

@@ -95,7 +95,7 @@ function ModuleRail({ modules }: { modules: GuideGroup[] }) {
           <li key={group.code}>
             <a
               href={`#${group.slug}`}
-              className="flex items-baseline gap-2.5 rounded-lg px-3 py-2 text-[13px] font-semibold leading-snug text-ink-muted no-underline transition-colors hover:bg-mint-soft hover:text-ink-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              className="flex items-baseline gap-2.5 rounded-lg px-3 py-2 text-[13px] font-semibold leading-snug text-ink-muted no-underline transition-colors hover:bg-mint-soft hover:text-ink-deep focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
             >
               <span className="tabular-nums text-teal-deep">{index + 1}</span>
               <span className="min-w-0">{group.title}</span>
@@ -193,7 +193,7 @@ function GuideRow({
           aria-expanded={isOpen}
           aria-controls={`guide-panel-${item.code}`}
           onClick={() => onToggle(isOpen ? null : item.code)}
-          className="group flex min-h-[64px] w-full items-center gap-3 border-0 bg-transparent px-2 py-3 text-left font-sans transition-colors hover:bg-mint-soft/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal md:min-h-[72px] md:gap-4 md:px-3"
+          className="group flex min-h-[64px] w-full items-center gap-3 border-0 bg-transparent px-2 py-3 text-left font-sans transition-colors hover:bg-mint-soft/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal md:min-h-[72px] md:gap-4 md:px-3"
         >
           <StepBadge step={step} variant={isOpen ? 'open' : 'default'} />
           <span className="min-w-0 flex-1">
@@ -321,7 +321,7 @@ function Callout({
               feedback before the page changes. */}
           <Link
             href={callout.buttonHref}
-            className="group inline-flex w-auto items-center justify-center gap-2 rounded-full bg-ink-deep px-6 py-3 text-[13px] font-bold text-white no-underline transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#1a5569] hover:shadow-[0_10px_24px_rgba(17,59,74,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none md:w-full"
+            className="group inline-flex w-auto items-center justify-center gap-2 rounded-full bg-ink-deep px-6 py-3 text-[13px] font-bold text-white no-underline transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#1a5569] hover:shadow-[0_10px_24px_rgba(17,59,74,0.22)] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none md:w-full"
           >
             {callout.buttonText}
             <span

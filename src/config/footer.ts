@@ -1,4 +1,3 @@
-import { siteConfig } from './site';
 
 export interface FooterChildLink {
   key: string; label: string; href: string;

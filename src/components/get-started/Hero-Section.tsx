@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import { getStartedContent } from '@/config/get-started';
@@ -26,7 +25,7 @@ export default function HeroSection() {
       delay={0}
     >
     {/* No min-h-screen here: this component is only the hero, not the whole
-        page. Forcing it to 100vh made flex-grow stretch <main>, padding out
+        page. Forcing it to 100vh made grow stretch <main>, padding out
         hundreds of pixels of white space before the section below. */}
     <div className="flex flex-col bg-white">
   <main className="pt-6 md:pt-10 pb-0 font-sans">
@@ -37,7 +36,7 @@ export default function HeroSection() {
       {/* z-10: the mascot is positioned to hang below the card's rounded edge,
           and the tinted band that follows is later in the DOM — without a
           stacking order here it paints over the cat's feet. */}
-      <section className="relative z-10 bg-gradient-to-r from-[#03c5c0] to-[#69d8c2] rounded-[32px] px-6 py-12 md:px-12 md:py-20 text-white mb-12 md:mb-20 shadow-sm overflow-visible">
+      <section className="relative z-10 bg-linear-to-r from-[#03c5c0] to-[#69d8c2] rounded-[32px] px-6 py-12 md:px-12 md:py-20 text-white mb-12 md:mb-20 shadow-xs overflow-visible">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative w-full z-10">
           
 
@@ -55,12 +54,12 @@ export default function HeroSection() {
               />
             </h1>
 
-            <p className="text-white text-sm md:text-base leading-relaxed mb-8 max-w-[420px]">
+            <p className="text-white text-sm md:text-base leading-relaxed md:leading-6 mb-8 max-w-[420px]">
               {hero.description}
             </p>
 
             <div className="flex flex-wrap gap-3 md:gap-4 items-center">
-              <Button className="bg-white text-[#113B4A] hover:bg-white/90 font-bold px-6 py-3 rounded-full text-[14px] shadow-sm transition-all duration-200" href={hero.primaryBtnHref}>
+              <Button className="bg-white text-ink-deep hover:bg-white/90 font-bold px-6 py-3 rounded-full text-[14px] shadow-xs transition-all duration-200" href={hero.primaryBtnHref}>
                 {hero.primaryBtn}
               </Button>
               <Button className="bg-transparent text-white border-2 border-white/40 hover:border-white hover:bg-white/10 font-bold px-6 py-2.5 rounded-full text-[14px] transition-all duration-200" href={siteConfig.loginUrl}>

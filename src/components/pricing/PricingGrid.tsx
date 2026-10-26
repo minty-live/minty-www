@@ -67,7 +67,7 @@ export default function PricingGrid() {
     >
     <section className="max-w-[1400px] mx-auto px-4 mb-16">
       <div className="flex justify-center mb-12">
-      <span className="bg-white border border-gray-100 text-[#113B4A] text-[13px] font-bold px-6 py-2.5 rounded-full shadow-md tracking-wide">
+      <span className="bg-white border border-gray-100 text-ink-deep text-[13px] font-bold px-6 py-2.5 rounded-full shadow-md tracking-wide">
         Subscription Types
       </span>
     </div>
@@ -85,7 +85,7 @@ export default function PricingGrid() {
                 ? 'bg-[#01d0c1] border-[#01d0c1] shadow-[0_12px_36px_rgba(1,208,193,0.2)] scale-[1.01] text-white'
                 : isSelected && (plan.id === 'petty-cash' || plan.id === 'bill-payment')
                 ? 'bg-white border-gray-300 shadow-md scale-[1.01]'
-                : 'bg-[#f4f6fc] border-gray-200/70 shadow-sm hover:border-gray-300'
+                : 'bg-[#f4f6fc] border-gray-200/70 shadow-xs hover:border-gray-300'
             }`}
           >
             <div>
@@ -104,7 +104,7 @@ export default function PricingGrid() {
 
               
               <div className="flex gap-2 items-center mb-3">
-                <h2 className={`text-2xl font-extrabold ${isSuperMintyGreen ? 'text-white' : 'text-[#113B4A]'}`}>{plan.title}</h2>
+                <h2 className={`text-2xl font-extrabold ${isSuperMintyGreen ? 'text-white' : 'text-ink-deep'}`}>{plan.title}</h2>
                 {plan.badgeText && <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide ${isSuperMintyGreen ? 'bg-white/20 text-white' : 'bg-[#E5ECF0] text-[#4A7280]'}`}>{plan.badgeText}</span>}
               </div>
 
@@ -113,7 +113,7 @@ export default function PricingGrid() {
               <div className="flex items-center gap-3 mb-1.5">
                 <span className={`font-bold text-2xl relative ${isSuperMintyGreen ? 'text-white/70' : 'text-gray-400'}`}>
                   {plan.crossedText}
-                  <span className="absolute left-0 top-1/2 w-full h-[2.5px] bg-[#FF5E5E] -translate-y-1/2 rounded" />
+                  <span className="absolute left-0 top-1/2 w-full h-[2.5px] bg-[#FF5E5E] -translate-y-1/2 rounded-sm" />
                 </span>
                 <span className={isSuperMintyGreen ? 'text-white font-extrabold text-3xl' : 'text-[#00CBB0] font-extrabold text-3xl'}>{plan.currentPrice}</span>
               </div>
@@ -121,18 +121,18 @@ export default function PricingGrid() {
               <p className={`text-[11px] leading-[1.6] whitespace-pre-line mb-3 min-h-[36px] ${isSuperMintyGreen ? 'text-white/80' : 'text-gray-400'}`}>{plan.subText}</p>
               
       
-              <p className={`text-[11px] font-medium p-3 rounded-xl mb-6 ${isSuperMintyGreen ? 'bg-white/15 text-white' : 'text-[#113B4A] bg-[#F5F8F9]'}`}>{plan.trialText}</p>
+              <p className={`text-[11px] font-medium p-3 rounded-xl mb-6 ${isSuperMintyGreen ? 'bg-white/15 text-white' : 'text-ink-deep bg-[#F5F8F9]'}`}>{plan.trialText}</p>
 
               <Button
                 href={siteConfig.waitlistUrl}
                 external
-                className={`w-full py-3 rounded-xl font-bold text-sm mb-8 ${isSelected ? 'bg-[#113B4A] text-white' : 'bg-[#ECF2F5] text-[#113B4A]'}`}
+                className={`w-full py-3 rounded-xl font-bold text-sm mb-8 ${isSelected ? 'bg-ink-deep text-white' : 'bg-[#ECF2F5] text-ink-deep'}`}
               >
                 Join Waitlist
               </Button>
 
               <div className={`border-t pt-6 ${isSuperMintyGreen ? 'border-white/20' : 'border-gray-100'}`}>
-                <p className={`text-xs font-bold mb-3 ${isSuperMintyGreen ? 'text-white' : 'text-[#113B4A]'}`}>
+                <p className={`text-xs font-bold mb-3 ${isSuperMintyGreen ? 'text-white' : 'text-ink-deep'}`}>
                   {plan.featuresHeading}
                 </p>
                 <ul className={`flex flex-col gap-3.5`}>

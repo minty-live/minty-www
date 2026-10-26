@@ -1,39 +1,45 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { landingFaq } from '@/config/faq';
 import FaqAccordion from './FaqAccordion';
 import AnimatedContent from '@/animations/landing/heroanim';
 
+const normalize = (str: string) =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '') // keep only letters, numbers, and spaces
+    .replace(/\s+/g, ' ')
+    .trim();
+
+/** The FAQ a `?faqId=<question>` deep link names, if any. */
+function faqFor(openId?: string | null) {
+  if (!openId) return undefined;
+  const wanted = normalize(decodeURIComponent(openId));
+  return landingFaq.find((item) => normalize(item.question) === wanted);
+}
+
 export default function FAQCategories({ openId }: { openId?: string | null }) {
-  const [activeTab, setActiveTab] = useState<'beginner' | 'intermediate' | 'accountant'>('beginner');
-  const [targetId, setTargetId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'beginner' | 'intermediate' | 'accountant'>(
+    () => faqFor(openId)?.category ?? 'beginner',
+  );
+  const [targetId, setTargetId] = useState<string | null>(() => faqFor(openId)?.id ?? null);
 
-  useEffect(() => {
-    if (openId) {
-      const normalize = (str: string) =>
-        str
-          .toLowerCase()
-          .replace(/[^a-z0-9\s]/g, '') // keep only letters, numbers, and spaces
-          .replace(/\s+/g, ' ')
-          .trim();
-
-      const decodedId = normalize(decodeURIComponent(openId));
-
-      const matchingFaq = landingFaq.find((item) => {
-        const normalizedQuestion = normalize(item.question);
-        return normalizedQuestion === decodedId;
-      });
-
-      if (matchingFaq) {
-        setActiveTab(matchingFaq.category);
-        setTargetId(matchingFaq.id);
-      }
+  // A new deep link while mounted (client navigation) re-targets during render - React's
+  // "adjust state when a prop changes" - rather than in an effect, which renders twice.
+  const [seenOpenId, setSeenOpenId] = useState(openId);
+  if (openId !== seenOpenId) {
+    setSeenOpenId(openId);
+    const match = faqFor(openId);
+    if (match) {
+      setActiveTab(match.category);
+      setTargetId(match.id);
     }
-  }, [openId]);
+  }
 
-
-  const filteredFaqs = landingFaq.filter((item) => item.category === activeTab);
+  // Memoised: FaqAccordion re-opens its target when this list changes identity, so a fresh array
+  // would re-open a closed target whenever this component re-renders for any other reason.
+  const filteredFaqs = useMemo(() => landingFaq.filter((item) => item.category === activeTab), [activeTab]);
 
   return (
     <AnimatedContent

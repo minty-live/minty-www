@@ -71,7 +71,7 @@ export default function VideoPlayer({
   isPlaying: controlledPlaying,
   onPlayingChange,
   collapsedWidth = 'max-w-[460px]',
-  posterAspect = 'aspect-[16/9]',
+  posterAspect = 'aspect-video',
   duration,
   showClose = true,
   scrollOnPlay = true,
@@ -97,10 +97,13 @@ export default function VideoPlayer({
   const poster = thumbnail || `https://img.youtube.com/vi/${youtubeId(videoUrl)}/hqdefault.jpg`;
   const isLocalThumb = Boolean(thumbnail) && thumbnail!.startsWith('/');
 
-  // Each newly opened video assumes sound again until the player says otherwise.
-  useEffect(() => {
+  // Each newly opened video assumes sound again until the player says otherwise (adjusted during
+  // render when isPlaying changes, rather than in an effect).
+  const [seenPlaying, setSeenPlaying] = useState(isPlaying);
+  if (isPlaying !== seenPlaying) {
+    setSeenPlaying(isPlaying);
     setIsMuted(false);
-  }, [isPlaying]);
+  }
 
   // The iframe reports its state (mute included) once we subscribe with a
   // `listening` message — that is what tells us whether the browser honoured
@@ -163,7 +166,7 @@ export default function VideoPlayer({
           }}
           aria-label={`Play: ${title}`}
           className={cn(
-            'relative w-full rounded-2xl overflow-hidden cursor-pointer group shadow-sm block border-0 p-0',
+            'relative w-full rounded-2xl overflow-hidden cursor-pointer group shadow-xs block border-0 p-0',
             posterAspect
           )}
         >
@@ -187,12 +190,12 @@ export default function VideoPlayer({
 
           <div className="absolute inset-0 bg-black/5 flex items-center justify-center transition-colors group-hover:bg-black/10">
             <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-md backdrop-blur-xs transform transition-transform group-hover:scale-110">
-              <span className="text-[#113B4A] text-xl ml-1" aria-hidden="true">▶</span>
+              <span className="text-ink-deep text-xl ml-1" aria-hidden="true">▶</span>
             </div>
           </div>
 
           {duration && (
-            <span className="absolute bottom-3 right-3 z-10 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-sm">
+            <span className="absolute bottom-3 right-3 z-10 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-xs">
               <Clock size={11} />
               {duration}
             </span>
@@ -207,7 +210,7 @@ export default function VideoPlayer({
       ref={playerRef}
       className={cn(
         'relative overflow-hidden bg-[#EDF3F1]',
-        'aspect-[16/9] mx-auto w-full rounded-2xl border border-emerald-50/50 shadow-inner transition-[max-width] duration-300 ease-out',
+        'aspect-video mx-auto w-full rounded-2xl border border-emerald-50/50 shadow-inner transition-[max-width] duration-300 ease-out',
         className
       )}
     >
@@ -228,7 +231,7 @@ export default function VideoPlayer({
       {isMuted && (
         <button
           onClick={unmute}
-          className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 px-3.5 py-2 text-[12px] font-bold text-white backdrop-blur-sm transition-colors hover:bg-black/85"
+          className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 px-3.5 py-2 text-[12px] font-bold text-white backdrop-blur-xs transition-colors hover:bg-black/85"
           aria-label="Turn on sound"
         >
           <VolumeX size={14} />

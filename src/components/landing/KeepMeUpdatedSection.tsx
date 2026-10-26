@@ -20,7 +20,7 @@ export default function KeepMeUpdatedSection() {
       <div className="mx-auto grid w-full max-w-[1140px] grid-cols-1 items-center gap-10 px-7 lg:min-h-[520px] lg:grid-cols-2">
         {/* Frosted glass card */}
         <div className="mx-auto w-full max-w-[440px] rounded-[28px] border border-white/45 bg-white/20 px-7 py-14 text-center shadow-[0_24px_60px_rgba(15,45,58,0.16),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-[18px] backdrop-saturate-[1.1] sm:px-14">
-          <h2 className="text-[clamp(44px,5vw,68px)] font-extrabold leading-[1.02] tracking-[-0.025em] text-ink">
+          <h2 className="text-[clamp(44px,5vw,68px)] font-extrabold leading-[1.02] tracking-tight text-ink">
             <span className="mb-2.5 block text-[clamp(20px,1.8vw,26px)] font-medium italic tracking-normal text-ink/70">
               {keepMeUpdated.eyebrow}
             </span>

@@ -100,13 +100,15 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
 }
 
 export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[]; defaultOpenId?: string | null }) {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(defaultOpenId ?? null);
 
-  useEffect(() => {
-    if (defaultOpenId) {
-      setOpenId(defaultOpenId);
-    }
-  }, [defaultOpenId, items]);
+  // A new target or a new list (the parent switched tabs) re-opens the target, adjusted during
+  // render rather than in an effect.
+  const [seen, setSeen] = useState({ defaultOpenId, items });
+  if (seen.defaultOpenId !== defaultOpenId || seen.items !== items) {
+    setSeen({ defaultOpenId, items });
+    if (defaultOpenId) setOpenId(defaultOpenId);
+  }
 
   useEffect(() => {
     if (openId) {
@@ -129,7 +131,7 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
             id={`faq-${item.id}`}
             className={cn(
               'bg-white border rounded-[14px] overflow-hidden transition-all duration-200 h-fit',
-              'border-line hover:border-ink/[0.18] hover:-translate-y-0.5 hover:shadow-minty-md',
+              'border-line hover:border-ink/18 hover:-translate-y-0.5 hover:shadow-minty-md',
               isOpen && 'border-teal shadow-[0_1px_0_rgba(47,184,166,.06),0_8px_24px_rgba(15,45,58,.06)]',
               item.wide && 'md:col-span-2'
             )}
@@ -157,9 +159,9 @@ export default function FaqAccordion({ items, defaultOpenId }: { items: FaqItem[
                 aria-hidden="true"
                 className={cn(
                   'relative flex-none w-10 h-10 rounded-xl bg-teal-gradient shadow-[0_6px_16px_rgba(0,203,198,.30)] transition-transform duration-300',
-                  'before:content-[""] before:absolute before:top-1/2 before:left-[11px] before:right-[11px] before:h-[2.5px] before:bg-white before:rounded-sm before:-translate-y-1/2 before:transition-transform before:duration-300',
-                  'after:content-[""] after:absolute after:left-1/2 after:top-[11px] after:bottom-[11px] after:w-[2.5px] after:bg-white after:rounded-sm after:-translate-x-1/2 after:transition-transform after:duration-300',
-                  isOpen && 'before:rotate-[135deg] after:rotate-[135deg]'
+                  'before:content-[""] before:absolute before:top-1/2 before:left-[11px] before:right-[11px] before:h-[2.5px] before:bg-white before:rounded-xs before:-translate-y-1/2 before:transition-transform before:duration-300',
+                  'after:content-[""] after:absolute after:left-1/2 after:top-[11px] after:bottom-[11px] after:w-[2.5px] after:bg-white after:rounded-xs after:-translate-x-1/2 after:transition-transform after:duration-300',
+                  isOpen && 'before:rotate-135 after:rotate-135'
                 )}
               />
             </button>
@@ -183,9 +185,9 @@ function renderBlocks(blocks: FaqBlock[]) {
   return blocks.map((block, idx) => {
     switch (block.type) {
       case 'p':
-        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 [text-align:justify]">{block.text}</p>;
+        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify">{block.text}</p>;
       case 'p-strong':
-        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 [text-align:justify]"><strong>{block.text}</strong></p>;
+        return <p key={idx} className="text-ink-muted [&+p]:mt-2.5 text-justify"><strong>{block.text}</strong></p>;
       case 'ul':
         return (
           <ul key={idx} className="mt-2.5 pl-5 text-ink-soft text-[14.5px] leading-[1.65] marker:text-teal">

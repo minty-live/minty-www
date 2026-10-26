@@ -22,7 +22,7 @@ export default function ProblemSection() {
       <FadeContent blur={true} duration={1000} ease="ease-out" initialOpacity={0}>
         <Container className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center md:items-start max-w-[1440px] px-4 md:px-6">
           <div className="min-w-0 flex items-center justify-center">
-            <div className="w-full max-w-[672px] aspect-[3/2] md:aspect-[672/412] overflow-hidden">
+            <div className="w-full max-w-[672px] aspect-3/2 md:aspect-672/412 overflow-hidden">
               <Image
                 src={problem.image}
                 alt={problem.imageAlt}

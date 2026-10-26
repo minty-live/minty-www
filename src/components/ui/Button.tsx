@@ -33,7 +33,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     'bg-teal-gradient text-white shadow-teal-glow hover:bg-teal-gradient-hover hover:-translate-y-px hover:shadow-[0_10px_24px_rgba(47,184,166,0.36)]',
   waitlist:
-    'btn-alive bg-gradient-to-r from-[#00CBC6] to-[#00D5BF] text-white shadow-[0_10px_28px_rgba(0,203,198,0.38),inset_0_1px_0_rgba(255,255,255,0.35)] hover:from-[#00D8D3] hover:to-[#00E2CC] hover:shadow-[0_14px_32px_rgba(0,203,198,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]',
+    'btn-alive bg-linear-to-r from-[#00CBC6] to-[#00D5BF] text-white shadow-[0_10px_28px_rgba(0,203,198,0.38),inset_0_1px_0_rgba(255,255,255,0.35)] hover:from-[#00D8D3] hover:to-[#00E2CC] hover:shadow-[0_14px_32px_rgba(0,203,198,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]',
   'pill-dark':
     'bg-ink text-white hover:bg-[#1a3e4d] hover:-translate-y-px',
   white:

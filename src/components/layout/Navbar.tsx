@@ -17,7 +17,7 @@ function navLinkClass(variant?: 'text' | 'primary' | 'dark'): string {
   if (variant === 'dark') {
     return 'inline-flex items-center justify-center rounded-full bg-ink text-white text-sm font-semibold px-[18px] py-[10px] hover:bg-[#1a3e4d] hover:-translate-y-px transition-all duration-150 ml-1';
   }
-  return 'inline-flex items-center text-ink no-underline px-[14px] py-2 rounded-full font-semibold text-sm hover:bg-ink/[0.06] transition-colors';
+  return 'inline-flex items-center text-ink no-underline px-[14px] py-2 rounded-full font-semibold text-sm hover:bg-ink/6 transition-colors';
 }
 
 function isActive(pathname: string, link: NavLink): boolean {
@@ -36,7 +36,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <nav className="relative top-0 z-50 bg-white border-b border-ink/[0.06]" aria-label="Primary">
+    <nav className="relative top-0 z-50 bg-white border-b border-ink/6" aria-label="Primary">
       <Container className="flex items-center justify-between py-5 md:py-10 max-w-[1440px] px-4 md:px-6">
         <Link href="/" className="inline-flex items-center" aria-label="Daily Minty home">
           <Image
@@ -68,7 +68,7 @@ export default function Navbar() {
                     className={cn(
                       navLinkClass(link.variant),
                       'flex items-center gap-1 select-none',
-                      active && 'bg-ink/[0.08]'
+                      active && 'bg-ink/8'
                     )}
                     aria-haspopup="true"
                     aria-expanded="false"
@@ -77,14 +77,14 @@ export default function Navbar() {
                     {link.label}
                     <span
                       aria-hidden="true"
-                      className="ml-0.5 inline-block w-2 h-2 border-r-2 border-b-2 border-current rotate-45 -translate-y-px transition-transform group-hover:rotate-[225deg] group-focus-within:rotate-[225deg]"
+                      className="ml-0.5 inline-block w-2 h-2 border-r-2 border-b-2 border-current rotate-45 -translate-y-px transition-transform group-hover:rotate-225 group-focus-within:rotate-225"
                     />
                   </button>
                   <div
                     role="menu"
                     className={cn(
                       'absolute top-full left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[200px]',
-                      'bg-white border border-ink/10 rounded-2xl shadow-minty-lg p-2 z-[60]',
+                      'bg-white border border-ink/10 rounded-2xl shadow-minty-lg p-2 z-60',
                       'opacity-0 invisible pointer-events-none transition-all duration-150',
                       'group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0',
                       'group-focus-within:opacity-100 group-focus-within:visible group-focus-within:pointer-events-auto group-focus-within:translate-y-0',
@@ -108,7 +108,7 @@ export default function Navbar() {
 
             const className = cn(
               navLinkClass(link.variant),
-              active && link.variant !== 'primary' && link.variant !== 'dark' && 'bg-ink/[0.08]'
+              active && link.variant !== 'primary' && link.variant !== 'dark' && 'bg-ink/8'
             );
 
             if (link.external) {
@@ -134,7 +134,7 @@ export default function Navbar() {
       </Container>
 
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-ink/10 p-4 flex flex-col gap-3 shadow-lg z-[60]">
+        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-ink/10 p-4 flex flex-col gap-3 shadow-lg z-60">
 
           {visible
             .filter((link) => link.key !== 'get-started' && link.key !== 'login')
@@ -148,7 +148,7 @@ export default function Navbar() {
                     <>
                       <button
                         onClick={() => setOpenDropdown(isDropdownOpen ? null : link.key)}
-                        className="w-full text-left px-4 py-3 rounded-xl font-semibold text-ink hover:bg-ink/[0.05] transition-colors flex items-center justify-between"
+                        className="w-full text-left px-4 py-3 rounded-xl font-semibold text-ink hover:bg-ink/5 transition-colors flex items-center justify-between"
                       >
                         <span>{link.label}</span>
                         <span className={`text-sm transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -177,7 +177,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 rounded-xl font-semibold text-ink hover:bg-ink/[0.05] transition-colors"
+                      className="px-4 py-3 rounded-xl font-semibold text-ink hover:bg-ink/5 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -198,7 +198,7 @@ export default function Navbar() {
             <Link
               href={siteConfig.loginUrl}
               onClick={() => setIsOpen(false)}
-              className="bg-[#113B4A] text-white px-6 py-3 rounded-full font-bold text-center hover:bg-[#1a5569] transition-colors"
+              className="bg-ink-deep text-white px-6 py-3 rounded-full font-bold text-center hover:bg-[#1a5569] transition-colors"
             >
               Log In
             </Link>

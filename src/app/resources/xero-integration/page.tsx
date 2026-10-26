@@ -46,7 +46,7 @@ export default function XeroIntegrationPage() {
               </span>
               <h1 className="text-[32px] md:text-[44px] font-extrabold tracking-tight mb-3">
                 <span className="text-[#2BA9E0]">{hero.titleAccent}</span>{' '}
-                <span className="text-[#113B4A]">{hero.titleRest}</span>
+                <span className="text-ink-deep">{hero.titleRest}</span>
               </h1>
               <p className="text-gray-500 text-sm md:text-base">{hero.subtitle}</p>
             </Container>
@@ -56,7 +56,7 @@ export default function XeroIntegrationPage() {
         <FadeContent blur={false} duration={1000} ease="ease-out" initialOpacity={0}>
           <section className="bg-white py-10 md:py-16">
             <Container className="max-w-[1440px] px-4 md:px-6">
-              <h2 className="text-[#113B4A] text-[22px] sm:text-[26px] md:text-[28px] font-extrabold tracking-tight mb-8 md:mb-10">
+              <h2 className="text-ink-deep text-[22px] sm:text-[26px] md:text-[28px] font-extrabold tracking-tight mb-8 md:mb-10">
                 {highlightXero(mapping.title)}
               </h2>
               <div className="mx-auto w-full max-w-[820px]">

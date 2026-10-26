@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Container from '@/components/ui/Container';
-import Button from '@/components/ui/Button';
 import { getStartedContent } from '@/config/get-started';
 import { cn } from '@/lib/utils';
 import FadeContent from '@/animations/landing/fadeanim';
@@ -36,7 +35,7 @@ export default function GetStartedFaqSection() {
     <section className="bg-[#F4F7F9] py-12 md:py-20 font-sans">
       <Container className="max-w-[950px] px-4 md:px-7">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-[#113B4A] text-[28px] md:text-[34px] font-extrabold tracking-tight mb-3">
+          <h2 className="text-ink-deep text-[28px] md:text-[34px] font-extrabold tracking-tight mb-3">
             {linkXero(faqSection.title)}
           </h2>
           <p className="text-gray-500 text-sm md:text-base">
@@ -45,7 +44,7 @@ export default function GetStartedFaqSection() {
         </div>
 
         <div className="bg-white rounded-3xl p-6 md:p-10 border border-gray-100 shadow-[0_4px_24px_rgba(17,59,74,0.02)] mb-8">
-          <h3 className="text-[#113B4A] text-[16px] font-extrabold mb-6 tracking-tight">
+          <h3 className="text-ink-deep text-[16px] font-extrabold mb-6 tracking-tight">
             {linkXero(faqSection.faqBox.title)}
           </h3>
 
@@ -75,7 +74,7 @@ export default function GetStartedFaqSection() {
                     <p
                       className={cn(
                         'flex-1 font-medium text-[14px] leading-snug transition-colors duration-150',
-                        isOpen ? 'text-[#00CBB0]' : 'text-[#113B4A] group-hover:text-[#00CBB0]'
+                        isOpen ? 'text-[#00CBB0]' : 'text-ink-deep group-hover:text-[#00CBB0]'
                       )}
                     >
                       {item.question}
@@ -84,7 +83,7 @@ export default function GetStartedFaqSection() {
                       aria-hidden="true"
                       className={cn(
                         'flex-none w-2 h-2 border-r-2 border-b-2 border-current rotate-45 -translate-y-px transition-transform duration-200',
-                        isOpen ? 'text-[#00CBB0] rotate-[225deg] translate-y-0.5' : 'text-gray-300'
+                        isOpen ? 'text-[#00CBB0] rotate-225 translate-y-0.5' : 'text-gray-300'
                       )}
                     />
                   </button>
@@ -95,7 +94,7 @@ export default function GetStartedFaqSection() {
                       role="region"
                       className="pl-10 pr-2 pb-4 text-[#5a6d75] text-[13.5px] leading-[1.65]"
                     >
-                      <p className="[text-align:justify]">{item.answer}</p>
+                      <p className="text-justify">{item.answer}</p>
                     </div>
                   )}
                 </div>
@@ -106,7 +105,7 @@ export default function GetStartedFaqSection() {
           <div className="flex justify-center">
             <Link
               href="/resources/faq"
-              className="bg-transparent text-[#113B4A] border border-gray-200 hover:bg-gray-50 font-bold px-6 py-2.5 rounded-full text-[13px] transition-all duration-200 inline-flex items-center gap-1.5 shadow-xs no-underline"
+              className="bg-transparent text-ink-deep border border-gray-200 hover:bg-gray-50 font-bold px-6 py-2.5 rounded-full text-[13px] transition-all duration-200 inline-flex items-center gap-1.5 shadow-2xs no-underline"
             >
               {faqSection.faqBox.buttonText} <span>→</span>
             </Link>

@@ -63,7 +63,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
     const offset = reverse ? -distance : distance;
     const startPct = (1 - threshold) * 100;
 
-    const initialProps: Record<string, any> = {
+    const initialProps: gsap.TweenVars = {
       scale,
       opacity: animateOpacity ? initialOpacity : 1,
       visibility: 'visible'
@@ -80,7 +80,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
       }
     });
 
-    const animateProps: Record<string, any> = {
+    const animateProps: gsap.TweenVars = {
       scale: 1,
       opacity: 1,
       duration,
@@ -91,7 +91,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
     tl.to(el, animateProps);
 
     if (disappearAfter > 0) {
-      const disappearProps: Record<string, any> = {
+      const disappearProps: gsap.TweenVars = {
         scale: 0.8,
         opacity: animateOpacity ? initialOpacity : 0,
         duration: disappearDuration,

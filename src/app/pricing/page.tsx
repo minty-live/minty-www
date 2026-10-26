@@ -10,7 +10,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FBFC]">
       <Navbar />
-      <main className="flex-grow pt-6 md:pt-10 pb-0 font-sans">
+      <main className="grow pt-6 md:pt-10 pb-0 font-sans">
         <PricingHero />
         <PricingGrid />
         <PricingFAQSupport />
@@ -96,10 +96,10 @@ export default function PricingPage() {
     <div className="min-h-screen flex flex-col bg-[#F9FBFC]">
       <Navbar />
 
-      <main className="flex-grow pt-6 md:pt-10 pb-24 font-sans">
+      <main className="grow pt-6 md:pt-10 pb-24 font-sans">
         <Container>
           
-          <section className="relative bg-[#00CBB0] rounded-[32px] px-6 py-10 md:p-16 text-white overflow-hidden lg:overflow-visible mb-12 md:mb-16 shadow-sm">
+          <section className="relative bg-[#00CBB0] rounded-[32px] px-6 py-10 md:p-16 text-white overflow-hidden lg:overflow-visible mb-12 md:mb-16 shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               <div className="lg:col-span-7 max-w-[550px]">
                 <h1 className="text-[32px] md:text-[48px] font-extrabold tracking-tight leading-tight mb-3">
@@ -125,7 +125,7 @@ export default function PricingPage() {
 
 
           <div className="flex justify-center mb-12">
-            <span className="bg-white border border-gray-100 text-[#113B4A] text-[13px] font-bold px-6 py-2.5 rounded-full shadow-sm tracking-wide">
+            <span className="bg-white border border-gray-100 text-ink-deep text-[13px] font-bold px-6 py-2.5 rounded-full shadow-xs tracking-wide">
               Subscription Types
             </span>
           </div>
@@ -147,7 +147,7 @@ export default function PricingPage() {
                 >
                   <div>
 
-                    <div className="bg-[#F5F8F9] rounded-2xl w-full aspect-[1.75/1] mb-6 flex items-center justify-center overflow-hidden border border-gray-100/50">
+                    <div className="bg-[#F5F8F9] rounded-2xl w-full aspect-1.75/1 mb-6 flex items-center justify-center overflow-hidden border border-gray-100/50">
                       <Image 
                         src={plan.illustrationSrc} 
                         alt={plan.title}
@@ -159,7 +159,7 @@ export default function PricingPage() {
 
 
                     <div className="flex gap-2 items-center mb-3">
-                      <h2 className="text-[#113B4A] text-2xl font-extrabold tracking-tight">
+                      <h2 className="text-ink-deep text-2xl font-extrabold tracking-tight">
                         {plan.title}
                       </h2>
                       {plan.badgeText && (
@@ -178,7 +178,7 @@ export default function PricingPage() {
                     <div className="flex items-center gap-3 mb-1.5 flex-wrap">
                       <span className="text-gray-400 font-bold text-2xl tracking-tight relative inline-block">
                         {plan.crossedText}
-                        <span className="absolute left-0 top-1/2 w-full h-[2.5px] bg-[#FF5E5E] -translate-y-1/2 rounded" />
+                        <span className="absolute left-0 top-1/2 w-full h-[2.5px] bg-[#FF5E5E] -translate-y-1/2 rounded-sm" />
                       </span>
                       
                       <span className="text-[#00CBB0] font-extrabold text-3xl tracking-tight">
@@ -191,7 +191,7 @@ export default function PricingPage() {
                       {plan.subText}
                     </p>
                     
-                    <p className="text-[#113B4A] text-[11px] font-medium bg-[#F5F8F9] p-3 rounded-xl border border-gray-100/50 mb-6">
+                    <p className="text-ink-deep text-[11px] font-medium bg-[#F5F8F9] p-3 rounded-xl border border-gray-100/50 mb-6">
                       {plan.trialText}
                     </p>
 
@@ -201,10 +201,10 @@ export default function PricingPage() {
                         e.stopPropagation(); // Prevents layout bubble handling if you trigger page routing
                         setSelectedPlan(plan.id);
                       }}
-                      className={`w-full py-3 rounded-xl font-bold text-sm shadow-xs transition-all duration-150 mb-8 ${
+                      className={`w-full py-3 rounded-xl font-bold text-sm shadow-2xs transition-all duration-150 mb-8 ${
                         isSelected 
-                          ? 'bg-[#113B4A] text-white hover:bg-[#1A4B5D]' 
-                          : 'bg-[#ECF2F5] text-[#113B4A] hover:bg-[#E1EAEB]'
+                          ? 'bg-ink-deep text-white hover:bg-[#1A4B5D]' 
+                          : 'bg-[#ECF2F5] text-ink-deep hover:bg-[#E1EAEB]'
                       }`}
                     >
                       Try for free
@@ -212,7 +212,7 @@ export default function PricingPage() {
 
 
                     <div className="border-t border-gray-100 pt-6">
-                      <h4 className="text-[#113B4A] text-xs font-extrabold mb-4 uppercase tracking-wider text-opacity-90">
+                      <h4 className="text-ink-deep text-xs font-extrabold mb-4 uppercase tracking-wider text-opacity-90">
                         {plan.id === 'super-minty' ? 'Everything in both services:' : 'What you get:'}
                       </h4>
                       <ul className="flex flex-col gap-3.5">
@@ -237,17 +237,17 @@ export default function PricingPage() {
 
 
           <section className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-12 shadow-[0_4px_24px_rgba(17,59,74,0.01)] text-center max-w-[650px] mx-auto">
-            <h3 className="text-[#113B4A] text-[24px] md:text-[28px] font-extrabold tracking-tight mb-2">
+            <h3 className="text-ink-deep text-[24px] md:text-[28px] font-extrabold tracking-tight mb-2">
               Still have questions?
             </h3>
             <p className="text-gray-400 text-xs md:text-sm mb-6 max-w-[420px] mx-auto leading-relaxed">
               Check our help centre or reach out — we'll match you with the right plan.
             </p>
             <div className="flex flex-wrap justify-center gap-4 items-center">
-              <Button className="bg-[#00CBB0] text-white hover:bg-[#00B59D] font-bold px-6 py-2.5 rounded-full text-[13px] shadow-sm transition-all duration-200">
+              <Button className="bg-[#00CBB0] text-white hover:bg-[#00B59D] font-bold px-6 py-2.5 rounded-full text-[13px] shadow-xs transition-all duration-200">
                 Visit FAQ
               </Button>
-              <Button className="bg-[#113B4A] text-white hover:bg-[#1A4B5D] font-bold px-6 py-2.5 rounded-full text-[13px] shadow-sm transition-all duration-200">
+              <Button className="bg-ink-deep text-white hover:bg-[#1A4B5D] font-bold px-6 py-2.5 rounded-full text-[13px] shadow-xs transition-all duration-200">
                 Contact Support
               </Button>
             </div>
