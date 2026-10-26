@@ -27,17 +27,17 @@ export default function SupportCardsSection() {
                     {card.icon}
                   </div>
 
-                  <h4 className="text-ink-deep text-[17px] font-extrabold mb-2">
+                  <h3 className="text-ink-deep text-[17px] font-extrabold mb-2">
                     {card.title}
-                  </h4>
-                  <p className="text-gray-500 text-[13px] leading-relaxed mb-6">
+                  </h3>
+                  <p className="text-gray-600 text-[13px] leading-relaxed mb-6">
                     {card.description}
                   </p>
                 </div>
 
                 <Link
                   href={card.href}
-                  className="text-[#00CBB0] font-bold text-[14px] hover:text-[#00A38D] inline-flex items-center gap-1 transition-colors group"
+                  className="text-teal-deep font-bold text-[14px] hover:text-ink-deep inline-flex min-h-11 items-center gap-1 transition-colors group"
                 >
                   {card.linkText}
                   <span className="transform transition-transform group-hover:translate-x-0.5">→</span>

@@ -9,13 +9,14 @@ import GuidesSectionFaq from '@/components/get-started/GetStartedFaq';
 import AnimatedContent from '@/animations/landing/heroanim';
 import FadeContent from '@/animations/landing/fadeanim';
 import { xeroIntegrationContent } from '@/config/xero-integration';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Xero Integration',
   description:
     'How Daily Minty connects to Xero — what syncs between the two, how to set it up, and how to manage the connection.',
-  alternates: { canonical: '/resources/xero-integration' },
-};
+  path: '/resources/xero-integration',
+});
 
 export default function XeroIntegrationPage() {
   const { hero, mapping } = xeroIntegrationContent;
@@ -40,7 +41,7 @@ export default function XeroIntegrationPage() {
         >
           <section className="bg-[#f3f9f7] py-12 md:py-16 text-center">
             <Container className="max-w-[1440px] px-4 md:px-6">
-              <span className="inline-flex items-center gap-2 bg-[#D2EFE9] text-[#00A884] text-[11px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
+              <span className="inline-flex items-center gap-2 bg-[#D2EFE9] text-teal-deep text-[12px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00A884]" />
                 {hero.eyebrow}
               </span>

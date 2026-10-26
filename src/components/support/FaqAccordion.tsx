@@ -31,7 +31,7 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
               <th
                 key={role}
                 className={cn(
-                  'bg-[#E4F6F1] px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-[#00B49A]',
+                  'bg-[#E4F6F1] px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-teal-deep',
                   i === roles.length - 1 && 'rounded-tr-xl'
                 )}
               >
@@ -76,14 +76,14 @@ function PermissionsTable({ permissions }: { permissions?: PermissionRow[] }) {
                     {perm.roles[role as keyof typeof perm.roles] ? (
                       <span
                         aria-label="Allowed"
-                        className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#D8F3EA] text-[11px] font-bold leading-none text-[#00B49A]"
+                        className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#D8F3EA] text-[12px] font-bold leading-none text-[#00B49A]"
                       >
                         ✓
                       </span>
                     ) : (
                       <span
                         aria-label="Not allowed"
-                        className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#FBE0D2] text-[10px] font-bold leading-none text-[#E8845A]"
+                        className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#FBE0D2] text-[12px] font-bold leading-none text-[#E8845A]"
                       >
                         ✕
                       </span>

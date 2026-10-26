@@ -51,25 +51,7 @@ export const getStartedContent = {
     primaryBtn: "Try Minty for free",
     primaryBtnHref: "/pricing",
     secondaryBtn: "Log In",
-    secondaryBtnHref: "",
     mascotSrc: "/guides/minty-mascot-glasses.webp",
-  },
-  benefits: {
-    title: "What will you get from this page?",
-    items: [
-      {
-        id: "01",
-        text: "Complete your first proper daily closing today"
-      },
-      {
-        id: "02",
-        text: "Just follow the steps in order"
-      },
-      {
-        id: "03",
-        text: "No accounting knowledge required"
-      }
-    ]
   },
   // The guide curriculum. The order here IS the order on the page, and it is the owner
   // canonical GS-xx-yy sequence - do not reorder without moving the codes with it.

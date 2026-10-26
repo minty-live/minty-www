@@ -1,17 +1,18 @@
 import { NextResponse } from 'next/server';
 import { sendContactEmail, type ContactSubmission } from '@/lib/graph-mailer';
-import { EMAIL_ASCII_HINT, hasNonAsciiEmailChar, isEmail } from '@/lib/email';
+import { contactProblems, type ContactValues } from '@/lib/contactRules';
 import { check, clientIp } from '@/lib/rate-limit';
+import { siteConfig } from '@/config/site';
 
 export const runtime = 'nodejs';
 
-const MAX_LENGTHS: Record<keyof ContactSubmission, number> = {
-  name: 100,
-  email: 200,
-  businessName: 150,
-  topic: 100,
-  message: 5000,
-};
+// Replies follow the house envelope: {"error": "<sentence>"}, plus `fields` (one sentence per
+// input) when input is refused, with 422. Sentences follow Part 11 - what is wrong, then what to
+// do - and the form shows them as they are.
+const UNREADABLE = "We couldn't read that message. Refresh the page and send it again.";
+const NOT_SENT = `Your message didn't send. Try again, or email us at ${siteConfig.contactEmail}.`;
+const TOO_LARGE = 'The message is too long to send. Shorten it and send it again.';
+const FIX_FIELDS = 'Some details need another look. Check the highlighted fields and send it again.';
 
 // Mirrors the client-side limits (which are only a UX guard) so the server never
 // rejects something the UI just promised, then adds an hourly ceiling the client
@@ -45,10 +46,14 @@ function isAllowedOrigin(request: Request): boolean {
   }
 }
 
-function validate(body: Record<string, unknown>): { data?: ContactSubmission; error?: string } {
+/** The same rules the form checks as you type (lib/contactRules.ts) - here they are the gate. */
+function validate(body: Record<string, unknown>): {
+  data?: ContactSubmission;
+  fields?: Partial<Record<keyof ContactValues, string>>;
+} {
   const get = (key: string) => (typeof body[key] === 'string' ? (body[key] as string).trim() : '');
 
-  const data: ContactSubmission = {
+  const data: ContactValues = {
     name: get('name'),
     email: get('email'),
     businessName: get('businessName'),
@@ -56,23 +61,8 @@ function validate(body: Record<string, unknown>): { data?: ContactSubmission; er
     message: get('message'),
   };
 
-  if (!data.name || !data.email || !data.topic || !data.message) {
-    return { error: 'Please fill in all required fields.' };
-  }
-  if (hasNonAsciiEmailChar(data.email)) {
-    return { error: EMAIL_ASCII_HINT };
-  }
-  if (!isEmail(data.email)) {
-    return { error: 'Please enter a valid email address.' };
-  }
-  for (const [key, limit] of Object.entries(MAX_LENGTHS)) {
-    const value = data[key as keyof ContactSubmission];
-    if (value && value.length > limit) {
-      return { error: `${key} is too long.` };
-    }
-  }
-
-  return { data };
+  const fields = contactProblems(data);
+  return Object.keys(fields).length ? { fields } : { data };
 }
 
 export async function POST(request: Request) {
@@ -80,7 +70,7 @@ export async function POST(request: Request) {
 
   // 1. Reject cross-site posts outright.
   if (!isAllowedOrigin(request)) {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 403 });
+    return NextResponse.json({ error: UNREADABLE }, { status: 403 });
   }
 
   // 2. Rate limit before doing any work, so floods stay cheap to reject.
@@ -103,19 +93,19 @@ export async function POST(request: Request) {
   // 3. Refuse oversized payloads without buffering them.
   const declaredLength = Number(request.headers.get('content-length') ?? 0);
   if (declaredLength > MAX_BODY_BYTES) {
-    return NextResponse.json({ error: 'Message is too long.' }, { status: 413 });
+    return NextResponse.json({ error: TOO_LARGE }, { status: 413 });
   }
 
   const raw = await request.text();
   if (raw.length > MAX_BODY_BYTES) {
-    return NextResponse.json({ error: 'Message is too long.' }, { status: 413 });
+    return NextResponse.json({ error: TOO_LARGE }, { status: 413 });
   }
 
   let body: Record<string, unknown>;
   try {
     body = JSON.parse(raw);
   } catch {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+    return NextResponse.json({ error: UNREADABLE }, { status: 400 });
   }
 
   // 4. Honeypot — real users never see this field, bots fill everything.
@@ -124,19 +114,19 @@ export async function POST(request: Request) {
     return NextResponse.json(SILENT_OK);
   }
 
-  // 5. Timing check — a form completed instantly was not typed by a person.
+  // 5. Timing check — a form completed instantly was not typed by a person. The form always
+  // sends renderedAt, so a body without a usable one did not come from it: dropped too. (Until
+  // 2026-10-26 a missing renderedAt skipped this check entirely.)
   const renderedAt = Number(body.renderedAt);
-  if (Number.isFinite(renderedAt) && renderedAt > 0) {
-    const elapsed = Date.now() - renderedAt;
-    if (elapsed < MIN_FILL_MS) {
-      console.warn('[contact] submitted too fast', { ip, elapsed });
-      return NextResponse.json(SILENT_OK);
-    }
+  const elapsed = Date.now() - renderedAt;
+  if (!Number.isFinite(renderedAt) || renderedAt <= 0 || elapsed < MIN_FILL_MS) {
+    console.warn('[contact] submitted too fast or without a fill time', { ip, elapsed });
+    return NextResponse.json(SILENT_OK);
   }
 
-  const { data, error } = validate(body);
+  const { data, fields } = validate(body);
   if (!data) {
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json({ error: FIX_FIELDS, fields }, { status: 422 });
   }
 
   try {
@@ -145,7 +135,7 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error('[contact] send failed:', err);
     return NextResponse.json(
-      { error: 'Something went wrong sending your message. Please email us directly.' },
+      { error: NOT_SENT },
       { status: 500 }
     );
   }
@@ -153,5 +143,8 @@ export async function POST(request: Request) {
 
 /** Anything other than POST is not a valid way to reach this endpoint. */
 export async function GET() {
-  return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 });
+  return NextResponse.json(
+    { error: 'This address only takes messages sent from the contact form.' },
+    { status: 405 }
+  );
 }

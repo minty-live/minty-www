@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { siteConfig } from '@/config/site';
+import { CURRENCY, PLANS } from '@/config/pricing';
 import './globals.css';
 
 // Plus Jakarta Sans, self-hosted through next/font as the three app frontends host Inter
@@ -13,7 +14,7 @@ import './globals.css';
 // whole page is brand surface, so Jakarta is the body face throughout. Only the MECHANISM is
 // unified. No `weight` array, so this is the variable font - the site genuinely uses
 // 400/500/600/700/800, and one variable file beats five static ones.
-// The stacks that consume --font-jakarta live in tailwind.config.ts; change the two together.
+// The stacks that consume --font-jakarta live in globals.css's @theme; change the two together.
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
@@ -55,12 +56,14 @@ export const metadata: Metadata = {
     creator: siteConfig.social.twitter,
   },
   icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
-  alternates: { canonical: siteConfig.url },
+  // No default canonical: each page names its own through lib/metadata.ts's pageMetadata. A
+  // site-wide canonical here told search engines every page was a copy of the homepage.
   category: 'business',
 };
 
 export const viewport: Viewport = {
-  width: 'device-width', initialScale: 1, themeColor: '#2fb8a6',
+  // The browser chrome tint on phones: Minty's brand colour (never a button fill, but this is not one).
+  width: 'device-width', initialScale: 1, themeColor: '#54D3DA',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -72,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     url: siteConfig.url,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
-    offers: { '@type': 'Offer', price: '280', priceCurrency: 'HKD' },
+    offers: { '@type': 'Offer', price: String(PLANS.pettyCash.monthly), priceCurrency: CURRENCY },
     publisher: {
       '@type': 'Organization',
       name: siteConfig.author.name,

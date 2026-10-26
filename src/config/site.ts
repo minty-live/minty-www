@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: 'Minty',
   tagline: 'Daily closing, finally calm.',
   description:
-    'Daily Minty helps small businesses close the day with confidence. Petty cash and bill payment, synced to Xero, in one calm dashboard.',
+    'Daily Minty helps small businesses close the day with confidence. Petty cash and payment requests, synced to Xero, in one calm dashboard.',
   // This site's own address: the canonical tag, og:url, robots.txt's sitemap line and every
   // sitemap.xml entry. www, not the apex - dailyminty.com is attached to the same Vercel
   // project as a redirect to www.dailyminty.com, so the apex would make all of the above point
@@ -18,13 +18,18 @@ export const siteConfig = {
   waitlistUrl:
     process.env.NEXT_PUBLIC_WAITLIST_FORM_URL ||
     'https://forms.clickup.com/9008167462/f/8ceveh6-19038/4A7KI514BG030HAP22',
+  // The Terms of Use and Privacy Policy are minty-web's pages (the hub owns the legal documents
+  // and their versions), open to anyone - no sign-in.
+  termsUrl: 'https://my.dailyminty.com/terms',
+  privacyUrl: 'https://my.dailyminty.com/privacy',
+  // The one reply-time promise the site makes (the contact page and the support cards).
+  replyPromise: 'We reply within one business day.',
   contactEmail:
     process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'hello@dailyminty.com',
-  // The social preview card (og:image / twitter:image). This pointed at /assets/og-image.png,
-  // a folder that has never existed, so every shared link rendered with no picture. Stopgap:
-  // an illustration we actually have, which crops acceptably to the 1200x630 most platforms
-  // use. Replace with a purpose-made 1200x630 card when one exists - it is a one-line change.
-  ogImage: '/landing/hero-cat-laptop-phone.webp',
+  // The social preview card (og:image / twitter:image): a true 1200x630 PNG, the size the card
+  // is declared as and the one every platform renders (some refuse webp). Cropped from the hero
+  // art (public/landing/hero-cat-laptop-phone.webp) on 2026-10-26; replace the file to change it.
+  ogImage: '/og-image.png',
   keywords: [
     'daily cash close',
     'petty cash app',

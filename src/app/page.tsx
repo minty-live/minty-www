@@ -8,12 +8,14 @@ import HowItWorksSection from '@/components/landing/HowItWorksSection';
 import HelpsYouSection from '@/components/landing/HelpsYouSection';
 import DemoSection from '@/components/landing/DemoSection';
 import KeepMeUpdatedSection from '@/components/landing/KeepMeUpdatedSection';
-export const metadata: Metadata = {
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata({
   title: 'Daily Minty',
   description:
-    'Daily Minty makes daily cash closing simple. Petty cash, bill payment, and Xero sync in one calm dashboard for small business owners.',
-  alternates: { canonical: '/' },
-};
+    'Daily Minty makes daily cash closing simple. Petty cash, payment requests and Xero sync in one calm dashboard for small business owners.',
+  path: '/',
+});
 
 export default function HomePage() {
   return (
@@ -29,8 +31,6 @@ export default function HomePage() {
         <KeepMeUpdatedSection />
       </main>
       <Footer />
-      
     </>
   );
 }
-// 2026 - 2027

@@ -5,13 +5,8 @@ import Image from 'next/image';
 import Container from '@/components/ui/Container';
 import VideoModal from '@/components/ui/VideoModal';
 import { landingContent } from '@/config/landing';
-import { Wallet, Menu, Play, LucideIcon } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 import FadeContent from '@/animations/landing/fadeanim';
-
-const iconMap: { [key: string]: LucideIcon } = {
-  Wallet: Wallet,
-  ReceiptText: Menu,
-};
 
 export default function OutcomeSection() {
   const { outcome } = landingContent;
@@ -38,7 +33,7 @@ export default function OutcomeSection() {
       <Container className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-12">
-          <span className="bg-[#bfeae0] text-[#00a896] text-xs font-bold tracking-wider px-4 py-1.5 rounded-full uppercase mb-4">
+          <span className="bg-[#bfeae0] text-teal-deep text-xs font-bold tracking-wider px-4 py-1.5 rounded-full uppercase mb-4">
             The Solution
           </span>
           <div className="bg-white px-8 py-4 rounded-full shadow-xs max-w-xl">
@@ -52,7 +47,6 @@ export default function OutcomeSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
           {outcome.cards.map((card, index) => {
             const theme = cardThemeStyles[index] || cardThemeStyles[0];
-            const IconComponent = iconMap[card.icon];
             return (
               <button
                 key={card.key}
@@ -68,8 +62,8 @@ export default function OutcomeSection() {
                   </h3>
                   {/* Dynamic Icon Container */}
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-xs">
-                    {IconComponent && (
-                      <IconComponent className={`${card.iconTextColor} w-5 h-5`} />
+                    {card.icon && (
+                      <Icon name={card.icon} className={`${card.iconTextColor} w-5 h-5`} />
                     )}
                   </div>
                 </div>
@@ -81,13 +75,13 @@ export default function OutcomeSection() {
                       src={card.image}
                       alt={card.alt}
                       fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover rounded-t-[16px]"
-                      priority={index < 2}
                     />
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all duration-200">
                       <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
-                        <Play className="w-7 h-7 text-[#00cbb2] fill-[#00cbb2] ml-0.5" />
+                        <Icon name="play_arrow-fill" className="w-8 h-8 text-[#00cbb2] ml-0.5" />
                       </div>
                     </div>
                   </div>

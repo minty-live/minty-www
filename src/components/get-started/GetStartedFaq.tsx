@@ -63,7 +63,7 @@ export default function GetStartedFaqSection() {
                   >
                     <div
                       className={cn(
-                        'w-6 h-6 text-[11px] font-bold rounded-full flex items-center justify-center shrink-0 transition-colors duration-150',
+                        'w-6 h-6 text-[12px] font-bold rounded-full flex items-center justify-center shrink-0 transition-colors duration-150',
                         isOpen
                           ? 'bg-[#00CBB0] text-white'
                           : 'bg-[#E6FAF7] text-[#00CBB0] group-hover:bg-[#00CBB0] group-hover:text-white'
@@ -74,7 +74,7 @@ export default function GetStartedFaqSection() {
                     <p
                       className={cn(
                         'flex-1 font-medium text-[14px] leading-snug transition-colors duration-150',
-                        isOpen ? 'text-[#00CBB0]' : 'text-ink-deep group-hover:text-[#00CBB0]'
+                        isOpen ? 'text-teal-deep' : 'text-ink-deep group-hover:text-teal-deep'
                       )}
                     >
                       {item.question}
@@ -105,9 +105,9 @@ export default function GetStartedFaqSection() {
           <div className="flex justify-center">
             <Link
               href="/resources/faq"
-              className="bg-transparent text-ink-deep border border-gray-200 hover:bg-gray-50 font-bold px-6 py-2.5 rounded-full text-[13px] transition-all duration-200 inline-flex items-center gap-1.5 shadow-2xs no-underline"
+              className="bg-transparent text-ink-deep border border-gray-200 hover:bg-gray-50 font-semibold px-6 py-2.5 min-h-11 rounded-xl text-sm transition-colors duration-200 inline-flex items-center gap-1.5 shadow-2xs no-underline"
             >
-              {faqSection.faqBox.buttonText} <span>→</span>
+              {faqSection.faqBox.buttonText} <span aria-hidden>→</span>
             </Link>
           </div>
         </div>

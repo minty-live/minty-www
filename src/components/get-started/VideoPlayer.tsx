@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { VolumeX, Clock } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 
 /** Pull the video id out of any YouTube URL form. */
 function youtubeId(videoUrl: string): string {
@@ -195,8 +195,8 @@ export default function VideoPlayer({
           </div>
 
           {duration && (
-            <span className="absolute bottom-3 right-3 z-10 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-xs">
-              <Clock size={11} />
+            <span className="absolute bottom-3 right-3 z-10 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[12px] font-bold text-white backdrop-blur-xs">
+              <Icon name="schedule" width={12} height={12} />
               {duration}
             </span>
           )}
@@ -230,19 +230,21 @@ export default function VideoPlayer({
           fullscreen now. Sits top-left so it clears the control bar. */}
       {isMuted && (
         <button
+          type="button"
           onClick={unmute}
-          className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 px-3.5 py-2 text-[12px] font-bold text-white backdrop-blur-xs transition-colors hover:bg-black/85"
+          className="absolute top-3 left-3 z-20 flex min-h-11 items-center gap-1.5 rounded-xl bg-black/70 px-3.5 py-2 text-xs font-bold text-white backdrop-blur-xs transition-colors hover:bg-black/85"
           aria-label="Turn on sound"
         >
-          <VolumeX size={14} />
+          <Icon name="volume_off" width={16} height={16} />
           Tap for sound
         </button>
       )}
 
       {showClose && (
         <button
+          type="button"
           onClick={() => setPlaying(false)}
-          className="absolute top-3 right-3 z-20 w-7 h-7 bg-black/60 text-white/90 hover:bg-black/80 rounded-full flex items-center justify-center transition-all duration-150 text-[11px] font-bold"
+          className="absolute top-2 right-2 z-20 w-11 h-11 bg-black/60 text-white/90 hover:bg-black/80 rounded-full flex items-center justify-center transition-colors duration-150 text-sm font-bold"
           aria-label="Close video"
         >
           ✕

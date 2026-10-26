@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import { landingContent } from '@/config/landing';
-import { ArrowRight } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 import AnimatedContent from '@/animations/landing/heroanim';
 
 export default function HeroSection() {
@@ -43,7 +43,7 @@ export default function HeroSection() {
               {hero.primaryCta.label}
             </Button>
             <Button href={hero.secondaryCta.href} variant="text" size="lg">
-              {hero.secondaryCta.label} <ArrowRight />
+              {hero.secondaryCta.label} <Icon name="arrow_forward" />
               
             </Button>
           </div>
@@ -73,7 +73,7 @@ export default function HeroSection() {
             width={1920}
             height={1080}
             sizes="(min-width: 1440px) 835px, (min-width: 768px) 60vw, 100vw"
-            priority
+            preload
             className="w-full max-w-[400px] md:max-w-[820px] h-auto object-contain"
           />
         </div>

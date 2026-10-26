@@ -1,8 +1,11 @@
 import Image from 'next/image';
-import AnimatedContent from '@/animations/contact/heroanim';
+import AnimatedContent from '@/animations/landing/heroanim';
 
 export default function ContactHero() {
   return (
+    // The hero slides in sideways from 100px off; clipping here stops it widening the page
+    // (a sideways scroll on phones) while it moves.
+    <div className="overflow-x-clip">
     <AnimatedContent
       distance={100}
       direction="horizontal"
@@ -16,7 +19,7 @@ export default function ContactHero() {
       delay={0}
     >
     <section className="relative pt-6 md:pt-10 pb-10 md:pb-16 text-center px-4 overflow-hidden bg-[#FAF6F0]">
-        <div className="inline-flex items-center gap-2 bg-mint text-[#00CBB0] px-3 md:px-4 py-1 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest mb-4 md:mb-6 border border-[#00CBB0]/10 shadow-xs">
+        <div className="inline-flex items-center gap-2 bg-mint text-teal-deep px-3 md:px-4 py-1 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4 md:mb-6 border border-[#00CBB0]/10 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00CBB0]" />
             {"We're here to help"}
         </div>
@@ -32,13 +35,15 @@ export default function ContactHero() {
         <div className="absolute left-[5%] top-[80px] hidden lg:block w-[320px]">
             <Image
             src="/support/contact-cat-desk.webp"
-            alt="Minty working"
+            alt="Minty, the cat mascot, at a desk wearing a headset"
             width={320}
             height={240}
+            preload
             className="w-full h-auto"
             />
         </div>
     </section>
     </AnimatedContent>
+    </div>
   );
 }

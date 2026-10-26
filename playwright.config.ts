@@ -1,6 +1,6 @@
 // Browser tests for the marketing site. Unlike the app repos this site has no
-// backend, so Playwright starts the dev server itself on 3002 (3000 and 3001 are
-// billing-frontend and onboarding) and tears it down afterwards.
+// backend, so Playwright starts the dev server itself on 3002 (3000 is minty-web's) and tears
+// it down afterwards - or reuses one already running there, outside CI.
 //
 //   npm run test:e2e
 //

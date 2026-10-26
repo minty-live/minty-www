@@ -19,7 +19,7 @@ export default function KeepMeUpdatedSection() {
     >
       <div className="mx-auto grid w-full max-w-[1140px] grid-cols-1 items-center gap-10 px-7 lg:min-h-[520px] lg:grid-cols-2">
         {/* Frosted glass card */}
-        <div className="mx-auto w-full max-w-[440px] rounded-[28px] border border-white/45 bg-white/20 px-7 py-14 text-center shadow-[0_24px_60px_rgba(15,45,58,0.16),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-[18px] backdrop-saturate-[1.1] sm:px-14">
+        <div className="mx-auto w-full max-w-[440px] rounded-[28px] border border-white/45 bg-white/20 px-5 py-14 text-center shadow-[0_24px_60px_rgba(15,45,58,0.16),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-[18px] backdrop-saturate-[1.1] sm:px-14">
           <h2 className="text-[clamp(44px,5vw,68px)] font-extrabold leading-[1.02] tracking-tight text-ink">
             <span className="mb-2.5 block text-[clamp(20px,1.8vw,26px)] font-medium italic tracking-normal text-ink/70">
               {keepMeUpdated.eyebrow}
@@ -31,7 +31,7 @@ export default function KeepMeUpdatedSection() {
             href={siteConfig.waitlistUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-9 inline-flex items-center gap-3.5 rounded-full bg-teal-gradient px-9 py-4 text-xl font-bold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(0,203,198,0.42),inset_0_1px_0_rgba(255,255,255,0.4)] transition-all hover:bg-teal-gradient-hover hover:shadow-[0_16px_36px_rgba(0,203,198,0.52),inset_0_1px_0_rgba(255,255,255,0.5)]"
+            className="group mt-9 inline-flex max-w-full items-center gap-3 rounded-xl bg-cta px-6 py-4 text-lg font-semibold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(60,188,195,0.42)] transition-colors hover:bg-cta-hover active:bg-cta-pressed sm:gap-3.5 sm:px-9 sm:text-xl"
           >
             {keepMeUpdated.buttonText}
             <span className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white/20 transition-all group-hover:translate-x-1 group-hover:bg-white/30">

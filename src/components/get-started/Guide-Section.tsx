@@ -7,7 +7,7 @@ import Container from '@/components/ui/Container';
 import { getStartedContent, parseGuideCode } from '@/config/get-started';
 import type { GuideGroup, GuideItem } from '@/config/get-started';
 import { cn } from '@/lib/utils';
-import { Clock } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 import VideoPlayer from '@/components/get-started/VideoPlayer';
 import FadeContent from '@/animations/landing/fadeanim';
 import { highlightXero } from '@/components/ui/XeroText';
@@ -87,7 +87,7 @@ export default function GuidesSection() {
 function ModuleRail({ modules }: { modules: GuideGroup[] }) {
   return (
     <nav aria-label="Guide modules" className="hidden lg:block lg:sticky lg:top-24 lg:self-start">
-      <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-muted">
+      <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.12em] text-ink-muted">
         Modules
       </p>
       <ol className="space-y-0.5">
@@ -120,7 +120,7 @@ function Module({
 }) {
   return (
     <section id={group.slug} className="scroll-mt-24 pt-10 first:pt-0 md:pt-14 md:first:pt-0">
-      <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-muted">
+      <p className="mb-1 text-[12px] font-bold uppercase tracking-[0.12em] text-ink-muted">
         Module {number}
       </p>
       <h2 className="mb-1.5 text-[22px] font-extrabold tracking-tight sm:text-[26px] md:text-[30px]">
@@ -178,7 +178,7 @@ function GuideRow({
             </span>
           )}
         </span>
-        <span className="flex-none rounded-full bg-cream px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-ink-soft">
+        <span className="flex-none rounded-full bg-cream px-2.5 py-1 text-[12px] font-bold uppercase tracking-wide text-ink-soft">
           Coming soon
         </span>
       </li>
@@ -208,7 +208,7 @@ function GuideRow({
           </span>
           {item.duration && (
             <span className="hidden flex-none items-center gap-1 text-[12px] font-semibold tabular-nums text-ink-muted sm:flex">
-              <Clock size={13} aria-hidden="true" />
+              <Icon name="schedule" width={14} height={14} />
               {item.duration}
             </span>
           )}
@@ -321,7 +321,7 @@ function Callout({
               feedback before the page changes. */}
           <Link
             href={callout.buttonHref}
-            className="group inline-flex w-auto items-center justify-center gap-2 rounded-full bg-ink-deep px-6 py-3 text-[13px] font-bold text-white no-underline transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#1a5569] hover:shadow-[0_10px_24px_rgba(17,59,74,0.22)] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none md:w-full"
+            className="group inline-flex min-h-11 w-auto items-center justify-center gap-2 rounded-xl bg-ink-deep px-6 py-3 text-sm font-semibold text-white no-underline transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#1a5569] hover:shadow-[0_10px_24px_rgba(17,59,74,0.22)] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none md:w-full"
           >
             {callout.buttonText}
             <span

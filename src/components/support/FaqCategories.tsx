@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { landingFaq } from '@/config/faq';
 import FaqAccordion from './FaqAccordion';
 import AnimatedContent from '@/animations/landing/heroanim';
@@ -15,11 +16,19 @@ const normalize = (str: string) =>
 /** The FAQ a `?faqId=<question>` deep link names, if any. */
 function faqFor(openId?: string | null) {
   if (!openId) return undefined;
-  const wanted = normalize(decodeURIComponent(openId));
+  // Usually already decoded by useSearchParams; a link encoded twice still matches. A stray '%'
+  // makes decodeURIComponent throw, so fall back to the value as given rather than crash.
+  let decoded = openId;
+  try {
+    decoded = decodeURIComponent(openId);
+  } catch {}
+  const wanted = normalize(decoded);
   return landingFaq.find((item) => normalize(item.question) === wanted);
 }
 
-export default function FAQCategories({ openId }: { openId?: string | null }) {
+export default function FAQCategories() {
+  // ?faqId=<the question, URL-encoded> opens that question's tab with it expanded.
+  const openId = useSearchParams().get('faqId');
   const [activeTab, setActiveTab] = useState<'beginner' | 'intermediate' | 'accountant'>(
     () => faqFor(openId)?.category ?? 'beginner',
   );
@@ -57,31 +66,33 @@ export default function FAQCategories({ openId }: { openId?: string | null }) {
     <section className="max-w-5xl mx-auto px-4 py-8 md:py-12">
       {/* Tab Navigation */}
       <div className="flex flex-col items-center mb-8 md:mb-12">
-        <div className="inline-flex bg-[#edf7f5] p-1 md:p-1.5 rounded-full border border-[#d6eae4] shadow-inner flex-wrap justify-center gap-1 md:gap-0">
+        <div className="inline-flex max-w-full bg-[#edf7f5] p-1 md:p-1.5 rounded-2xl border border-[#d6eae4] shadow-inner flex-wrap justify-center gap-1 md:gap-0">
           {(['beginner', 'intermediate', 'accountant'] as const).map((tab) => {
             const isActive = activeTab === tab;
 
             return (
               <button
                 key={tab}
+                type="button"
+                aria-pressed={isActive}
                 onClick={() => {
                   setActiveTab(tab);
                   setTargetId(null);
                 }}
-                className={`px-3 md:px-6 py-2 md:py-2.5 rounded-full text-[11px] md:text-sm font-bold transition-all duration-200 flex items-center gap-1 md:gap-2 whitespace-nowrap ${
+                className={`min-h-11 px-3 md:px-6 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 flex items-center gap-1 md:gap-2 whitespace-nowrap ${
                   isActive
-                    ? 'bg-[#00CBB0] text-white shadow-[0_4px_12px_rgba(0,203,176,0.3)]'
+                    ? 'bg-cta text-white shadow-[0_4px_12px_rgba(60,188,195,0.3)]'
                     : 'text-[#1e3a47] hover:bg-white/50'
                 }`}
               >
                 {tab === 'beginner' && (
-                  <span className="text-sm md:text-base" role="img" aria-label="sprout">🌱</span>
+                  <span className="text-sm md:text-base" aria-hidden>🌱</span>
                 )}
                 {tab === 'intermediate' && (
-                  <span className="text-sm md:text-base" role="img" aria-label="gear">⚙️</span>
+                  <span className="text-sm md:text-base" aria-hidden>⚙️</span>
                 )}
                 {tab === 'accountant' && (
-                  <span className="text-sm md:text-base" role="img" aria-label="chart">📊</span>
+                  <span className="text-sm md:text-base" aria-hidden>📊</span>
                 )}
 
                 <span>
@@ -91,7 +102,7 @@ export default function FAQCategories({ openId }: { openId?: string | null }) {
             );
           })}
         </div>
-        <p className="text-gray-400 text-[12px] md:text-sm mt-3 md:mt-4 text-center">
+        <p className="text-gray-600 text-[12px] md:text-sm mt-3 md:mt-4 text-center">
           {activeTab === 'beginner' && "New to Minty? Start here — the everyday basics of closing your day."}
           {activeTab === 'intermediate' && "Optimize operations — workflows, tracking codes, and team control options."}
           {activeTab === 'accountant' && "Deep dives — bookkeeper workflows, reconciliation tools, and data mapping."}

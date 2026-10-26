@@ -60,13 +60,13 @@ export default function XeroMapping({
     <div className="w-full">
       <div className="grid grid-cols-[1fr_auto_1fr] md:grid-cols-[1fr_120px_1fr] gap-2 md:gap-4 items-center mb-5">
         <div className="flex justify-center">
-          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#3FCFC0] text-white text-[11px] font-bold">
+          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#3FCFC0] text-white text-[12px] font-bold">
             {leftLabel}
           </span>
         </div>
         <div />
         <div className="flex justify-center">
-          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#2BA9E0] text-white text-[11px] font-bold">
+          <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#2BA9E0] text-white text-[12px] font-bold">
             {rightLabel}
           </span>
         </div>
@@ -83,7 +83,7 @@ export default function XeroMapping({
                 startsNewGroup && 'mt-4'
               )}
             >
-              <span className="rounded-md bg-[#3FCFC0] text-white text-[10px] md:text-[11px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center">
+              <span className="rounded-md bg-[#3FCFC0] text-white text-[12px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center">
                 {row.left}
               </span>
               <Arrow
@@ -93,7 +93,7 @@ export default function XeroMapping({
               />
               <span
                 className={cn(
-                  'rounded-md text-white text-[10px] md:text-[11px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center',
+                  'rounded-md text-white text-[12px] font-semibold leading-tight px-2 md:px-3 py-1.5 md:py-2 text-center',
                   TONE[row.tone].pill
                 )}
               >

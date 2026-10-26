@@ -47,3 +47,8 @@ test('a question toggles, and switching tabs swaps the list', async ({ page }) =
   await expect(toggle(page, INTERMEDIATE)).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator(`#faq-${BEGINNER}`)).toHaveCount(0);
 });
+
+test('a malformed deep link does not break the page', async ({ page }) => {
+  await page.goto(`${PATH}?faqId=100%`);
+  await expect(toggle(page, BEGINNER)).toHaveAttribute('aria-expanded', 'false');
+});

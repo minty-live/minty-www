@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FadeContent from '@/animations/landing/fadeanim';
+import { siteConfig } from '@/config/site';
 
 export default function FAQSupportSection() {
   return (
@@ -12,19 +13,19 @@ export default function FAQSupportSection() {
           <h2 className="text-ink-deep text-[22px] md:text-[26px] font-extrabold tracking-tight mb-2">
             Still need a hand?
           </h2>
-          <p className="text-[#5a6d75] text-[12px] md:text-[14px] leading-normal mb-4 md:mb-5">
-            Can&apos;t find the answer here? The Minty team replies within one business day, and we&apos;re real people who actually run the numbers.
+          <p className="text-[#5a6d75] text-[13px] md:text-[14px] leading-normal mb-4 md:mb-5">
+            Can&apos;t find the answer here? {siteConfig.replyPromise} We&apos;re real people who actually run the numbers.
           </p>
           <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3">
             <Link
               href="/resources/contact"
-              className="bg-[#00CBB0] hover:bg-[#00b59d] text-white font-bold text-[12px] md:text-[14px] px-5 md:px-6 py-2.5 rounded-full shadow-xs transition-all duration-150 w-full md:w-auto text-center"
+              className="inline-flex min-h-11 items-center justify-center bg-cta hover:bg-cta-hover active:bg-cta-pressed text-white font-semibold text-sm px-5 md:px-6 py-2.5 rounded-xl transition-colors duration-150 w-full md:w-auto text-center"
             >
               Contact Support
             </Link>
             <Link
               href="/pricing"
-              className="text-ink-deep border border-[#f1ece4] rounded-full font-bold text-[12px] md:text-[14px] px-5 md:px-6 py-2.5 hover:text-[#00cbb0] transition-all duration-150 w-full md:w-auto text-center"
+              className="inline-flex min-h-11 items-center justify-center text-ink-deep border border-[#e7ddd0] rounded-xl font-semibold text-sm px-5 md:px-6 py-2.5 hover:text-teal-deep hover:border-ink-soft transition-colors duration-150 w-full md:w-auto text-center"
             >
               See pricing plans
             </Link>
@@ -34,9 +35,9 @@ export default function FAQSupportSection() {
         <div className="hidden md:flex shrink-0 z-10 w-[200px] md:w-[260px] md:mr-4 lg:mr-6">
           <Image
             src="/support/minty-mascot-chat.webp"
-            alt="Minty Waving Mascot"
+            alt="Minty, the cat mascot, waving"
             width={260}
-            height={260}
+            height={195}
             className="w-full h-auto object-contain"
           />
         </div>

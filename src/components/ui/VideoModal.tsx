@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { X } from 'lucide-react';
+import Icon from '@/components/ui/Icon';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -50,7 +50,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
           className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
           aria-label="Close video"
         >
-          <X size={32} />
+          <Icon name="close" width={32} height={32} />
         </button>
 
         {/* Video Title (optional) */}

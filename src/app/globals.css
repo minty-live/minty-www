@@ -19,19 +19,29 @@
   --color-mint-deep: #b9e2d6;
 
   --color-teal: #2fb8a6;
-  --color-teal-deep: #1f9e8d;
+  /* Small teal text: links, eyebrow badges, open questions. Darkened 2026-10-26 from #1f9e8d
+     (3.3:1 on white) to pass WCAG AA - 4.85:1 or better on every background the site uses. */
+  --color-teal-deep: #0b7a6e;
   --color-teal-grad1: #00cbc6;
   --color-teal-grad2: #00d5bf;
 
   --color-ink: #0f2d3a;
   --color-ink-soft: #2c4754;
-  --color-ink-muted: #6b8088;
+  /* Secondary body text. Darkened 2026-10-26 from #6b8088 (4.1:1 on white) to pass AA. */
+  --color-ink-muted: #5a6d75;
   --color-ink-deep: #113b4a;
 
   --color-line: #e7ddd0;
   --color-line-soft: #efe8da;
 
   --color-brand-deep: #124b6a;
+
+  /* Primary CTA - Minty Action (Part 13): white label at least 14px SemiBold. Brand #54D3DA is
+     never a button fill. White on #3CBCC3 is 2.29:1, an exception the owner accepted for
+     Primary CTA labels only. */
+  --color-cta: #3cbcc3;
+  --color-cta-hover: #35b2b9;
+  --color-cta-pressed: #2fa4ab;
   --color-peach-accent: #d96a3a;
 
   /* Plus Jakarta Sans is this site's body face throughout - the marketing site is the one
@@ -144,6 +154,14 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 
+  /* A visible keyboard focus on everything (Responsive UI rules: "visible keyboard focus on
+     desktop"). Pointer clicks do not show it (:focus-visible). Controls that draw their own
+     ring set outline-hidden, which wins: utilities sit above this base layer. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
   /* v4's preflight gives buttons the default cursor; v3 gave them a pointer. */
   button:not(:disabled),
   [role='button']:not(:disabled) {
@@ -166,7 +184,7 @@
     border-radius: inherit;
     pointer-events: none;
     z-index: -1;
-    box-shadow: 0 0 0 0 rgba(0, 203, 198, 0.55);
+    box-shadow: 0 0 0 0 rgba(60, 188, 195, 0.55);
     animation: aliveRing 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
   }
   .btn-alive::after {
@@ -178,15 +196,15 @@
 
   @keyframes aliveRing {
     0% {
-      box-shadow: 0 0 0 0 rgba(0, 203, 198, 0.55);
+      box-shadow: 0 0 0 0 rgba(60, 188, 195, 0.55);
       opacity: 1;
     }
     70% {
-      box-shadow: 0 0 0 18px rgba(0, 203, 198, 0);
+      box-shadow: 0 0 0 18px rgba(60, 188, 195, 0);
       opacity: 0;
     }
     100% {
-      box-shadow: 0 0 0 0 rgba(0, 203, 198, 0);
+      box-shadow: 0 0 0 0 rgba(60, 188, 195, 0);
       opacity: 0;
     }
   }

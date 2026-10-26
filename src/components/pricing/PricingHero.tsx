@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import AnimatedContent from '@/animations/pricing/heroanim';
+import AnimatedContent from '@/animations/landing/heroanim';
 
 export default function PricingHero() {
   return (
@@ -49,7 +49,7 @@ export default function PricingHero() {
                 alt="Minty Superhero Mascot"
                 width={720}
                 height={720}
-                priority
+                preload
                 className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.15)] motion-safe:animate-cat-float"
             />
         </div>

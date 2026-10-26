@@ -46,7 +46,7 @@ export default function HeroSection() {
               <Image
                 src="/brand/minty-logo.webp"
                 alt="Minty"
-                width={100}
+                width={60}
                 height={60}
                 // Logo tracks the heading size — at 40px next to 28px text it
                 // overpowered the words on small screens.
@@ -59,10 +59,10 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-3 md:gap-4 items-center">
-              <Button className="bg-white text-ink-deep hover:bg-white/90 font-bold px-6 py-3 rounded-full text-[14px] shadow-xs transition-all duration-200" href={hero.primaryBtnHref}>
+              <Button className="bg-white text-ink-deep hover:bg-white/90 px-6 py-3 text-sm shadow-xs" href={hero.primaryBtnHref}>
                 {hero.primaryBtn}
               </Button>
-              <Button className="bg-transparent text-white border-2 border-white/40 hover:border-white hover:bg-white/10 font-bold px-6 py-2.5 rounded-full text-[14px] transition-all duration-200" href={siteConfig.loginUrl}>
+              <Button className="bg-transparent text-white border-2 border-white/40 hover:border-white hover:bg-white/10 px-6 py-2.5 text-sm" href={siteConfig.loginUrl} external>
                 {hero.secondaryBtn}
               </Button>
             </div>
@@ -86,17 +86,13 @@ export default function HeroSection() {
               alt="Minty Mascot"
               width={420} 
               height={420}
-              priority
+              preload
               className="w-full h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
             />
           </div>
 
         </div>
       </section>
-
-      {/* The "What will you get from this page?" benefits band sat here. It is
-          replaced by the "Login to Minty with OTP" guides group, which renders
-          immediately below from Guide-Section. Content kept in get-started.ts. */}
 
     </Container>
   </main>

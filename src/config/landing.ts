@@ -1,4 +1,5 @@
 import { siteConfig } from './site';
+import type { IconName } from '@/components/ui/Icon';
 
 export const landingContent = {
   hero: {
@@ -35,14 +36,14 @@ export const landingContent = {
         image: '/shared/cash.webp',
         alt: 'Check the cash',
         title: 'Check the cash',
-        body: 'Count your draw amount + Minty does the math along side you.',
+        body: 'Count your drawer + Minty does the math alongside you.',
       },
       {
         num: 3,
         image: '/landing/box-minty.webp',
         alt: 'Request payments',
         title: 'Request payments',
-        body: 'Create, pay, and track payments + Minty keeps everyone aligned on bill payments.',
+        body: 'Create, pay, and track payment requests + Minty keeps everyone aligned on what is owed.',
       },
       {
         num: 4,
@@ -73,21 +74,23 @@ export const landingContent = {
     {
       key: 'petty-cash',
       title: 'Petty Cash',
+      // (The file names are swapped: landing-payment.webp is the till scene, landing-petty.webp
+      // the payments line. Each card shows the right picture.)
       image: '/landing/landing-payment.webp',
-      alt: 'Petty cash placeholder',
+      alt: 'Two Minty cats at a cash register, counting the till with a phone and the day’s receipt',
       // Added design tokens for the first card
-      icon: 'Wallet',
+      icon: 'account_balance_wallet' as IconName,
       bgColor: 'bg-[#00cbb2]',
       iconTextColor: 'text-[#00cbb2]',
       href: 'https://www.youtube.com/watch?v=3_TVkcyzEQs'
     },
     {
-      key: 'bill-payment',
-      title: 'Payment',
+      key: 'payment-request',
+      title: 'Payment Request',
       image: '/landing/landing-petty.webp',
-      alt: 'Bill payment placeholder',
+      alt: 'A line of Minty cats carrying boxes of cash past the owner, who checks a wallet, bills and reports',
       // Added design tokens for the second card
-      icon: 'ReceiptText',
+      icon: 'receipt_long' as IconName,
       bgColor: 'bg-[#0f2d37]',
       iconTextColor: 'text-[#0f2d37]',
       href: 'https://www.youtube.com/watch?v=fucuzlKQwDU'
@@ -98,17 +101,17 @@ helpsYou: {
   title: 'Minty helps you to',
   cards: [
     {
-      icon: 'CheckCircle', 
+      icon: 'check_circle' as IconName,
       alt: 'Checkmark icon',
       body: 'Account accurately, and less stress around daily figures.',
     },
     {
-      icon: 'RefreshCw',
+      icon: 'sync' as IconName,
       alt: 'Sync circle icon',
       body: 'Trust your daily numbers and sync them directly to Xero.',
     },
     {
-      icon: 'CreditCard', 
+      icon: 'credit_card' as IconName,
       alt: 'Plan card icon',
       body: 'Plan all your shop in one place.',
     },

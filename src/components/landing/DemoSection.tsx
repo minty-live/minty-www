@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Container from '@/components/ui/Container';
 import { landingContent } from '@/config/landing';
 import FadeContent from '@/animations/landing/fadeanim';
-// Test
 export default function DemoSection() {
   const { demo } = landingContent;
   const [isPlaying, setIsPlaying] = useState(false);
@@ -40,7 +39,7 @@ export default function DemoSection() {
       <Container className="flex flex-col items-center text-center">
         
         {/* Top Pill Badge */}
-        <div className="inline-flex items-center gap-1.5 bg-[#D2EFE9] text-[#00A884] text-[11px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
+        <div className="inline-flex items-center gap-1.5 bg-[#D2EFE9] text-teal-deep text-[12px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00A884]"></span>
           {demo.badge}
         </div>
@@ -51,7 +50,7 @@ export default function DemoSection() {
         </h2>
         
         {/* Section Subtitle */}
-        <p className="text-[#647C85] text-[15px] max-w-[550px] leading-relaxed mb-12">
+        <p className="text-[#5a6d75] text-[15px] max-w-[550px] leading-relaxed mb-12">
           {demo.subtitle}
         </p>
 
@@ -98,7 +97,7 @@ export default function DemoSection() {
 
               {/* Bottom Left Badge overlay */}
               <div className="absolute bottom-6 left-6 bg-white text-ink-deep text-xs font-bold px-4 py-2 rounded-full shadow-xs">
-                DailyMinty
+                Daily Minty
               </div>
               
               {/* Bottom Right Duration overlay */}

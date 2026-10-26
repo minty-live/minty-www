@@ -30,10 +30,11 @@ interface NativeButtonProps extends BaseProps {
 type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    'bg-teal-gradient text-white shadow-teal-glow hover:bg-teal-gradient-hover hover:-translate-y-px hover:shadow-[0_10px_24px_rgba(47,184,166,0.36)]',
+  // The Primary CTA: Minty Action, its hover and pressed tones (Part 13; tokens in globals.css).
+  primary: 'bg-cta text-white hover:bg-cta-hover active:bg-cta-pressed',
+  // The same CTA with the "alive" pulse, for the one Join Waitlist a section leads with.
   waitlist:
-    'btn-alive bg-linear-to-r from-[#00CBC6] to-[#00D5BF] text-white shadow-[0_10px_28px_rgba(0,203,198,0.38),inset_0_1px_0_rgba(255,255,255,0.35)] hover:from-[#00D8D3] hover:to-[#00E2CC] hover:shadow-[0_14px_32px_rgba(0,203,198,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]',
+    'btn-alive bg-cta text-white shadow-[0_10px_28px_rgba(60,188,195,0.38)] hover:bg-cta-hover active:bg-cta-pressed',
   'pill-dark':
     'bg-ink text-white hover:bg-[#1a3e4d] hover:-translate-y-px',
   white:
@@ -46,15 +47,16 @@ const variantStyles: Record<ButtonVariant, string> = {
     'bg-transparent text-white shadow-[inset_0_0_0_1.5px_rgba(255,255,255,.7)] hover:bg-white/10 hover:shadow-[inset_0_0_0_1.5px_white]',
 };
 
+// Every size is at least 44px tall (the touch target) with at least a 14px label.
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-[18px] py-[10px] text-sm',
+  sm: 'min-h-11 px-[18px] py-[10px] text-sm',
   md: 'px-[26px] py-[14px] text-[15px]',
   lg: 'px-9 py-[18px] text-base',
   xl: 'px-9 py-5 text-[clamp(20px,2.4vw,28px)] font-bold',
 };
 
 const baseStyles =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold no-underline cursor-pointer border-0 font-sans transition-all duration-150';
+  'inline-flex items-center justify-center gap-2 rounded-xl font-semibold no-underline cursor-pointer border-0 font-sans transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink';
 
 export default function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', className, children } = props;
