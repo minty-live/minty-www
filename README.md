@@ -54,6 +54,7 @@ animations are Tailwind tokens in the `@theme` block of `src/app/globals.css` (t
 | `npm run lint`      | ESLint 9 flat config (`eslint.config.mjs`: Next's core-web-vitals + TypeScript rules) |
 | `npm run type-check`| `tsc --noEmit`                                         |
 | `npm run test:e2e`  | Playwright — starts its own dev server on 3002         |
+| `npm run format`    | Prettier (the app frontends' settings, in `package.json`); CI runs `format:check` |
 | `npm run icons`     | regenerate the inlined Material Symbols after adding a name to `scripts/icons.mjs` |
 
 CI (`.github/workflows/ci.yml`) calls the shared `next-web.yml@v1` in

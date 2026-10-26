@@ -19,5 +19,6 @@ jobs:
     uses: minty-oliveandvine/.github/.github/workflows/next-web.yml@v1
     with:
       typecheck-script: type-check
+      extra-scripts: format:check
       unit-tests: false
       e2e: true

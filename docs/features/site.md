@@ -96,8 +96,8 @@ format, and refuses `$`/`HK$`.
 - `responsive`: at 360, 768 and 1440, no sideways scroll and no text under 12px; at 360, every
   tap target is at least 44×44.
 
-There are no unit tests. CI runs type-check, lint, a production build and the e2e specs
-through the shared `next-web.yml@v1`.
+There are no unit tests. CI runs type-check, lint, `format:check` (Prettier, the app frontends'
+settings), a production build and the e2e specs through the shared `next-web.yml@v1`.
 
 ## Open items
 
@@ -109,5 +109,3 @@ through the shared `next-web.yml@v1`.
   AA. The first is a design choice, the second the partner's brand colour.
 - **The hero art's app screenshot** shows amounts as `HK$ 1,500.00`, the old symbol format. It
   is part of the image, so it needs a new export.
-- **Prettier** is not set up here (the app frontends gate `format:check`); adding it is a new
-  dev dependency, waiting on a yes.
