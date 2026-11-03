@@ -1,6 +1,6 @@
 // The subscription catalogue as this site shows it. Mirrors Minty/docs/schema/seed_catalogue.sql
-// (billing_plan: PETTY_CASH 28000, BILL "Payment Request" 28000, BILL+PETTY_CASH "Super Minty"
-// 40000, all HKD monthly; billing_policy.trial_days 30). A price, name or trial change goes in
+// (billing_plan: PETTY_CASH 28000, PAYMENT_REQUEST "Payment Request" 28000,
+// PAYMENT_REQUEST+PETTY_CASH "Super Minty" 40000, all HKD monthly; billing_policy.trial_days 30). A price, name or trial change goes in
 // the database, that file AND here.
 import { formatPrice } from "@/lib/money";
 
