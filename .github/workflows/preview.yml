@@ -1,6 +1,6 @@
 # Branch preview sets: this repo's Vercel preview of a pull request's branch is served on
 # pr-<branch>-www.dailyminty.com, beside the other apps of the same set. The workflow body is
-# shared: minty-oliveandvine/.github -> .github/workflows/vercel-preview-set.yml. Its own file,
+# shared: minty-live/.github -> .github/workflows/vercel-preview-set.yml. Its own file,
 # never ci.yml: a second job there would add a second "check / check" run, the name Vercel's
 # production check is bound to. pull_request_target runs the BASE branch's copy of this file, so
 # a pull request cannot change what runs with VERCEL_TOKEN. The variables and the secret are
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   preview:
-    uses: minty-oliveandvine/.github/.github/workflows/vercel-preview-set.yml@v1
+    uses: minty-live/.github/.github/workflows/vercel-preview-set.yml@v1
     with:
       app: www
       apps: ${{ vars.PREVIEW_APPS }}

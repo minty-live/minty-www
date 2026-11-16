@@ -58,7 +58,7 @@ animations are Tailwind tokens in the `@theme` block of `src/app/globals.css` (t
 | `npm run icons`      | regenerate the inlined Material Symbols after adding a name to `scripts/icons.mjs`    |
 
 CI (`.github/workflows/ci.yml`) calls the shared `next-web.yml@v1` in
-`minty-oliveandvine/.github`: `type-check`, `lint`, a production `build` on Node 24 and
+`minty-live/.github`: `type-check`, `lint`, a production `build` on Node 24 and
 `test:e2e`, on every push to `main` and `development`.
 
 ## Testing

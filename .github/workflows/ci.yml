@@ -1,5 +1,5 @@
 # Types, lint, a production build and the browser specs. The workflow body is shared:
-# minty-oliveandvine/.github -> .github/workflows/next-web.yml
+# minty-live/.github -> .github/workflows/next-web.yml
 #
 # This is the one repo whose playwright.config.ts starts its own server and needs no backend and
 # no database, so its specs run here rather than in Minty's stack job. contact.spec.ts never
@@ -16,7 +16,7 @@ on:
 
 jobs:
   check:
-    uses: minty-oliveandvine/.github/.github/workflows/next-web.yml@v1
+    uses: minty-live/.github/.github/workflows/next-web.yml@v1
     with:
       typecheck-script: type-check
       extra-scripts: format:check
